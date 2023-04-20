@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "gvkyxPFoeid/TEuA8HIx5EYH+IO7yCscVgzcWLJsVbkAB9RA4IB2wfBUGBXi6EiTelaDmyctV8kpTOgJk6pXUQ==",
+  "dgSpecHash": "V60P8Ljo1VTUP7oij4fCO2yMQXT3XOw3IflM8/nGY/8JMaLJPFnuJS2yLp5fcbQxOO4HHsBb1JCG6985/kf/hQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\application\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.8\\microsoft.aspnetcore.authentication.jwtbearer.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.8\\microsoft.aspnetcore.cryptography.internal.6.0.8.nupkg.sha512",

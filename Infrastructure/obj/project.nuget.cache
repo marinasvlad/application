@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I2BLUORwF48cexfctAgIX6KUbv95WhD+oRQhqU96u/PE4R7vuilNGV3e8B4zy6cJwVT5bPrJS4AyIgYVMhcgKw==",
+  "dgSpecHash": "fdbhwtFVILM8tJfllyLJFWeJaqzbraTGrw/tlILoIzygL3OXun/+PVoa6oFB+1a4979faaLuv2G6MWfTYyrlhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\application\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.8\\microsoft.aspnetcore.cryptography.internal.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.8\\microsoft.aspnetcore.cryptography.keyderivation.6.0.8.nupkg.sha512",

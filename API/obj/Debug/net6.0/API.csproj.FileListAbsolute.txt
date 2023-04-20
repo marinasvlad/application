@@ -70,3 +70,4 @@ C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Infrastructure.pdb
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Core.pdb
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Vlad\Projects\application\API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
