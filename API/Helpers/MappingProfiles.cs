@@ -10,7 +10,7 @@ namespace API.Helpers
 {
     public class MappingProfiles : Profile
     {
-        protected MappingProfiles()
+        public MappingProfiles()
         {
             CreateMap<RegisterDto, AppUser>();
 

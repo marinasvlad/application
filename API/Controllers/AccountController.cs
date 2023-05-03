@@ -72,7 +72,7 @@ namespace API.Controllers
 
             var user = new AppUser
             {
-                DisplayName = registerDto.Email,
+                DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 UserName = registerDto.Email
             };
@@ -80,6 +80,12 @@ namespace API.Controllers
             var results = await _userManager.CreateAsync(user, registerDto.Password);
 
             if(!results.Succeeded)
+            {
+                return BadRequest(new ApiResponse(400));
+            }
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+            if(!roleResult.Succeeded)
             {
                 return BadRequest(new ApiResponse(400));
             }

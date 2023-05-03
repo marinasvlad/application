@@ -1,12 +1,15 @@
 using API.Extensions;
+using API.Helpers;
 using API.MiddleWare;
+using Core.Entities;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+//builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
@@ -40,6 +43,12 @@ try
 {
     var context = services.GetRequiredService<AppIdentityContext>();
     await context.Database.MigrateAsync();
+    if(app.Environment.IsDevelopment())
+    {
+        var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+
+            await Seed.SeedRoles(roleManager);
+    }
 }
 catch (Exception ex)
 {

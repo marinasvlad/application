@@ -1928,21 +1928,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vlad\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Vlad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vlad\\Projects\\application\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\Vlad\\Projects\\application\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vlad\\Projects\\application\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -1958,8 +1954,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Vlad\\Projects\\application\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Vlad\\Projects\\application\\Core\\Core.csproj"
+            "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj"
             }
           }
         }
