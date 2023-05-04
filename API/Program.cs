@@ -46,8 +46,12 @@ try
     if(app.Environment.IsDevelopment())
     {
         var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
 
             await Seed.SeedRoles(roleManager);
+
+            await Seed.SeedUsers(roleManager, userManager);
+
     }
 }
 catch (Exception ex)
