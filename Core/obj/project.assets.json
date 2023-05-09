@@ -819,21 +819,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Vlad\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Vlad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vlad\\Projects\\application\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\Vlad\\Projects\\application\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vlad\\Projects\\application\\Core\\obj\\",
+      "outputPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
