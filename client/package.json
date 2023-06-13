@@ -18,6 +18,7 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "angularx-social-login": "^4.1.0",
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^7.1.2",

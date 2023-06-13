@@ -1,0 +1,33 @@
+
+<div class="container">
+    <div style="height: 90vh; display: flex; justify-content: center; align-items: center;">
+    
+        <div class="container" style="width: 30vh;">
+            <div class="row">
+                <img src="../../assets/appLogo.png" alt="appLogo">
+            </div>
+            <br>
+            <div class="row">
+                <input type="text" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="user">            
+            </div>
+
+            <br>
+
+            <div class="row">
+                <input type="password" class="form-control" placeholder="Parola" aria-label="Parola" aria-describedby="parola">          
+            </div>
+            <br>
+            <img (mouseover)="imgSrc = '../../assets/btn_google_signin_light_focus_web.png'"
+                 (mouseout)="imgSrc = '../../assets/btn_google_signin_light_normal_web.png'"
+                 (mousedown)="imgSrc = '../../assets/btn_google_signin_light_pressed_web.png'"
+                 (mouseup)="imgSrc = '../../assets/btn_google_signin_light_focus_web.png'"
+                 (click)="signInGoogle()"                 
+            [src]="imgSrc" 
+            alt="googleLoginNormal" class="google-login">
+
+        </div>
+
+    </div>
+</div>
+
+

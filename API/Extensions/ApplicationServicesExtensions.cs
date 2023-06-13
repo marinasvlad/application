@@ -17,6 +17,7 @@ namespace API.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IExternalAuthService, ExternalAuthService>();
             services.AddDbContext<AppIdentityContext>(opt => {
                 opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
             });

@@ -34,6 +34,11 @@ export class AccountService {
     );
   }
 
+  getUrlGoogleLogin()
+  {
+    return this.http.get<string>(this.baseUrl + 'account/geturlgooglelogin');
+  }
+
   loadCurrentUser(user: IUser){
     if(user == null && user == undefined)
     {

@@ -67,9 +67,17 @@ namespace Infrastructure.Data
                         Email = users[2].Email,
                         UserName = users[2].Email
                     };
+
                     await userManager.CreateAsync(usersAdmin,"Pa$$w0rd");
                     await userManager.AddToRolesAsync(usersAdmin, new[] { "Admin", "Moderator", "Member" });                    
     
+                        var vladMarinas = new AppUser{
+                        DisplayName = users[3].DisplayName.ToUpper(),
+                        Email = users[3].Email,
+                        UserName = users[3].Email
+                    };
+                    await userManager.CreateAsync(vladMarinas,"Pa$$w0rd");
+                    await userManager.AddToRolesAsync(vladMarinas, new[] { "Admin", "Moderator", "Member" });   
                 }
             }
         }        

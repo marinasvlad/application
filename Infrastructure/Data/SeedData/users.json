@@ -10,5 +10,9 @@
     {
         "DisplayName":"Admin",
         "Email":"admin@test.com"
-    }        
+    },
+    {
+        "DisplayName": "Vlad Marinas",
+        "Email": "marinasvlad@gmail.com"
+    }
 ]
