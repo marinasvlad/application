@@ -9,7 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { GrupeComponent } from './grupe/grupe.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatToolbarModule} from '@angular/material/toolbar'
+import {MatIconModule} from '@angular/material/icon';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { EleviComponent } from './elevi/elevi.component';
+import { ContactComponent } from './contact/contact.component';
+
 
 @NgModule({
   declarations: [
@@ -17,14 +25,22 @@ import {MatMenuModule} from '@angular/material/menu';
     SignInComponent,
     NavComponent,
     HomeComponent,
-    GrupeComponent
+    GrupeComponent,
+    EleviComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
     MatMenuModule
+
   ],
   providers: [
 

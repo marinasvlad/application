@@ -1,1 +1,24 @@
-<p>nav works!</p>
+<mat-toolbar style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);" color="basic">
+  <span>Îți place să înoți!</span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu"> 
+    <button routerLink="home" mat-menu-item class="larger-button">
+      <mat-icon>home</mat-icon> 
+      Acasă
+    </button>
+    <button routerLink="grupe" mat-menu-item class="larger-button">
+      <mat-icon>group</mat-icon>          
+      Grupe
+    </button>
+    <button routerLink="elevi" mat-menu-item class="larger-button">
+      <mat-icon>person</mat-icon> 
+      Elevi  
+    </button>
+    <button routerLink="contact" mat-menu-item class="larger-button">
+          <mat-icon>contact_support</mat-icon>
+      Contact
+    </button>    
+  </mat-menu>
+</mat-toolbar>
