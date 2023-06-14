@@ -23,6 +23,11 @@ namespace Infrastructure.Services
             GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
         }
 
+        public string GetGoogleLoginUrl()
+        {
+            return "https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=" + GoogleRedirectionUri + "&response_type=code&client_id=" + GoogleClientId;
+        }
+
         public async Task<GoogleJsonWebSignature.Payload> GetPayloadAsync(string authCode)
         {
             var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer

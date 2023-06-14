@@ -1,1 +1,5 @@
-<app-sign-in></app-sign-in>
+<app-sign-in *ngIf="(accountService.currentUser$ | async) === null && this.user == undefined"></app-sign-in>
+
+<div class="container" *ngIf="(accountService.currentUser$ | async) === null">
+    <h1>Hello</h1>
+</div>

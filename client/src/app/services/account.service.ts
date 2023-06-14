@@ -5,6 +5,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
+import { GoogleAuthUrlDTO } from '../dtos/googleAuthUrlDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class AccountService {
 
   getUrlGoogleLogin()
   {
-    return this.http.get<string>(this.baseUrl + 'account/geturlgooglelogin');
+    return this.http.get<GoogleAuthUrlDTO>(this.baseUrl + 'account/geturlgooglelogin');
   }
 
   loadCurrentUser(user: IUser){

@@ -53,6 +53,16 @@ namespace API.Controllers
             };
         }
 
+        [HttpGet("geturlgooglelogin")]
+        public ActionResult<GoogleAuthUrlDTO> GetGoogleLoginUrl()
+        {
+            string url = _externalAuthService.GetGoogleLoginUrl();
+            var googleUrlDTO = new GoogleAuthUrlDTO{
+                Url = url
+            };
+            return Ok(googleUrlDTO);
+        }        
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
@@ -73,21 +83,20 @@ namespace API.Controllers
             };
         }
 
-        [HttpGet("logingoogle")]
-        public async Task<ActionResult<UserDto>> LoginGoogle(string code)
+        [HttpPost("logingoogle")]
+        public async Task<ActionResult<UserDto>> LoginGoogle(GoogleAuthCodeDTO googleAuthCodeDTO)
         {
 
-            var payload = await _externalAuthService.GetPayloadAsync(code);
+            var payload = await _externalAuthService.GetPayloadAsync(googleAuthCodeDTO.code);
 
             var user = await _userManager.FindByEmailAsync(payload.Email);
 
-            return new UserDto
+            return Ok(new UserDto
             {
                 Email = user.Email,
                 Token = await _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
-            };
-
+            });
         }
 
         [HttpPost("register")]

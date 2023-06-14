@@ -71,11 +71,6 @@ C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Core.pdb
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Humanizer.dll
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Vlad\Projects\application\API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\Vlad\Projects\Application\API\obj\Debug\net6.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Vlad\Projects\Application\API\obj\Debug\net6.0\staticwebassets\msbuild.build.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Debug\net6.0\staticwebassets.pack.json
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Google.Apis.dll
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Google.Apis.Auth.PlatformServices.dll
 C:\Users\Vlad\Projects\Application\API\bin\Debug\net6.0\Google.Apis.Auth.dll

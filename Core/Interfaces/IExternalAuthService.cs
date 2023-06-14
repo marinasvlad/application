@@ -9,5 +9,7 @@ namespace Core.Interfaces
     public interface IExternalAuthService
     {
         Task<GoogleJsonWebSignature.Payload> GetPayloadAsync(string authCode);
+
+        string GetGoogleLoginUrl();
     }
 }
