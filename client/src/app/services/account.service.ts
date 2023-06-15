@@ -40,6 +40,13 @@ export class AccountService {
     return this.http.get<GoogleAuthUrlDTO>(this.baseUrl + 'account/geturlgooglelogin');
   }
 
+  logOut(){
+    //stergem useru din localstorage
+    localStorage.removeItem('userApplication');
+    this.currentUserSource.next(null as any);
+    this.router.navigateByUrl('/');
+  }  
+
   loadCurrentUser(user: IUser){
     if(user == null && user == undefined)
     {

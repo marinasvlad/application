@@ -8,7 +8,6 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent {
   user: any;
-  title = 'Înoți în apă';
   constructor(public accountService: AccountService){
   }
   ngOnInit(){

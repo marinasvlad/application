@@ -1,19 +1,41 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" [opened]="isSidenavOpen" class="custom-sidenav">
-    <!-- Add your navigation links here -->
-    <mat-nav-list>
-      <a mat-list-item routerLink="/" class="nav-link">
-        <span class="icon-wrapper">
-          <mat-icon>home</mat-icon>
-        </span>
-      </a>      <!-- Add more navigation links as needed -->
-    </mat-nav-list>
+    <!-- <mat-nav-list>
+    </mat-nav-list> -->
+
+        <mat-button-toggle-group style="border-color: white;" name="fontStyle" aria-label="Font Style" class="vertical-toggle-group" >
+          <mat-button-toggle routerLink="/" class="vertical-align-content-button" value="bold">
+            <mat-icon class="iconButton" >home</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle routerLink="grupe" class="vertical-align-content-button" value="italic">
+            <mat-icon>group</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle routerLink="elevi" class="vertical-align-content-button" value="underline">
+            <mat-icon>person</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle routerLink="contact" class="vertical-align-content-button" value="underline">
+            <mat-icon>contact_support</mat-icon>         
+          </mat-button-toggle>
+          <mat-button-toggle (click)="logout()" routerLink="contact" class="vertical-align-content-button" value="underline">
+            <mat-icon >logout</mat-icon>
+          </mat-button-toggle>               
+        </mat-button-toggle-group>        
+      
+      <!-- <span mat-list-item class="icon-wrapper">
+        <mat-icon>home</mat-icon>
+      </span>       -->
+      <!-- <a mat-list-item routerLink="/" class="nav-link">
+
+      </a>       -->
   </mat-sidenav>
   <mat-sidenav-content>
-    <button mat-icon-button class="toggle-button" (click)="toggleSidenav()">
-      <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
-    </button>
-    <!-- Add your main content here -->
+    <div class="top-elements">
+      <button mat-icon-button class="toggle-button" (click)="toggleSidenav()">
+        <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
+      </button>
+      <h4 style="padding-right: 15px;">Nume Prenume</h4>
+    </div>
+
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

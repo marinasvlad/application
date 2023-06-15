@@ -17,14 +17,20 @@
                 <input type="password" class="form-control" placeholder="Parola" aria-label="Parola" aria-describedby="parola">          
             </div>
             <br>
-            <img (mouseover)="imgSrc = '../../assets/btn_google_signin_light_focus_web.png'"
-                 (mouseout)="imgSrc = '../../assets/btn_google_signin_light_normal_web.png'"
-                 (mousedown)="imgSrc = '../../assets/btn_google_signin_light_pressed_web.png'"
-                 (mouseup)="imgSrc = '../../assets/btn_google_signin_light_focus_web.png'"
-                 (click)="signInGoogle()"                 
-            [src]="imgSrc" 
-            alt="googleLoginNormal" class="google-login">
 
+            <div class="row">
+                <button mat-raised-button><mat-icon >login</mat-icon>
+                    Sign In</button>
+            </div>
+            <br>
+            <div class="row">
+                    <button (click)="signInGoogle()" mat-raised-button >
+                        <span>
+                            <img style="height: 3vh; width: 4vh;" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+                        </span>
+                        Sign in cu Google
+                    </button>
+            </div>
         </div>
 
     </div>

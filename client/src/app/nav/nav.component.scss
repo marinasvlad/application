@@ -7,17 +7,36 @@ mat-sidenav {
 }
 
 .custom-sidenav {
-  width: 10em; /* Adjust the width as needed */
+  width: 20%; /* Adjust the width as needed */
 }
 
-.icon-wrapper {
+
+.vertical-toggle-group {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+  flex-direction: column;
+  width: 100%;
 }
 
-.nav-link {
+.vertical-align-content-button
+{
+  line-height: 7em;  
   display: flex;
   align-items: center;
+}
+
+.top-elements
+{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+}
+
+.toggle-button{
+  height: 5em;  
+  width: 5em;  
+
+}
+
+.iconButton{
+  height:fit-content;
 }

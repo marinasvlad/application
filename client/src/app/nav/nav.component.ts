@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-nav',
@@ -6,13 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  isSidenavOpen = true;
+  isSidenavOpen = false;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
   toggleSidenav() {
     this.isSidenavOpen = !this.isSidenavOpen;
+  }
+
+  logout()
+  {
+    this.accountService.logOut();
+    window.location.reload();
   }
 }
