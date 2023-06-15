@@ -1,7 +1,21 @@
-.larger-button {
-    font-size: 20px;
-    padding: 12px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  height: 100%;
+}
+
+.custom-sidenav {
+  width: 10em; /* Adjust the width as needed */
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.icon-wrapper mat-icon {
+  line-height: 1;
+}

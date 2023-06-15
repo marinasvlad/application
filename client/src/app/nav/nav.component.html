@@ -1,24 +1,19 @@
-<mat-toolbar style="box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);" color="basic">
-  <span>Îți place să înoți!</span>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu"> 
-    <button routerLink="home" mat-menu-item class="larger-button">
-      <mat-icon>home</mat-icon> 
-      Acasă
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [opened]="isSidenavOpen" class="custom-sidenav">
+    <!-- Add your navigation links here -->
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" class="nav-link">
+        <span class="icon-wrapper">
+          <mat-icon>home</mat-icon>
+        </span>
+      </a>      <!-- Add more navigation links as needed -->
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-icon-button class="toggle-button" (click)="toggleSidenav()">
+      <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
     </button>
-    <button routerLink="grupe" mat-menu-item class="larger-button">
-      <mat-icon>group</mat-icon>          
-      Grupe
-    </button>
-    <button routerLink="elevi" mat-menu-item class="larger-button">
-      <mat-icon>person</mat-icon> 
-      Elevi  
-    </button>
-    <button routerLink="contact" mat-menu-item class="larger-button">
-          <mat-icon>contact_support</mat-icon>
-      Contact
-    </button>    
-  </mat-menu>
-</mat-toolbar>
+    <!-- Add your main content here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
