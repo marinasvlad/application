@@ -45,6 +45,11 @@ namespace Infrastructure.Data
             .WithOne(b => b.Grupa)
             .HasForeignKey(b => b.GrupaId);
 
+            builder.Entity<AppUser>()
+            .HasMany(a => a.Anunturi)
+            .WithOne(b => b.AppUser)
+            .HasForeignKey(b => b.AppUserId);
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
