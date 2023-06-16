@@ -60,7 +60,7 @@ namespace Infrastructure.Data
                     };
 
                     await userManager.CreateAsync(userModerator,"Pa$$w0rd");
-                    await userManager.AddToRolesAsync(userModerator, new[] { "Moderator", "Member" });
+                    await userManager.AddToRoleAsync(userModerator, "Moderator");
 
                     var usersAdmin = new AppUser{
                         DisplayName = users[2].DisplayName.ToUpper(),
@@ -69,7 +69,7 @@ namespace Infrastructure.Data
                     };
 
                     await userManager.CreateAsync(usersAdmin,"Pa$$w0rd");
-                    await userManager.AddToRolesAsync(usersAdmin, new[] { "Admin", "Moderator", "Member" });                    
+                    await userManager.AddToRoleAsync(usersAdmin, "Admin");                    
     
                         var vladMarinas = new AppUser{
                         DisplayName = users[3].DisplayName.ToUpper(),
@@ -77,7 +77,7 @@ namespace Infrastructure.Data
                         UserName = users[3].Email
                     };
                     await userManager.CreateAsync(vladMarinas,"Pa$$w0rd");
-                    await userManager.AddToRolesAsync(vladMarinas, new[] { "Admin", "Moderator", "Member" });   
+                    await userManager.AddToRoleAsync(vladMarinas,"Admin" );   
                 }
             }
         }        

@@ -17,7 +17,6 @@ export class AppComponent {
   loadCurrentUser(){
     this.user = localStorage.getItem('userApplication');
     this.accountService.loadCurrentUser(JSON.parse(this.user)).subscribe(() => {
-      console.log(this.user);
     }, error =>{
       console.log(error);
     });

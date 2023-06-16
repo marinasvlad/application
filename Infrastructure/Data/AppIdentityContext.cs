@@ -18,6 +18,11 @@ namespace Infrastructure.Data
 
         }
 
+        public DbSet<Grupa> Grupe {get; set;}
+
+        public DbSet<Anunt> Anunturi {get; set;}
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -34,6 +39,11 @@ namespace Infrastructure.Data
             .WithOne(u => u.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
+
+            builder.Entity<Grupa>()
+            .HasMany(a => a.Elevi)
+            .WithOne(b => b.Grupa)
+            .HasForeignKey(b => b.GrupaId);
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
