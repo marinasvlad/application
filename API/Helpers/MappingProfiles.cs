@@ -15,6 +15,10 @@ namespace API.Helpers
             CreateMap<RegisterDto, AppUser>();
 
             CreateMap<UserDto, AppUser>().ReverseMap();
+
+            CreateMap<Anunt, AnuntDTO>().ForMember(anuntDto => anuntDto.Autor, anunt => anunt.MapFrom(a => a.AppUser.DisplayName))
+            .ForMember(anuntDto => anuntDto.Data, anunt => anunt.MapFrom(a => a.DataAnunt.ToString("dd.MM.yyyy")));
+
         }
     }
 }

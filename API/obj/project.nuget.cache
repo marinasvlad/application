@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EgKf/DbIPg+P34TBua7PWG2F6V9CprthTSRPRZj/85+hZMH/prLIQ0OeFFtflg3PT9oPuAh6RVcFRSVmTPRn8w==",
+  "dgSpecHash": "NYMoIvwHGCo0CZyg2Nn5sArZW0heGWgDd5hnCltUEBZMvEXYp+ZnJjceQTcDqgt0unaQodY6zxtUeNxirSdTBA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\Projects\\application\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

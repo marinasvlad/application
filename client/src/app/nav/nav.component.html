@@ -24,7 +24,7 @@
       <button mat-icon-button class="toggle-button" (click)="toggleSidenav()">
         <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
       </button>
-      <h4 style="padding-right: 15px;">{{(currentUser$ | async).displayName}}</h4>
+      <h4 class="font-PE" style="padding-right: 15px;">{{(currentUser$ | async).displayName}}</h4>
     </div>
 
     <router-outlet></router-outlet>

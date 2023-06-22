@@ -6,7 +6,7 @@ import { AccountService } from '../services/account.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss', '../shared/style.scss']
 })
 export class NavComponent implements OnInit {
   isSidenavOpen = false;

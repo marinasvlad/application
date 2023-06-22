@@ -30,7 +30,9 @@ namespace Infrastructure.Services
         {
             var claims = new List<Claim>{
                 new Claim(JwtRegisteredClaimNames.Name, user.DisplayName),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString())
+
             };
 
             var roles = await _userManager.GetRolesAsync(user);
