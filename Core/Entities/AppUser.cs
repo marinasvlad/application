@@ -12,7 +12,7 @@ namespace Core.Entities
 
         public ICollection<AppUserRole> UserRoles { get; set; }
 
-        public int GrupaId { get; set; }
+        public int? GrupaId { get; set; }
 
         public Grupa Grupa { get; set; }
 

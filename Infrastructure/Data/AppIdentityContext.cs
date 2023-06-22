@@ -40,10 +40,11 @@ namespace Infrastructure.Data
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired();
 
-            builder.Entity<Grupa>()
-            .HasMany(a => a.Elevi)
-            .WithOne(b => b.Grupa)
-            .HasForeignKey(b => b.GrupaId);
+            builder.Entity<AppUser>()
+            .HasOne(a => a.Grupa)
+            .WithMany(g => g.Elevi)
+            .HasForeignKey(c => c.GrupaId)
+            .IsRequired(false);
 
             builder.Entity<AppUser>()
             .HasMany(a => a.Anunturi)
