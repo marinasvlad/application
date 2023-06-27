@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001/api/',
-  googleOauthUrl: 'https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=https://localhost:5001/api/account/logingoogle&response_type=code&client_id=931211722163-k4v30mh5k87a0le5m4bh71h38rq010v4.apps.googleusercontent.com'
+  apiUrl: 'https://localhost:5001/api/'
 };
 
 /*

@@ -20,7 +20,15 @@ import { ContactComponent } from './contact/contact.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'; 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AnuntModalComponent } from './home/anunt-modal/anunt-modal.component'; 
+import {MatDialogModule} from '@angular/material/dialog'; 
+import {MatInputModule} from '@angular/material/input'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { FormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card'; 
+import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HomeComponent,
     GrupeComponent,
     EleviComponent,
-    ContactComponent
+    ContactComponent,
+    AnuntModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,19 +48,26 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
+    MatDialogModule,
+    FormsModule,
+    MatCardModule,
     MatSidenavModule,
+    MatInputModule,
     MatListModule,
+    MatFormFieldModule,
     MatButtonModule,
     MatMenuModule,
     MatButtonToggleModule,
     NgxSpinnerModule,
-    MatProgressSpinnerModule
-
-
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true 
+    })
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi: true},
-
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

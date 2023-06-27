@@ -21,10 +21,27 @@ export class AnuntService {
   this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
   this.user = user;
 });
-
   let headers = new HttpHeaders();
-  headers = headers.set('Authorizations', 'Bearer ' + this.user.token);
+  headers = headers.set('Authorization', 'Bearer ' + this.user.token);
 
-    return this.http.get<Anunt[]>(this.baseUrl + '/anunt', {headers});
+    return this.http.get<Anunt[]>(this.baseUrl + 'anunt', {headers});
   }
+
+  postAnunt(anunt: Anunt){
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+      return this.http.post(this.baseUrl + 'anunt', {Text: anunt.text},{headers})
+    }
+
+    deleteAnunt(id: number){
+      this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+        this.user = user;
+      });
+        let headers = new HttpHeaders();
+        headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+        return this.http.delete(this.baseUrl + 'anunt/' + id,{headers})
+      }
 }

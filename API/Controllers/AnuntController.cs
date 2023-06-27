@@ -29,7 +29,6 @@ namespace API.Controllers
         [Authorize(Policy = "RequireAdminRole")]
         public async Task<ActionResult<IReadOnlyList<AnuntDTO>>> GetAnunturi(){
             var anunturi = await _anuntRepo.GetAnunturiAsync();
-
             return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
         }
 

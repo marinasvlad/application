@@ -1,0 +1,85 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\3rdpartylicenses.txt",
+      "PackagePath": "staticwebassets\\3rdpartylicenses.txt"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\appLogo.png",
+      "PackagePath": "staticwebassets\\assets\\appLogo.png"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_focus_web.png",
+      "PackagePath": "staticwebassets\\assets\\btn_google_signin_light_focus_web.png"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_normal_web.png",
+      "PackagePath": "staticwebassets\\assets\\btn_google_signin_light_normal_web.png"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_pressed_web.png",
+      "PackagePath": "staticwebassets\\assets\\btn_google_signin_light_pressed_web.png"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.20fd1704ea223900efa9.woff2",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.20fd1704ea223900efa9.woff2"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.8b43027f47b20503057d.eot",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.8b43027f47b20503057d.eot"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.f691f37e57f04c152e23.woff",
+      "PackagePath": "staticwebassets\\fontawesome-webfont.f691f37e57f04c152e23.woff"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.de261a55e5df7b271223.js",
+      "PackagePath": "staticwebassets\\main.de261a55e5df7b271223.js"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",
+      "PackagePath": "staticwebassets\\polyfills.87860c810a59379dbd9b.js"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\runtime.4b1540bf51da5ef20c67.js",
+      "PackagePath": "staticwebassets\\runtime.4b1540bf51da5ef20c67.js"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\styles.4c90a449dada6d650aee.css",
+      "PackagePath": "staticwebassets\\styles.4c90a449dada6d650aee.css"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.API.props",
+      "PackagePath": "build\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.API.props",
+      "PackagePath": "buildMultiTargeting\\API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.API.props",
+      "PackagePath": "buildTransitive\\API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

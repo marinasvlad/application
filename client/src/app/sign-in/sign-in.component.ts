@@ -17,7 +17,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
+  user: any = {};
   imgSrc: string;
   googleLoginUrl: string;
   googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";;
@@ -48,6 +48,12 @@ export class SignInComponent implements OnInit {
 
   getDecodedToken(token) {
     return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  signIn(){
+    this.accountService.login(this.user).subscribe(res =>{
+      window.location.reload();
+    });
   }
 
   handleGoogleResponse() {

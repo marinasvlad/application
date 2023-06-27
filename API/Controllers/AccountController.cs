@@ -66,6 +66,15 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
+            if(loginDto.Email == null)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai completat adresa de email!"));
+            }
+
+            if(loginDto.Password == null)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai completat parola!"));
+            }
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
             if (user == null)

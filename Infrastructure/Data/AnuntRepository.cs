@@ -28,7 +28,7 @@ namespace Infrastructure.Data
 
         public async Task<IReadOnlyList<Anunt>> GetAnunturiAsync()
         {
-            return await _context.Anunturi.OrderBy(a => a.DataAnunt).ToListAsync();
+            return await _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).OrderByDescending(a => a.DataAnunt).ToListAsync();
         }
 
         public async Task<bool> PostAnunt(Anunt anunt)

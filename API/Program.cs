@@ -40,14 +40,15 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
            
 app.UseHttpsRedirection();
-
-
+app.UseRouting();
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 
 app.MapControllers();
+app.MapFallbackToController("Index", "Fallback");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
