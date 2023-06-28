@@ -3,7 +3,7 @@ import { AnuntService } from '../services/anunt.service';
 import { Anunt } from '../models/anunt';
 import { MatDialog } from '@angular/material/dialog';
 import { AnuntModalComponent } from './anunt-modal/anunt-modal.component';
-
+import { delay } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -29,9 +29,11 @@ export class HomeComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(AnuntModalComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      this.getAnunturi();
-    });    
+    dialogRef.afterClosed().subscribe(result => {    
+      setTimeout(() => {
+        this.getAnunturi();
+      }, 500);
+    });
   }
 
   stergeAnunt(id: number){

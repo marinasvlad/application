@@ -13,7 +13,6 @@
           "Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.8",
           "Microsoft.EntityFrameworkCore.Design": "6.0.8",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.8",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
@@ -629,6 +628,7 @@
           "Core": "1.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "6.0.8",
           "Microsoft.IdentityModel.Tokens": "6.28.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "6.0.8",
           "System.IdentityModel.Tokens.Jwt": "6.28.1"
         },
         "runtime": {

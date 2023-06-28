@@ -31,6 +31,8 @@ C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.JsonWebTokens
 C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.Logging.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Vlad\Projects\Application\publish\Newtonsoft.Json.dll
+C:\Users\Vlad\Projects\Application\publish\Npgsql.dll
+C:\Users\Vlad\Projects\Application\publish\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Vlad\Projects\Application\publish\SQLitePCLRaw.batteries_v2.dll
 C:\Users\Vlad\Projects\Application\publish\SQLitePCLRaw.core.dll
 C:\Users\Vlad\Projects\Application\publish\SQLitePCLRaw.provider.e_sqlite3.dll
