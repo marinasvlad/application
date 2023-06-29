@@ -31,6 +31,11 @@ namespace Infrastructure.Data
             return await _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).OrderByDescending(a => a.DataAnunt).ToListAsync();
         }
 
+        public async Task<IReadOnlyList<Anunt>> GetAnunturiPaginatedAsync(int skip, int take)
+        {
+            return await _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).OrderByDescending(a => a.DataAnunt).Skip(skip).Take(take).ToListAsync();
+        }
+
         public async Task<bool> PostAnunt(Anunt anunt)
         {
             await _context.Anunturi.AddAsync(anunt);

@@ -10,6 +10,9 @@ namespace Core.Interfaces
     {
         Task<IReadOnlyList<Anunt>> GetAnunturiAsync();
 
+        Task<IReadOnlyList<Anunt>> GetAnunturiPaginatedAsync(int skip, int take);
+
+
         Task<bool> PostAnunt(Anunt anunt);
 
         Task<bool> DeleteAnunt(int anuntId);
