@@ -5,7 +5,7 @@
     <p class="font-PE"> Aceasta este o aplicație de management a cursurilor de înot. Ea îndeplinește mai multe funcționalități printre care împărțirea elevilor pe grupe, contabilizarea prezențelor lor, publicarea de anunțuri, contact și așa mai departe. 
     </p>
 
-    <button mat-raised-button (click)="openDialog()">
+    <button mat-raised-button (click)="openModal(template)">
       <mat-icon >note_add</mat-icon>
       Adaugă anunț
     </button>
@@ -31,5 +31,21 @@
           </mat-card>
           <br>
     </div>
-
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Adaugă un anunț</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+            <mat-form-field class="mat-form-field-class" >
+              <textarea [(ngModel)]="inputValue" class="text-area-class" matInput placeholder="Scrie aici anunțul pe care vrei să îl adaugi"></textarea>
+            </mat-form-field>
+            <br>
+      <button mat-button (click)="modalRef?.hide()">Închide</button>
+      <button [disabled]="inputValue.length == 0" mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="postAnunt()" >Adaugă</button>
+      </div>
+</ng-template>

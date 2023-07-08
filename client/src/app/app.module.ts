@@ -21,7 +21,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { AnuntModalComponent } from './home/anunt-modal/anunt-modal.component'; 
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatInputModule} from '@angular/material/input'; 
 import {MatFormFieldModule} from '@angular/material/form-field'; 
@@ -29,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card'; 
 import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -38,8 +38,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     HomeComponent,
     GrupeComponent,
     EleviComponent,
-    ContactComponent,
-    AnuntModalComponent
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +52,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     MatCardModule,
     MatSidenavModule,
     MatInputModule,
+    ModalModule.forRoot(),
     MatListModule,
     MatFormFieldModule,
     MatButtonModule,

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AnuntService } from '../services/anunt.service';
 import { Anunt } from '../models/anunt';
 import { MatDialog } from '@angular/material/dialog';
-import { AnuntModalComponent } from './anunt-modal/anunt-modal.component';
 import { delay } from 'rxjs/operators';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,7 +11,10 @@ import { delay } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   anunturi: Anunt[];
-  constructor(private anuntService: AnuntService, public dialog: MatDialog) { }
+  modalRef?: BsModalRef;
+  inputValue: string = '';
+
+  constructor(private anuntService: AnuntService, public dialog: MatDialog, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getAnunturi();
@@ -23,22 +26,23 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  postAnunt(){
-    this.openDialog();
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AnuntModalComponent);
-    dialogRef.afterClosed().subscribe(result => {    
-      setTimeout(() => {
-        this.getAnunturi();
-      }, 500);
-    });
-  }
-
   stergeAnunt(id: number){
     this.anuntService.deleteAnunt(id).subscribe(res => {
       this.getAnunturi();
     });
   }
+
+  openModal(template: TemplateRef<any>){
+    this.inputValue = '';
+    this.modalRef = this.modalService.show(template);
+  }
+
+  postAnunt(){
+    let anunt: Anunt = new Anunt();
+    anunt.text = this.inputValue;
+    this.anuntService.postAnunt(anunt).subscribe(() => {
+      this.modalRef?.hide();
+      this.getAnunturi();
+    });
+  }  
 }

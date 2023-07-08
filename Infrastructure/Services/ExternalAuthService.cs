@@ -20,7 +20,7 @@ namespace Infrastructure.Services
         {
             GoogleClientId = configuration["GoogleAuth:ClientId"];
             GooglweClientSecret = configuration["GoogleAuth:ClientSecret"];
-            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
+            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];            
         }
 
         public string GetGoogleLoginUrl()
