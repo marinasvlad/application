@@ -2,7 +2,7 @@
     <h1 class="font-PE">Acasă</h1>
     <br>
     <h3 class="font-PE">Bine ai venit!</h3>
-    <p class="font-PE"> Aceasta este o aplicație de management a cursurilor de înot. Ea îndeplinește mai multe funcționalități printre care împărțirea elevilor pe grupe, contabilizarea prezențelor lor, publicarea de anunțuri, contact și așa mai departe. 
+    <p class="font-PE"> Aceasta este o aplicație de management a cursurilor de înot. Ea îndeplinește mai multe funcționalități printre care împărțirea elevilor pe grupe, contabilizarea prezențelor elevilor, publicarea de anunțuri, contact și așa mai departe. 
     </p>
 
     <button mat-raised-button (click)="openModal(template)">
@@ -30,6 +30,23 @@
             </mat-card-actions>
           </mat-card>
           <br>
+    </div>
+    <div class="d-flex justify-content-center" *ngIf="pagination" >
+      <pagination 
+      class="my-pagination" 
+      [boundaryLinks]="true" 
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [maxSize]="10"
+      [nextText]="'Următoarea'"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      extText="&rsaquo;" 
+      firstText="&laquo;" 
+      lastText="&raquo;">
+
+</pagination>
     </div>
 </div>
 

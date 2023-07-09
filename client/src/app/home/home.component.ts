@@ -4,31 +4,43 @@ import { Anunt } from '../models/anunt';
 import { MatDialog } from '@angular/material/dialog';
 import { delay } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Pagination } from '../models/pagination';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss','../shared/style.scss']
 })
 export class HomeComponent implements OnInit {
-  anunturi: Anunt[];
+  anunturi: Anunt[] = [];
   modalRef?: BsModalRef;
   inputValue: string = '';
+
+  pagination: Pagination | undefined;
+
+  pageNumber = 1;
+
+  pageSize = 10;
 
   constructor(private anuntService: AnuntService, public dialog: MatDialog, private modalService: BsModalService) { }
 
   ngOnInit(): void {
-    this.getAnunturi();
+    this.loadAnunturi();
   }
 
-  getAnunturi(){
-    this.anuntService.getAnunturi().subscribe(anunturi => {
-      this.anunturi = anunturi;
+  loadAnunturi(){
+    this.anuntService.getAnunturi(this.pageNumber, this.pageSize).subscribe({
+      next: response => {
+        if(response.pagination && response.result){
+          this.anunturi = response.result;
+          this.pagination = response.pagination;
+        }
+      }
     });
   }
 
   stergeAnunt(id: number){
     this.anuntService.deleteAnunt(id).subscribe(res => {
-      this.getAnunturi();
+      this.loadAnunturi();
     });
   }
 
@@ -42,7 +54,14 @@ export class HomeComponent implements OnInit {
     anunt.text = this.inputValue;
     this.anuntService.postAnunt(anunt).subscribe(() => {
       this.modalRef?.hide();
-      this.getAnunturi();
+      this.loadAnunturi();
     });
-  }  
+  }
+
+  pageChanged(event: any){
+    if(this.pageNumber != event.page){
+      this.pageNumber = event.page;
+      this.loadAnunturi();
+    }
+  }
 }

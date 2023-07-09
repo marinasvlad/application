@@ -2,6 +2,7 @@ C:\Users\Vlad\Projects\Application\publish\API.exe
 C:\Users\Vlad\Projects\Application\publish\Data\SeedData\users.json
 C:\Users\Vlad\Projects\Application\publish\appsettings.Development.json
 C:\Users\Vlad\Projects\Application\publish\appsettings.json
+C:\Users\Vlad\Projects\Application\publish\someThings.json
 C:\Users\Vlad\Projects\Application\publish\API.dll
 C:\Users\Vlad\Projects\Application\publish\API.runtimeconfig.json
 C:\Users\Vlad\Projects\Application\publish\API.pdb

@@ -29,6 +29,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MatSidenavModule,
     MatInputModule,
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     MatListModule,
     MatFormFieldModule,
     MatButtonModule,

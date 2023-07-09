@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Extensions;
+using API.Helpers;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,8 +29,11 @@ namespace API.Controllers
 
         [HttpGet]
         [Authorize(Policy = "RequireAdminRole")]
-        public async Task<ActionResult<IReadOnlyList<AnuntDTO>>> GetAnunturi(){
-            var anunturi = await _anuntRepo.GetAnunturiAsync();
+        public async Task<ActionResult<PagedList<AnuntDTO>>> GetAnunturi([FromQuery]UserParams userParams){
+            var anunturi = await _anuntRepo.GetAnunturiAsync(userParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(anunturi.CurrentPage, anunturi.PageSize, anunturi.TotalCount, anunturi.TotalPages));
+
             return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
         }
 
@@ -48,7 +53,7 @@ namespace API.Controllers
 
             Anunt anunt = new Anunt{
                 Text = anuntDto.Text,
-                DataAnunt = DateTime.Now,
+                DataAnunt = DateTime.Now.ToUniversalTime(),
                 AppUser = user,
                 AppUserId = user.Id
             };

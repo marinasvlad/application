@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Paging;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
@@ -26,9 +27,11 @@ namespace Infrastructure.Data
 
         }
 
-        public async Task<IReadOnlyList<Anunt>> GetAnunturiAsync()
+        public async Task<PagedList<Anunt>> GetAnunturiAsync(UserParams userParams)
         {
-            return await _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).OrderByDescending(a => a.DataAnunt).ToListAsync();
+            var query = _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).OrderByDescending(a => a.DataAnunt).AsNoTracking();
+
+            return await PagedList<Anunt>.CreateAsync(query, userParams.pageNumber, userParams.PageSize);
         }
 
         public async Task<IReadOnlyList<Anunt>> GetAnunturiPaginatedAsync(int skip, int take)

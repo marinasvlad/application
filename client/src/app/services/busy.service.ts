@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,9 @@ export class BusyService {
     this.busyRequestCount--;
     if(this.busyRequestCount <= 0) {
       this.busyRequestCount = 0;
-      this.spinnerService.hide();
+      setTimeout(() => {
+        this.spinnerService.hide();
+      }, 900);      
     }
   }
 }

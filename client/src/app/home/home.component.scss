@@ -6,3 +6,17 @@
     width: 100%;
 
 }
+
+.my-pagination::ng-deep .page-item.active .page-link {
+    z-index: 1;
+    color: white;
+    background-color:black !important;
+    border-color: black;
+}
+
+.my-pagination::ng-deep .page-item .page-link {
+    z-index: 1;
+    color: black;
+    background-color:white !important;
+    border-color: white;
+}
