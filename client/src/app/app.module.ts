@@ -30,6 +30,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import {MatStepperModule} from '@angular/material/stepper';
+import { RegisterComponent } from './register/register.component';
+import { InitialScreenComponent } from './initial-screen/initial-screen.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     HomeComponent,
     GrupeComponent,
     EleviComponent,
-    ContactComponent
+    ContactComponent,
+    RegisterComponent,
+    InitialScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MatCardModule,
     MatSidenavModule,
     MatInputModule,
+    MatStepperModule,    
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
     MatListModule,

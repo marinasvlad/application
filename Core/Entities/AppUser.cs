@@ -16,7 +16,13 @@ namespace Core.Entities
 
         public Grupa Grupa { get; set; }
 
+        public int? LocatieId { get; set; }
+
+        public Locatie Locatie { get; set; }
+
         public ICollection<Anunt> Anunturi { get; set; }
+        
+        public int NumarSedinteRamase { get; set; }
 
     }
 }

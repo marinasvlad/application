@@ -20,8 +20,8 @@ namespace API.Extensions
             services.AddScoped<IExternalAuthService, ExternalAuthService>();
             services.AddScoped<IAnuntRepository, AnuntRepository>();
             services.AddDbContext<AppIdentityContext>(opt => {
-                opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
-                //opt.UseSqlite(config.GetConnectionString("SqliteConnection"));
+                //opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
+                opt.UseSqlite(config.GetConnectionString("SqliteConnection"));
             });
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<ApiBehaviorOptions>(options => {

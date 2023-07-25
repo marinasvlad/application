@@ -80,6 +80,28 @@ namespace Infrastructure.Data
                     await userManager.AddToRoleAsync(vladMarinas,"Admin" );   
                 }
             }
-        }        
+        }
+
+
+        public static async Task SeedLocatii(AppIdentityContext context)
+        {
+           if(!context.Locatii.Any())
+           {
+                var waterPark = new Locatie();
+                waterPark.NumeLocatie = "Water Park";
+
+                var imperialGarden = new Locatie();
+                imperialGarden.NumeLocatie = "Imperial Garden";
+
+                var bazinulCarol = new Locatie();
+                bazinulCarol.NumeLocatie = "Bazinul Carol";
+
+                context.Locatii.Add(waterPark);
+                context.Locatii.Add(imperialGarden);
+                context.Locatii.Add(bazinulCarol);
+
+                await context.SaveChangesAsync();
+           }
+        }          
     }
 }

@@ -22,6 +22,8 @@ namespace Infrastructure.Data
 
         public DbSet<Anunt> Anunturi {get; set;}
 
+        public DbSet<Locatie> Locatii { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -44,6 +46,12 @@ namespace Infrastructure.Data
             .HasOne(a => a.Grupa)
             .WithMany(g => g.Elevi)
             .HasForeignKey(c => c.GrupaId)
+            .IsRequired(false);
+
+            builder.Entity<AppUser>()
+            .HasOne(u => u.Locatie)
+            .WithMany(l => l.Elevi)
+            .HasForeignKey(u => u.LocatieId)
             .IsRequired(false);
 
             builder.Entity<AppUser>()

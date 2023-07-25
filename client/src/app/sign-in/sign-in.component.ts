@@ -36,7 +36,6 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.imgSrc = '../../assets/btn_google_signin_light_normal_web.png';
-    this.handleGoogleResponse();
   }
 
 
@@ -55,27 +54,4 @@ export class SignInComponent implements OnInit {
       window.location.reload();
     });
   }
-
-  handleGoogleResponse() {
-    this.route.queryParams.subscribe(params => {
-      const codeGoogle = params['code'];
-      if (codeGoogle) {
-        this.http.post<any>(this.baseUrl + 'account/logingoogle', {code: codeGoogle}).pipe(
-          map((response: IUser) => {
-            const user = response;
-            if (user) {
-              const roles = this.getDecodedToken(user.token).role;
-              user.roles = [];
-              Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-              localStorage.setItem('userApplication', JSON.stringify(user));
-              this.currentUserSource.next(user);
-            }
-          })
-        ).subscribe(resp => {
-          window.location.reload();
-        })
-      }
-    });
-  }
-
 }

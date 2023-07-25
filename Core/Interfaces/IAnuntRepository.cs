@@ -16,5 +16,6 @@ namespace Core.Interfaces
         Task<bool> PostAnunt(Anunt anunt);
 
         Task<bool> DeleteAnunt(int anuntId);
+
     }
 }

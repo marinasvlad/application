@@ -67,6 +67,7 @@ try
 
             await Seed.SeedUsers(roleManager, userManager);
 
+            await Seed.SeedLocatii(context);
     }
 }
 catch (Exception ex)

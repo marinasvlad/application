@@ -1,0 +1,31 @@
+
+<div class="container">
+    <div style="height: 90vh; display: flex; justify-content: center; align-items: center;">
+    
+        <div class="container" style="width: 30vh;">
+            <div class="row">
+                <img src="../../assets/appLogo.png" alt="appLogo">
+            </div>
+            <br>
+            <div *ngIf="initialButtonsVisible == true" class="row">
+                <button mat-raised-button (click)="signInClick()" >Sign In</button>
+            </div>
+            <br>
+            <br>
+            <div *ngIf="initialButtonsVisible == true" class="row">
+                <button mat-raised-button (click)="registerClick()" >Înregistrează-te</button>
+            </div>
+            <br>
+          
+            <app-sign-in *ngIf="signInVisible == true" ></app-sign-in>
+            <app-register *ngIf="registerVisible == true" ></app-register>
+            <br>
+            <div *ngIf="signInVisible == true || registerVisible == true" class="row">
+                <button mat-raised-button  (click)="inapoiClick()" >Înapoi</button>
+            </div>  
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,5 +1,8 @@
 <ngx-spinner>
     <h3>Așteaptă...</h3>
 </ngx-spinner>
-<app-sign-in *ngIf="(accountService.currentUser$ | async) === null && this.user == undefined"></app-sign-in>
+<!-- <app-sign-in *ngIf="(accountService.currentUser$ | async) === null && this.user == undefined"></app-sign-in> -->
+
+<app-initial-screen *ngIf="(accountService.currentUser$ | async) === null && this.user == undefined"></app-initial-screen>
 <app-nav *ngIf="(accountService.currentUser$ | async)"></app-nav>
+

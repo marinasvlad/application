@@ -1,4 +1,33 @@
+<div class="row">
+    <input [(ngModel)]="user.email" type="text" class="form-control" placeholder="Email" aria-label="Email"
+        aria-describedby="user">
+</div>
 
+<br>
+
+<div class="row">
+    <input [required] [(ngModel)]="user.password" type="password" class="form-control" placeholder="Parola"
+        aria-label="Parola" aria-describedby="parola">
+</div>
+<br>
+
+<div class="row">
+    <button mat-raised-button (click)="signIn()"><mat-icon>login</mat-icon>
+        Sign In</button>
+</div>
+<br>
+<div class="row">
+    <button (click)="signInGoogle()" mat-raised-button>
+        <span>
+            <img style="height: 3vh; width: 4vh;"
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+        </span>
+        Sign in cu Google
+    </button>
+</div>
+
+
+<!-- 
 <div class="container">
     <div style="height: 90vh; display: flex; justify-content: center; align-items: center;">
     
@@ -34,6 +63,4 @@
         </div>
 
     </div>
-</div>
-
-
+</div> -->

@@ -37,13 +37,6 @@ namespace API.Controllers
             return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
         }
 
-        // [HttpGet]
-        // [Authorize(Policy = "RequireAdminRole")]
-        // public async Task<ActionResult<IReadOnlyList<AnuntDTO>>> GetAnunturi(int skip, int take){
-        //     var anunturi = await _anuntRepo.GetAnunturiPaginatedAsync(skip, take);
-        //     return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
-        // }        
-
         [HttpPost]
         [Authorize(Policy = "RequireAdminRole")]
         public async Task<IActionResult> PostAnunt(AnuntDTO anuntDto){
