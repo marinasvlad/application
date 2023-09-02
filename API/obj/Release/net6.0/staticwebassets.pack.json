@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\assets\\appLogo.png"
     },
     {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\bazin-carol.jpg",
+      "PackagePath": "staticwebassets\\assets\\bazin-carol.jpg"
+    },
+    {
       "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_focus_web.png",
       "PackagePath": "staticwebassets\\assets\\btn_google_signin_light_focus_web.png"
     },
@@ -19,6 +23,14 @@
     {
       "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_pressed_web.png",
       "PackagePath": "staticwebassets\\assets\\btn_google_signin_light_pressed_web.png"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\imperial-garden.jpg",
+      "PackagePath": "staticwebassets\\assets\\imperial-garden.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\water-park.jpg",
+      "PackagePath": "staticwebassets\\assets\\water-park.jpg"
     },
     {
       "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\favicon.ico",
@@ -49,8 +61,8 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.9016200b35e79dd25f07.js",
-      "PackagePath": "staticwebassets\\main.9016200b35e79dd25f07.js"
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.8036c4627b4003f4fcc4.js",
+      "PackagePath": "staticwebassets\\main.8036c4627b4003f4fcc4.js"
     },
     {
       "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",

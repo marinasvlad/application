@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { GoogleAuthUrlDTO } from '../dtos/googleAuthUrlDTO';
+import { RegisterDTO } from '../models/registerDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,20 @@ export class AccountService {
       })
     );
   }
+
+  registerCont(registerDto: RegisterDTO){
+    console.log(this.baseUrl + 'account/register');
+    console.log({DisplayName: registerDto.displayName,
+      Email: registerDto.email,
+      Password: registerDto.parola,
+      LocatieNumar: registerDto.locatieNumar});
+
+      return this.http.post<any>(this.baseUrl + 'account/register',
+      {DisplayName: registerDto.displayName,
+      Email: registerDto.email,
+      Password: registerDto.parola,
+      LocatieNumar: registerDto.locatieNumar});
+    }
 
   getUrlGoogleLogin()
   {

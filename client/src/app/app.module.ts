@@ -33,6 +33,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import {MatStepperModule} from '@angular/material/stepper';
 import { RegisterComponent } from './register/register.component';
 import { InitialScreenComponent } from './initial-screen/initial-screen.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { InitialScreenComponent } from './initial-screen/initial-screen.componen
     MatButtonToggleModule,
     NgxSpinnerModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true 

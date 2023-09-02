@@ -1,0 +1,18 @@
+[
+    {
+        "DisplayName":"Member",
+        "Email":"member@test.com"
+    },
+    {
+        "DisplayName":"Moderator",
+        "Email":"moderator@test.com"
+    },
+    {
+        "DisplayName":"Admin",
+        "Email":"admin@test.com"
+    },
+    {
+        "DisplayName": "Vlad Marinas",
+        "Email": "marinasvlad@gmail.com"
+    }
+]

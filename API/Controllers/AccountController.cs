@@ -29,9 +29,12 @@ namespace API.Controllers
         private readonly IMapper _mapper;
 
         private readonly IExternalAuthService _externalAuthService;
+        private readonly ILocatiiRepository _locatiiRepo;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService, IMapper mapper, IExternalAuthService externalAuthService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService,
+         IMapper mapper, IExternalAuthService externalAuthService, ILocatiiRepository locatiiRepo)
         {
+            _locatiiRepo = locatiiRepo;
             _externalAuthService = externalAuthService;
             _mapper = mapper;
             _tokenService = tokenService;
@@ -108,19 +111,51 @@ namespace API.Controllers
             });
         }
 
+        [HttpPost("registergoogle")]
+        public async Task<ActionResult<UserDto>> RegisterGoogle(GoogleAuthCodeDTO googleAuthCodeDTO)
+        {
+
+            var payload = await _externalAuthService.GetPayloadAsync(googleAuthCodeDTO.code);
+
+            var user = await _userManager.FindByEmailAsync(payload.Email);
+
+            return Ok(new UserDto
+            {
+                Email = user.Email,
+                Token = await _tokenService.CreateToken(user),
+                DisplayName = user.DisplayName
+            });
+        }        
+
         [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        public async Task<ActionResult> Register(RegisterDto registerDto)
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
-                return new BadRequestObjectResult(new ApiValidationErrorResponse { Errors = new[] { "Email address is in use" } });
+                return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Adresa de email este deja folosită de alt cont." } });
             }
+
+            var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
+            if(contNume != null)
+            {
+                //return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." } });
+                return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
+
+            }
+
+            if(registerDto.LocatieNumar == 0)
+            {
+                return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Nu ai completat parola." } });
+            }
+            var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
 
             var user = new AppUser
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email
+                UserName = registerDto.Email,
+                Locatie = locatie,
+                LocatieId = locatie.Id
             };
 
             var results = await _userManager.CreateAsync(user, registerDto.Password);
@@ -136,12 +171,9 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400));
             }
 
-            return new UserDto
-            {
-                DisplayName = user.DisplayName,
-                Token = await _tokenService.CreateToken(user),
-                Email = user.Email
-            };
+            await _locatiiRepo.AddNewUserToLocatieAsync(user);
+
+            return Ok();
         }
 
         [HttpGet("emailexists")]

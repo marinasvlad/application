@@ -1,0 +1,10 @@
+.locatie-card {
+    max-width: 400px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;    
+  }
+
+  .selected {
+    background-color: #cce5ff;
+  }

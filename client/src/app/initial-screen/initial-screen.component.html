@@ -1,6 +1,6 @@
 
 <div class="container">
-    <div style="height: 90vh; display: flex; justify-content: center; align-items: center;">
+    <div style="padding-top: 100px;display: flex; justify-content: center; align-items: center;">
     
         <div class="container" style="width: 30vh;">
             <div class="row">
@@ -13,19 +13,20 @@
             <br>
             <br>
             <div *ngIf="initialButtonsVisible == true" class="row">
-                <button mat-raised-button (click)="registerClick()" >Înregistrează-te</button>
+                <button mat-raised-button (click)="registerClick()" >
+                    Înregistrează-te</button>
             </div>
-            <br>
-          
-            <app-sign-in *ngIf="signInVisible == true" ></app-sign-in>
-            <app-register *ngIf="registerVisible == true" ></app-register>
-            <br>
+            <br> 
             <div *ngIf="signInVisible == true || registerVisible == true" class="row">
-                <button mat-raised-button  (click)="inapoiClick()" >Înapoi</button>
-            </div>  
-        </div>
-
+                <button mat-raised-button  (click)="inapoiClick()" ><mat-icon>keyboard_backspace</mat-icon>
+                    Înapoi</button>
+            </div>                                 
+        </div>  
     </div>
+    <app-sign-in *ngIf="signInVisible == true"></app-sign-in>
+    <app-register *ngIf="registerVisible == true" ></app-register>      
 </div>
+
+
 
 

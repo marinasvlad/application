@@ -1,0 +1,4 @@
+{
+    "dbElephantSql": "Server=tyke.db.elephantsql.com;Database=itrhrknl;User Id=itrhrknl;Password=oki1rnYbbgsSItUMHmAKOO-C0BBMKGW0;Port=5432",
+    "sqlite": "Data source=identity.db"
+}

@@ -8,12 +8,15 @@ namespace API.Dtos
 {
     public class RegisterDto
     {
-        [Required]
+        [Required(ErrorMessage = "Nu ai completat numele și prenumele")]
         public string DisplayName { get; set; }
         [Required]
+        [EmailAddress(ErrorMessage = "Adresa de email este invalidă")]        
         public string Email { get; set; }
         [Required]
-        [RegularExpression("(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$",ErrorMessage = "Parola trebuie sa aiba cel putin o litera mare, o litera mica, o cifra, un caracter alpha numeric si sa aiba cel putin 6 caractere in total.")]
+        // [RegularExpression("(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\\s).*$",ErrorMessage = "Parola trebuie să aibă cel puțin o litera mare, o literă mică, o cifră, un caracter alpha numeric și să aibă cel puțin 6 caractere în total.")]
         public string Password { get; set; }
+        [Required]
+        public int LocatieNumar { get; set; }
     }
 }

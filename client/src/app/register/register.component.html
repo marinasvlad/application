@@ -1,1 +1,178 @@
-<p>register works!</p>
+<!-- <div class="row">
+    <input [(ngModel)]="user.email" type="text" class="form-control" placeholder="Email" aria-label="Email"
+        aria-describedby="user">
+</div> -->
+<div class="container" style="width: 30vh;">
+    <br>
+    <div *ngIf="contNouStepperVisible == true" class="row">
+        <button mat-raised-button (click)="renunta()" ><mat-icon>cancel_presentation</mat-icon>
+            Renunță</button>
+    </div>    
+    <div *ngIf="contNouStepperVisible == false" class="row">
+        <button mat-raised-button (click)="contNou()" ><mat-icon>add_circle</mat-icon>
+            Cont nou</button>
+    </div>
+    <br>
+    <div *ngIf="contNouStepperVisible == false" class="row">
+        <button mat-raised-button>
+            <span>
+                <img style="height: 3vh; width: 4vh;"
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+            </span>
+            Cont nou cu Google
+        </button>
+    </div>
+</div>
+
+<mat-stepper *ngIf="contNouStepperVisible == true" orientation="vertical">
+    <mat-step>
+        <ng-template matStepLabel>Nume și prenume</ng-template>
+        <ng-template matStepContent>
+            <form [formGroup]="firstFormGroup">
+                <mat-form-field>
+                    <mat-label>Numele și prenumele</mat-label>
+                    <input [(ngModel)]="numeSiPrenume" matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
+                </mat-form-field>
+            </form>
+            <div>
+                <p>Completează numele și prenumele.</p>
+                <button mat-button matStepperNext>Următorul</button>
+            </div>
+        </ng-template>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Email și parola</ng-template>
+        <ng-template matStepContent>
+            <form [formGroup]="secondFormGroup">
+                <mat-form-field>
+                    <mat-label>Adresa de email</mat-label>
+                    <input [(ngModel)]="email" type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
+                        required>                       
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Parola</mat-label>
+                    <input [(ngModel)]="parola" type="password" matInput placeholder="parola1234" formControlName="secondCtrl"
+                        required>                     
+                </mat-form-field>
+            </form>
+
+            <div>
+                <p>Completează adresa de email.</p>
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Următorul</button>
+            </div>
+        </ng-template>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Locație</ng-template>
+        <ng-template matStepContent>
+            <mat-label>Locația la care vrei să participi</mat-label>
+            <br>
+            <br>          
+            <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
+                <mat-card-title-group>
+                    <mat-card-title><strong>Waterpark</strong></mat-card-title>
+                    <img mat-card-sm-image src="../../assets/water-park.jpg">
+                </mat-card-title-group>
+                <mat-card-content>
+                    <p><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova</p>
+                    <p><strong>Nivel</strong>: începători/intermediari/avansați</p>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-card class="locatie-card" (click)="selectCard(2)" [ngClass]="{ 'selected': selectedCard === 2 }">
+                <mat-card-title-group>
+                    <mat-card-title><strong>Imperial Garden</strong></mat-card-title>
+                    <img mat-card-sm-image src="../../assets/imperial-garden.jpg">
+                </mat-card-title-group>
+                <mat-card-content>
+                    <p><strong>Adresă</strong>: Drumul Industriilor 17, Craiova</p>
+                    <p><strong>Nivel</strong>: începători</p>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-card class="locatie-card" (click)="selectCard(3)" [ngClass]="{ 'selected': selectedCard === 3 }">
+                <mat-card-title-group>
+                    <mat-card-title>Bazinul Carol</mat-card-title>
+                    <img mat-card-sm-image src="../../assets/bazin-carol.jpg">
+                </mat-card-title-group>
+                <mat-card-content>
+                    <p><strong>Adresă</strong>: Strada Bibescu 30, Craiova</p>
+                    <p><strong>Nivel</strong>: intermediari/avansați</p>
+                </mat-card-content>
+            </mat-card>
+            <div>
+                <p>Selectează locația la care vrei să participi</p>
+                <button mat-button matStepperPrevious>Înapoi</button>
+                <button mat-button matStepperNext>Următorul</button>
+            </div>
+        </ng-template>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Crează cont!</ng-template>
+        <p>Contul tau este gata de a fi creat!</p>
+        <button mat-button (click)="creazaCont()" >Crează cont</button>
+        <button mat-button matStepperPrevious>Înapoi</button>
+    </mat-step>
+</mat-stepper>
+
+<!-- <mat-stepper #stepper orientation="vertical">
+    <mat-step [stepControl]="firstFormGroup" errorMessage="Completează numele">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Nume și prenumele</ng-template>
+        <mat-form-field>
+          <mat-label>Nume și prenume</mat-label>
+          <input matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <div>
+          <p>Completează numele și prenumele.</p>
+          <button mat-button matStepperNext>Următorul</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" errorMessage="Completează email-ul">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Adresa de email</ng-template>
+        <mat-form-field>
+          <mat-label>Adresa de email</mat-label>
+          <input type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
+                 required>
+        </mat-form-field>
+        <div>
+          <p>Completează adresa de email.</p>
+          <button mat-button matStepperPrevious>Înapoi</button>
+          <button mat-button matStepperNext>Următorul</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup" errorMessage="Selectează locația">
+        <form [formGroup]="thirdFormGroup">
+          <ng-template matStepLabel>Locația</ng-template>
+          <mat-form-field>
+            <mat-label>Locația la care vrei să participi</mat-label>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option>
+                    <p>Locația 1</p>
+                </mat-list-option>
+                <mat-list-option>
+                    <p>Locația 1</p>
+                </mat-list-option>                
+              </mat-selection-list>
+          </mat-form-field>
+          <div>
+            <p>Completează adresa de email.</p>
+            <button mat-button matStepperPrevious>Înapoi</button>
+            <button mat-button matStepperNext>Următorul</button>
+          </div>
+        </form>
+      </mat-step>    
+    <mat-step>
+      <ng-template matStepLabel>Crează cont</ng-template>
+      <p>După ce ai completat datele necesare și ai selectat locația îți poți crea contul pentru aplicația Înoți în apă!</p>
+      <div>
+        <button mat-button matStepperPrevious>Înapoi</button>
+        <button mat-button (click)="stepper.reset()">Crează</button>
+      </div>
+    </mat-step>
+  </mat-stepper> -->
