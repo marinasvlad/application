@@ -24,7 +24,7 @@
         </div>  
     </div>
     <app-sign-in *ngIf="signInVisible == true"></app-sign-in>
-    <app-register *ngIf="registerVisible == true" ></app-register>      
+    <app-register [googleAccount]="googleAccount" *ngIf="registerVisible == true" ></app-register>      
 </div>
 
 

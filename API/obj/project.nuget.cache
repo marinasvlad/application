@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pHuXzDxTLYT+vj2txCwckuC5QHQgPsvEq1xgT9jjGp9srlBfHtARP9LrVkgr+Bp9D5H9xlmUuPq0CSoJlD6DuQ==",
+  "dgSpecHash": "JI9+BWxs7mlWcowt2V6gMDl9VmcwCLISsuX7K3x1+M46ofg+R6Pi9VgCXple1KXjpXdyyQUumj3QmLHqSb/faQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\application\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -45,7 +45,7 @@
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\Vlad\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\npgsql\\6.0.8\\npgsql.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.8\\npgsql.entityframeworkcore.postgresql.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.6\\sqlitepclraw.bundle_e_sqlite3.2.0.6.nupkg.sha512",

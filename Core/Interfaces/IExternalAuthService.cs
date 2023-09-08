@@ -11,5 +11,10 @@ namespace Core.Interfaces
         Task<GoogleJsonWebSignature.Payload> GetPayloadAsync(string authCode);
 
         string GetGoogleLoginUrl();
+
+        string GetGoogleLoginUrlForRegister();
+
+        string GetFacebookLoginUrl();
+
     }
 }

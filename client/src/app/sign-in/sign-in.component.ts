@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ReplaySubject } from 'rxjs';
 import { AccountService } from '../services/account.service';
-import { GoogleAuthUrlDTO } from '../dtos/googleAuthUrlDTO';
+import { AuthUrlDTO } from '../dtos/AuthUrlDTO';
 import { StorageService } from '../services/storage.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -41,6 +41,12 @@ export class SignInComponent implements OnInit {
 
   signInGoogle() {
     this.accountService.getUrlGoogleLogin().subscribe(res => {
+      window.location.href = res.url;
+    });
+  }
+
+  signInFacebook() {
+    this.accountService.getUrlFacebookLogin().subscribe(res => {
       window.location.href = res.url;
     });
   }

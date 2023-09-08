@@ -5,8 +5,9 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
-import { GoogleAuthUrlDTO } from '../dtos/googleAuthUrlDTO';
+import { AuthUrlDTO } from '../dtos/AuthUrlDTO';
 import { RegisterDTO } from '../models/registerDTO';
+import { RegisterGoogleDTO } from '../models/registerGoogleDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -37,23 +38,60 @@ export class AccountService {
   }
 
   registerCont(registerDto: RegisterDTO){
-    console.log(this.baseUrl + 'account/register');
-    console.log({DisplayName: registerDto.displayName,
-      Email: registerDto.email,
-      Password: registerDto.parola,
-      LocatieNumar: registerDto.locatieNumar});
 
       return this.http.post<any>(this.baseUrl + 'account/register',
       {DisplayName: registerDto.displayName,
       Email: registerDto.email,
       Password: registerDto.parola,
-      LocatieNumar: registerDto.locatieNumar});
+      LocatieNumar: registerDto.locatieNumar}).pipe(
+        map((response: IUser) => {
+          const user = response;
+          if(user)
+          {
+            const roles = this.getDecodedToken(user.token).role;
+            user.roles = [];
+            Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+            localStorage.setItem('userApplication', JSON.stringify(user));
+            this.currentUserSource.next(user);
+          }
+        })
+      );
     }
+
+  registerContGoogle(registerDto: RegisterGoogleDTO){
+    return this.http.post<any>(this.baseUrl + 'account/registergoogle',
+    {DisplayName: registerDto.displayName,
+    Email: registerDto.email,
+    LocatieNumar: registerDto.locatieNumar}).pipe(
+      map((response: IUser) => {
+        const user = response;
+        if(user)
+        {
+          const roles = this.getDecodedToken(user.token).role;
+          user.roles = [];
+          Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+          localStorage.setItem('userApplication', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    );
+  } 
 
   getUrlGoogleLogin()
   {
-    return this.http.get<GoogleAuthUrlDTO>(this.baseUrl + 'account/geturlgooglelogin');
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlgooglelogin');
   }
+
+  getUrlFacebookLogin()
+  {
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlfacebooklogin');
+  }
+
+
+  getUrlGoogleRegister()
+  {
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlgoogleloginforregister');
+  }  
 
   logOut(){
     //stergem useru din localstorage

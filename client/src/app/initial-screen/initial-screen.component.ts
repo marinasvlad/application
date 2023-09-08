@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { ReplaySubject } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-initial-screen',
@@ -14,11 +15,13 @@ import { ReplaySubject } from 'rxjs';
 export class InitialScreenComponent implements OnInit {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private location: Location) { }
 
   signInVisible:boolean = false;
   registerVisible:boolean = false;
+  registerGoogleVisible:boolean = false;
   initialButtonsVisible:boolean = true;
+  googleAccount: string = '';
   private currentUserSource = new ReplaySubject<IUser>(1);
 
   ngOnInit(): void {
@@ -29,6 +32,7 @@ export class InitialScreenComponent implements OnInit {
     this.signInVisible = false;
     this.registerVisible = false;
     this.initialButtonsVisible = true;
+    this.registerGoogleVisible = false;
   }
 
   signInClick(){
@@ -44,27 +48,42 @@ export class InitialScreenComponent implements OnInit {
 
   handleGoogleResponse() {
     this.route.queryParams.subscribe(params => {
+      console.log('here');
+      console.log(params);
       const codeGoogle = params['code'];
-      if (codeGoogle) {
-        this.http.post<any>(this.baseUrl + 'account/logingoogle', {code: codeGoogle}).pipe(
-          map((response: IUser) => {
-            const user = response;
-            if (user) {
-              const roles = this.getDecodedToken(user.token).role;
-              user.roles = [];
-              Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-              localStorage.setItem('userApplication', JSON.stringify(user));
-              this.currentUserSource.next(user);
-            }
+      if(params['state'] == 'login')
+      {
+        if (codeGoogle) {
+          this.http.post<any>(this.baseUrl + 'account/logingoogle', {code: codeGoogle}).pipe(
+            map((response: IUser) => {
+              const user = response;
+              if (user) {
+                const roles = this.getDecodedToken(user.token).role;
+                user.roles = [];
+                Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+                localStorage.setItem('userApplication', JSON.stringify(user));
+                this.currentUserSource.next(user);
+              }
+            })
+          ).subscribe(resp => {
+            this.router.navigate(['/']);
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);            
           })
-        ).subscribe(resp => {
-          this.router.navigate(['/']);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);            
-          
-        })
+        }
       }
+      else if (params['state'] == 'register')
+      {
+        if (codeGoogle) {
+          this.http.post<any>(this.baseUrl + 'account/logingoogleregister', {code: codeGoogle}).subscribe((resp: string) => {
+            this.googleAccount = JSON.stringify(resp);
+            this.location.go('');
+            this.registerClick();
+          });
+        }
+      }
+
     });
   }
   

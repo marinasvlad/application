@@ -13,21 +13,37 @@ namespace Infrastructure.Services
     public class ExternalAuthService : IExternalAuthService
     {
         private readonly string GoogleClientId;
-        private readonly string GooglweClientSecret;
+        private readonly string GoogleClientSecret;
         private readonly string GoogleRedirectionUri;
+        private readonly string FacebookClientId;
+        private readonly string FacebookClientSecret;
+        private readonly string FacebookRedirectionUri;        
 
         public ExternalAuthService(IConfiguration configuration)
         {
             GoogleClientId = configuration["GoogleAuth:ClientId"];
-            GooglweClientSecret = configuration["GoogleAuth:ClientSecret"];
-            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
-            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
+            GoogleClientSecret = configuration["GoogleAuth:ClientSecret"];
+            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
+            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
+            FacebookClientId = configuration["FacebookAuth:ClientId"];
+            FacebookClientSecret = configuration["FacebookAuth:ClientSecret"];
+            FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUriLocal"];            
+        }
+
+        public string GetFacebookLoginUrl()
+        {
+            return "https://www.facebook.com/v17.0/dialog/oauth?client_id=" + FacebookClientId + "&redirect_uri=" + FacebookRedirectionUri + "&state=login";
         }
 
         public string GetGoogleLoginUrl()
         {
-            return "https://accounts.google.com/o/oauth2/v2/auth?scope=email&include_granted_scopes=true&redirect_uri=" + GoogleRedirectionUri + "&response_type=code&client_id=" + GoogleClientId;
+            return "https://accounts.google.com/o/oauth2/v2/auth?scope=email&state=login&include_granted_scopes=true&redirect_uri=" + GoogleRedirectionUri + "&response_type=code&client_id=" + GoogleClientId;
         }
+
+        public string GetGoogleLoginUrlForRegister()
+        {
+            return "https://accounts.google.com/o/oauth2/v2/auth?scope=profile&state=register&include_granted_scopes=true&redirect_uri=" + GoogleRedirectionUri + "&response_type=code&client_id=" + GoogleClientId;
+        }        
 
         public async Task<GoogleJsonWebSignature.Payload> GetPayloadAsync(string authCode)
         {
@@ -36,7 +52,7 @@ namespace Infrastructure.Services
                 ClientSecrets = new ClientSecrets
                 {
                     ClientId = GoogleClientId,
-                    ClientSecret = GooglweClientSecret
+                    ClientSecret = GoogleClientSecret
                 }
             });
 
