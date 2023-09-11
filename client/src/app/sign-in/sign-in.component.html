@@ -1,7 +1,7 @@
 <br>
 <div class="container" style="width: 30vh;">
     <div class="row">
-        <input [(ngModel)]="user.email" type="text" class="form-control" placeholder="Email" aria-label="Email"
+        <input [(ngModel)]="user.email" autocomplete="off" type="text" class="form-control" placeholder="Email" aria-label="Email"
             aria-describedby="user">
     </div>
     
@@ -22,7 +22,7 @@
         <button (click)="signInGoogle()" mat-raised-button>
             <span>
                 <img style="height: 3vh; width: 4vh;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+                    src="{{googleLogoUrl}}" alt="Google Logo">
             </span>
             Sign in cu Google
         </button>
@@ -32,12 +32,12 @@
         <button (click)="signInFacebook()" mat-raised-button>
             <span>
                 <img style="height: 3vh; width: 4vh;"
-                    src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg" alt="Google Logo">
+                    src="{{facebookLogoUrl}}" alt="Facebook Logo">
             </span>
             Sign in cu Facebook
         </button>
     </div>
-
+    <br>
 
 </div>
 

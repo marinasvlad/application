@@ -8,13 +8,16 @@ namespace Core.Interfaces
 {
     public interface IExternalAuthService
     {
-        Task<GoogleJsonWebSignature.Payload> GetPayloadAsync(string authCode);
+        Task<GoogleJsonWebSignature.Payload> GetGooglePayloadAsync(string authCode);
 
+        Task<(string,string)> GetFacebookPayloadAsync(string authCode);
         string GetGoogleLoginUrl();
 
-        string GetGoogleLoginUrlForRegister();
+        string GetGoogleRegisterUrl();
 
         string GetFacebookLoginUrl();
+
+        string GetFacebookRegisterUrl();
 
     }
 }

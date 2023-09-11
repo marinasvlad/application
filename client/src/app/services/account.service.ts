@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { AuthUrlDTO } from '../dtos/AuthUrlDTO';
 import { RegisterDTO } from '../models/registerDTO';
-import { RegisterGoogleDTO } from '../models/registerGoogleDTO';
+import { RegisterOauthDTO } from '../models/registerOauthDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -58,8 +58,8 @@ export class AccountService {
       );
     }
 
-  registerContGoogle(registerDto: RegisterGoogleDTO){
-    return this.http.post<any>(this.baseUrl + 'account/registergoogle',
+  createOauthGoogleAccount(registerDto: RegisterOauthDTO){
+    return this.http.post<any>(this.baseUrl + 'account/oauthregister',
     {DisplayName: registerDto.displayName,
     Email: registerDto.email,
     LocatieNumar: registerDto.locatieNumar}).pipe(
@@ -77,20 +77,44 @@ export class AccountService {
     );
   } 
 
-  getUrlGoogleLogin()
+  createOauthFacebookAccount(registerDto: RegisterOauthDTO){
+    return this.http.post<any>(this.baseUrl + 'account/oauthregister',
+    {DisplayName: registerDto.displayName,
+    Email: registerDto.email,
+    LocatieNumar: registerDto.locatieNumar}).pipe(
+      map((response: IUser) => {
+        const user = response;
+        if(user)
+        {
+          const roles = this.getDecodedToken(user.token).role;
+          user.roles = [];
+          Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+          localStorage.setItem('userApplication', JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+      })
+    );
+  }   
+
+  getGoogleLoginUrl()
   {
-    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlgooglelogin');
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/getgoogleloginurl');
   }
 
-  getUrlFacebookLogin()
+  getFacebookLoginUrl()
   {
-    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlfacebooklogin');
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/getfacebookloginurl');
   }
 
 
-  getUrlGoogleRegister()
+  getGoogleRegisterUrl()
   {
-    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/geturlgoogleloginforregister');
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/getgoogleregisterurl');
+  }
+
+  getFacebookRegisterUrl()
+  {
+    return this.http.get<AuthUrlDTO>(this.baseUrl + 'account/getfacebookregisterurl');
   }  
 
   logOut(){

@@ -4,34 +4,45 @@
 </div> -->
 <div class="container" style="width: 30vh;">
     <br>
-    <div *ngIf="contNouStepperVisible == true || contNouStepperGoogleVisible == true" class="row">
+    <div *ngIf="contNouStepperVisible == true || contNouStepperOauthVisible == true" class="row">
         <button mat-raised-button (click)="renunta()" ><mat-icon>cancel_presentation</mat-icon>
             Renunță</button>
     </div>    
-    <div *ngIf="contNouStepperVisible == false && contNouStepperGoogleVisible == false" class="row">
+    <div *ngIf="contNouStepperVisible == false && contNouStepperOauthVisible == false" class="row">
         <button mat-raised-button (click)="contNou()" ><mat-icon>add_circle</mat-icon>
             Cont nou</button>
     </div>
     <br>
-    <div *ngIf="contNouStepperVisible == false && contNouStepperGoogleVisible==false" class="row">
-        <button mat-raised-button (click)="signInGoogleRegister()" >
+    <div *ngIf="contNouStepperVisible == false && contNouStepperOauthVisible==false" class="row">
+        <button mat-raised-button (click)="registerGoogle()" >
             <span>
                 <img style="height: 3vh; width: 4vh;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo">
+                    src="{{googleLogoUrl}}" alt="Google Logo">
             </span>
             Cont nou cu Google
         </button>
     </div>
+    <br>
+    <div *ngIf="contNouStepperVisible == false && contNouStepperOauthVisible==false" class="row">
+        <button mat-raised-button (click)="registerFacebook()" >
+            <span>
+                <img style="height: 3vh; width: 4vh;"
+                    src="{{facebookLogoUrl}}" alt="Facebook Logo">
+            </span>
+            Cont nou cu Facebook
+        </button>
+    </div>
+    <br>
 </div>
 
-<mat-stepper *ngIf="contNouStepperGoogleVisible == true" orientation="vertical">
+<mat-stepper *ngIf="contNouStepperOauthVisible == true" orientation="vertical">
     <mat-step>
         <ng-template matStepLabel>Nume și prenume</ng-template>
         <ng-template matStepContent>
             <form [formGroup]="firstFormGroup">
                 <mat-form-field>
                     <mat-label>Numele și prenumele</mat-label>
-                    <input [(ngModel)]="registerGoogleDTO.displayName" readonly matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
+                    <input [(ngModel)]="registerOauthDTO.displayName" readonly matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
                 </mat-form-field>
             </form>
             <div>
@@ -46,7 +57,7 @@
             <form [formGroup]="secondFormGroup">
                 <mat-form-field>
                     <mat-label>Adresa de email</mat-label>
-                    <input [(ngModel)]="registerGoogleDTO.email" readonly type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
+                    <input [(ngModel)]="registerOauthDTO.email" readonly type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
                         required>                       
                 </mat-form-field>
                 <br>
@@ -107,7 +118,8 @@
     <mat-step>
         <ng-template matStepLabel>Crează cont!</ng-template>
         <p>Contul tau este gata de a fi creat!</p>
-        <button mat-button (click)="creazaContGoogle()" >Crează cont</button>
+        <button *ngIf="registerOauthDTO.provider == 'Google'" mat-button (click)="createGoogleOauthAccount()" >Crează cont</button>
+        <button *ngIf="registerOauthDTO.provider == 'Facebook'" mat-button (click)="createFacebookOauthAccount()" >Crează cont</button>
         <button mat-button matStepperPrevious>Înapoi</button>
     </mat-step>
 </mat-stepper>
@@ -124,7 +136,7 @@
             <form [formGroup]="firstFormGroup">
                 <mat-form-field>
                     <mat-label>Numele și prenumele</mat-label>
-                    <input [(ngModel)]="numeSiPrenume" matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
+                    <input autocomplete="off" [(ngModel)]="numeSiPrenume" matInput placeholder="Ex: Ion Popescu" formControlName="firstCtrl" required>
                 </mat-form-field>
             </form>
             <div>
@@ -139,14 +151,14 @@
             <form [formGroup]="secondFormGroup">
                 <mat-form-field>
                     <mat-label>Adresa de email</mat-label>
-                    <input [(ngModel)]="email" type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
+                    <input autocomplete="off" [(ngModel)]="email" type="email" matInput placeholder="Ex: ionpop@test.com" formControlName="secondCtrl"
                         required>                       
                 </mat-form-field>
                 <br>
                 <mat-form-field>
                     <mat-label>Parola</mat-label>
                     <input [(ngModel)]="parola" type="password" matInput placeholder="parola1234" formControlName="secondCtrl"
-                        required>                     
+                        required>
                 </mat-form-field>
             </form>
 

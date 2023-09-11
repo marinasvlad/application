@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Self } from '@angular/core';
+import {  FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { RegisterDTO } from '../models/registerDTO';
-import { RegisterGoogleDTO } from '../models/registerGoogleDTO';
+import { RegisterOauthDTO } from '../models/registerOauthDTO';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +10,7 @@ import { RegisterGoogleDTO } from '../models/registerGoogleDTO';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @Input() googleAccount: string;
+  @Input() oauthAccount: string;
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -21,29 +21,32 @@ export class RegisterComponent implements OnInit {
     thirdCtrl: ['', Validators.required],
   });
 
+  googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
+  facebookLogoUrl: string = "https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg";  
+
   locatieSelectata: number = 0;
 
   selectedCard: number | null = null;
 
   contNouStepperVisible: boolean = false;
-  contNouStepperGoogleVisible: boolean = false;
+  contNouStepperOauthVisible: boolean = false;
   numeSiPrenume: string;
   email: string;
   parola: string;
-  registerGoogleDTO: RegisterGoogleDTO = new RegisterGoogleDTO();
+  registerOauthDTO: RegisterOauthDTO = new RegisterOauthDTO();
 
   selectCard(cardNumber: number) {
     this.selectedCard = cardNumber;
     this.locatieSelectata = cardNumber;
-    this.registerGoogleDTO.locatieNumar = cardNumber;
+    this.registerOauthDTO.locatieNumar = cardNumber;
   }
   
   constructor(private _formBuilder: FormBuilder, private accountService: AccountService) { }
 
   ngOnInit(): void {
-    if(this.googleAccount != '')
+    if(this.oauthAccount != '')
     {
-      this.processGoogleRegisterAccount(this.googleAccount);
+      this.processOauthRegisterAccount(this.oauthAccount);
     }
   }
 
@@ -53,15 +56,20 @@ export class RegisterComponent implements OnInit {
 
   renunta(){
     this.contNouStepperVisible = false;
-    this.contNouStepperGoogleVisible = false;
+    this.contNouStepperOauthVisible = false;
   }
 
-  signInGoogleRegister() {
-    this.accountService.getUrlGoogleRegister().subscribe(res => {
+  registerGoogle() {
+    this.accountService.getGoogleRegisterUrl().subscribe(res => {
       window.location.href = res.url;
     });
   }
 
+  registerFacebook(){
+    this.accountService.getFacebookRegisterUrl().subscribe(res =>{
+      window.location.href = res.url;
+    });
+  }
   creazaCont(){
     let registerDTO = new RegisterDTO();
     registerDTO.displayName = this.numeSiPrenume;
@@ -73,17 +81,24 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  creazaContGoogle(){
-    this.accountService.registerContGoogle(this.registerGoogleDTO).subscribe(() => {
+  createGoogleOauthAccount(){
+    this.accountService.createOauthGoogleAccount(this.registerOauthDTO).subscribe(() => {
       window.location.reload();
     });
   }
 
-  processGoogleRegisterAccount(googleAccountObject: string)
+  createFacebookOauthAccount(){
+    this.accountService.createOauthFacebookAccount(this.registerOauthDTO).subscribe(() => {
+      window.location.reload();
+    });
+  }  
+
+  processOauthRegisterAccount(oauthJsonString: string)
   {
-    let googleJSON = JSON.parse(googleAccountObject);    
-    this.registerGoogleDTO.displayName = googleJSON["DisplayName"];
-    this.registerGoogleDTO.email = googleJSON["Email"];
-    this.contNouStepperGoogleVisible = true;
+    let oauthJSON = JSON.parse(oauthJsonString);    
+    this.registerOauthDTO.displayName = oauthJSON["DisplayName"];
+    this.registerOauthDTO.email = oauthJSON["Email"];
+    this.registerOauthDTO.provider = oauthJSON["Provider"];
+    this.contNouStepperOauthVisible = true;
   }
 }

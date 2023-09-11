@@ -87,3 +87,4 @@ C:\Users\Vlad\Projects\Application\API\bin\Release\net6.0\Microsoft.Extensions.D
 C:\Users\Vlad\Projects\Application\API\bin\Release\net6.0\Npgsql.dll
 C:\Users\Vlad\Projects\Application\API\bin\Release\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Vlad\Projects\Application\API\bin\Release\net6.0\someThings.json
+C:\Users\Vlad\Projects\Application\API\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.Facebook.dll

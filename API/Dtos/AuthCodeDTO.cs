@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.Dtos
 {
-    public class GoogleAuthCodeDTO
+    public class AuthCodeDTO
     {
         public string code { get; set; }
     }

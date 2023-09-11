@@ -35,7 +35,6 @@ import { RegisterComponent } from './register/register.component';
 import { InitialScreenComponent } from './initial-screen/initial-screen.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,

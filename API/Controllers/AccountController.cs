@@ -57,35 +57,45 @@ namespace API.Controllers
             };
         }
 
-        [HttpGet("geturlgooglelogin")]
-        public ActionResult<GoogleAuthUrlDTO> GetGoogleLoginUrl()
+        [HttpGet("getgoogleloginurl")]
+        public ActionResult<AuthUrlDTO> GetGoogleLoginUrl()
         {
             string url = _externalAuthService.GetGoogleLoginUrl();
-            var googleUrlDTO = new GoogleAuthUrlDTO{
+            var googleUrlDTO = new AuthUrlDTO{
                 Url = url
             };
             return Ok(googleUrlDTO);
         }   
 
-        [HttpGet("geturlfacebooklogin")]
-        public ActionResult<FacebookAuthUrlDTO> GetFacebookLoginUrl()
+        [HttpGet("getfacebookloginurl")]
+        public ActionResult<AuthUrlDTO> GetFacebookLoginUrl()
         {
             string url = _externalAuthService.GetFacebookLoginUrl();
-            var facebookUrlDto = new FacebookAuthUrlDTO{
+            var facebookUrlDto = new AuthUrlDTO{
                 Url = url
             };
             return Ok(facebookUrlDto);
         }           
 
-        [HttpGet("geturlgoogleloginforregister")]
-        public ActionResult<GoogleAuthUrlDTO> GetGoogleLoginUrlForRegister()
+        [HttpGet("getgoogleregisterurl")]
+        public ActionResult<AuthUrlDTO> GetGoogleRegisterUrl()
         {
-            string url = _externalAuthService.GetGoogleLoginUrlForRegister();
-            var googleUrlDTO = new GoogleAuthUrlDTO{
+            string url = _externalAuthService.GetGoogleRegisterUrl();
+            var googleUrlDTO = new AuthUrlDTO{
                 Url = url
             };
             return Ok(googleUrlDTO);
-        }          
+        }      
+
+        [HttpGet("getfacebookregisterurl")]
+        public ActionResult<AuthUrlDTO> GetFacebookRegisterUrl()
+        {
+            string url = _externalAuthService.GetFacebookRegisterUrl();
+            var googleUrlDTO = new AuthUrlDTO{
+                Url = url
+            };
+            return Ok(googleUrlDTO);
+        }                
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -116,11 +126,11 @@ namespace API.Controllers
             };
         }
 
-        [HttpPost("logingoogle")]
-        public async Task<ActionResult<UserDto>> LoginGoogle(GoogleAuthCodeDTO googleAuthCodeDTO)
+        [HttpPost("googlelogin")]
+        public async Task<ActionResult<UserDto>> GoogleLogin(AuthCodeDTO googleAuthCodeDTO)
         {
 
-            var payload = await _externalAuthService.GetPayloadAsync(googleAuthCodeDTO.code);
+            var payload = await _externalAuthService.GetGooglePayloadAsync(googleAuthCodeDTO.code);
 
             var user = await _userManager.FindByEmailAsync(payload.Email);
 
@@ -132,18 +142,49 @@ namespace API.Controllers
             });
         }
 
-        [HttpPost("logingoogleregister")]
-        public async Task<ActionResult<string>> LoginGoogleRegister(GoogleAuthCodeDTO googleAuthCodeDTO)
+        [HttpPost("facebooklogin")]
+        public async Task<ActionResult<UserDto>> FacebookLogin(AuthCodeDTO facebookCodeDTO)
         {
 
-            var payload = await _externalAuthService.GetPayloadAsync(googleAuthCodeDTO.code);
+            var userObject = await _externalAuthService.GetFacebookPayloadAsync(facebookCodeDTO.code);
 
-            GoogleRegisterDTO googleRegisterDTO = new GoogleRegisterDTO();
+            var user = await _userManager.FindByEmailAsync(userObject.Item2);
+
+            return Ok(new UserDto
+            {
+                Email = user.Email,
+                Token = await _tokenService.CreateToken(user),
+                DisplayName = user.DisplayName
+            });
+        }
+        [HttpPost("getgooglepayload")]
+        public async Task<ActionResult<string>> GetGooglePayload(AuthCodeDTO googleAuthCodeDTO)
+        {
+
+            var payload = await _externalAuthService.GetGooglePayloadAsync(googleAuthCodeDTO.code);
+
+            OauthRegisterDTO googleRegisterDTO = new OauthRegisterDTO();
 
             googleRegisterDTO.Email = payload.Email;
             googleRegisterDTO.DisplayName = payload.Name;
+            googleRegisterDTO.Provider = "Google";
 
             string googleRegisterJsonString = JsonConvert.SerializeObject(googleRegisterDTO);
+            return googleRegisterJsonString;
+        }        
+
+        [HttpPost("getfacebookpayload")]
+        public async Task<ActionResult<string>> GetFacebookPayload(AuthCodeDTO facebookAuthCodeDTO)
+        {
+
+            var payload = await _externalAuthService.GetFacebookPayloadAsync(facebookAuthCodeDTO.code);
+
+            OauthRegisterDTO facebookRegisterDTO = new OauthRegisterDTO();
+
+            facebookRegisterDTO.Email = payload.Item2;
+            facebookRegisterDTO.DisplayName = payload.Item1;
+            facebookRegisterDTO.Provider = "Facebook";
+            string googleRegisterJsonString = JsonConvert.SerializeObject(facebookRegisterDTO);
             return googleRegisterJsonString;
         }        
 
@@ -208,8 +249,8 @@ namespace API.Controllers
         }
 
 
-        [HttpPost("registergoogle")]
-        public async Task<ActionResult> RegisterGoogle(GoogleRegisterDTO registerDto)
+        [HttpPost("oauthregister")]
+        public async Task<ActionResult> GoogleRegister(OauthRegisterDTO registerDto)
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
@@ -245,7 +286,7 @@ namespace API.Controllers
             {
                 return BadRequest(new ApiResponse(400));
             }
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            var roleResult = await _userManager.AddToRolesAsync(user,new[] {"Admin","Moderator","Member"});
 
             if (!roleResult.Succeeded)
             {

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "N/xkAMCyXP6ZQ6e337rqFTbnT69AxFQvsz0uwJQJzcM4UzpM50xBLpKqd8AFbOemklbOROJ9+9C1Wy9N6yxssQ==",
+  "dgSpecHash": "sJiQ/9+PjueR/uiyePXf91wod9BJjtQ56wDp5ZOl1201M4je9HoJ3IsHVC453YXZi3pQTcmLLWfE2hvE8C24Lg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\Projects\\application\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\google.apis\\1.60.0\\google.apis.1.60.0.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\google.apis.auth\\1.60.0\\google.apis.auth.1.60.0.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\google.apis.core\\1.60.0\\google.apis.core.1.60.0.nupkg.sha512",
+    "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\6.0.8\\microsoft.aspnetcore.authentication.facebook.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.8\\microsoft.aspnetcore.cryptography.internal.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.8\\microsoft.aspnetcore.cryptography.keyderivation.6.0.8.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.8\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.8.nupkg.sha512",

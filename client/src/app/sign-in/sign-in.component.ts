@@ -19,8 +19,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SignInComponent implements OnInit {
   user: any = {};
   imgSrc: string;
-  googleLoginUrl: string;
-  googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";;
+  googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
+  facebookLogoUrl: string = "https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg";
+
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -40,13 +41,13 @@ export class SignInComponent implements OnInit {
 
 
   signInGoogle() {
-    this.accountService.getUrlGoogleLogin().subscribe(res => {
+    this.accountService.getGoogleLoginUrl().subscribe(res => {
       window.location.href = res.url;
     });
   }
 
   signInFacebook() {
-    this.accountService.getUrlFacebookLogin().subscribe(res => {
+    this.accountService.getFacebookLoginUrl().subscribe(res => {
       window.location.href = res.url;
     });
   }

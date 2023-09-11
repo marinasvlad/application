@@ -21,7 +21,7 @@ export class InitialScreenComponent implements OnInit {
   registerVisible:boolean = false;
   registerGoogleVisible:boolean = false;
   initialButtonsVisible:boolean = true;
-  googleAccount: string = '';
+  oauthAccount: string = '';
   private currentUserSource = new ReplaySubject<IUser>(1);
 
   ngOnInit(): void {
@@ -47,14 +47,48 @@ export class InitialScreenComponent implements OnInit {
 
 
   handleGoogleResponse() {
-    this.route.queryParams.subscribe(params => {
-      console.log('here');
-      console.log(params);
-      const codeGoogle = params['code'];
-      if(params['state'] == 'login')
+    this.route.queryParams.subscribe(oauthResponse => {
+      if(oauthResponse['state'] == 'googlelogin')
       {
-        if (codeGoogle) {
-          this.http.post<any>(this.baseUrl + 'account/logingoogle', {code: codeGoogle}).pipe(
+        const authCode = oauthResponse['code'];
+        if (authCode) {
+          this.http.post<any>(this.baseUrl + 'account/googlelogin', {code: authCode}).pipe(
+            map((response: IUser) => {
+              const user = response;
+              console.log("response: ");
+              console.log(response);
+              if (user) {
+                const roles = this.getDecodedToken(user.token).role;
+                user.roles = [];
+                Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
+                localStorage.setItem('userApplication', JSON.stringify(user));
+                this.currentUserSource.next(user);
+              }
+            })
+          ).subscribe(resp => {
+            this.router.navigate(['/']);
+            setTimeout(() => {
+              window.location.reload();
+            }, 500);            
+          });
+        }
+      }
+      else if (oauthResponse['state'] == 'googleregister')
+      {
+        const authCode = oauthResponse['code'];
+        if (authCode) {
+          this.http.post<any>(this.baseUrl + 'account/getgooglepayload', {code: authCode}).subscribe((resp: string) => {
+            this.oauthAccount = JSON.stringify(resp);
+            this.location.go('');
+            this.registerClick();
+          });
+        }
+      }
+      else if (oauthResponse['state'] == 'facebooklogin')
+      {
+        const authCode = oauthResponse['code'];
+        if (authCode) {
+          this.http.post<any>(this.baseUrl + 'account/facebooklogin', {code: authCode}).pipe(
             map((response: IUser) => {
               const user = response;
               if (user) {
@@ -70,19 +104,20 @@ export class InitialScreenComponent implements OnInit {
             setTimeout(() => {
               window.location.reload();
             }, 500);            
-          })
+          });
         }
       }
-      else if (params['state'] == 'register')
+      else if (oauthResponse['state'] == 'facebookregister')
       {
-        if (codeGoogle) {
-          this.http.post<any>(this.baseUrl + 'account/logingoogleregister', {code: codeGoogle}).subscribe((resp: string) => {
-            this.googleAccount = JSON.stringify(resp);
+        const authCode = oauthResponse['code'];
+        if (authCode) {
+          this.http.post<any>(this.baseUrl + 'account/getfacebookpayload', {code: authCode}).subscribe((resp: string) => {
+            this.oauthAccount = JSON.stringify(resp);
             this.location.go('');
             this.registerClick();
           });
         }
-      }
+      }            
 
     });
   }

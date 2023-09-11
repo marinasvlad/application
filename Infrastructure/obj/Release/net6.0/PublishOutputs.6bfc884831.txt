@@ -6,6 +6,7 @@ C:\Users\Vlad\Projects\Application\publish\Google.Apis.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Auth.PlatformServices.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Auth.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Core.dll
+C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -14,18 +15,11 @@ C:\Users\Vlad\Projects\Application\publish\Microsoft.EntityFrameworkCore.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.EntityFrameworkCore.Sqlite.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Caching.Memory.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.DependencyInjection.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.DependencyModel.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Logging.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Logging.Abstractions.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Options.dll
-C:\Users\Vlad\Projects\Application\publish\Microsoft.Extensions.Primitives.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.IdentityModel.Logging.dll

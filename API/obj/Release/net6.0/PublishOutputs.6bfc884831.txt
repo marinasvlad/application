@@ -12,6 +12,7 @@ C:\Users\Vlad\Projects\Application\publish\Google.Apis.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Auth.PlatformServices.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Auth.dll
 C:\Users\Vlad\Projects\Application\publish\Google.Apis.Core.dll
+C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Authentication.Facebook.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Vlad\Projects\Application\publish\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
