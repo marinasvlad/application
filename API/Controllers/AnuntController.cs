@@ -12,6 +12,7 @@ using Core.Paging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -20,15 +21,17 @@ namespace API.Controllers
         private readonly IAnuntRepository _anuntRepo;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
-        public AnuntController(IAnuntRepository anuntRepo, IMapper mapper, UserManager<AppUser> userManager)
+        private readonly ILocatiiRepository _locatiiRepo;
+        public AnuntController(IAnuntRepository anuntRepo, ILocatiiRepository locatiiRepo, IMapper mapper, UserManager<AppUser> userManager)
         {
+            _locatiiRepo = locatiiRepo;
             _userManager = userManager;
             _mapper = mapper;
             _anuntRepo = anuntRepo;
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireAdminRole")]
+        [Authorize(Policy = "RequireModeratorRole")]
         public async Task<ActionResult<PagedList<AnuntDTO>>> GetAnunturi([FromQuery]UserParams userParams){
             var anunturi = await _anuntRepo.GetAnunturiAsync(userParams);
 
@@ -37,8 +40,49 @@ namespace API.Controllers
             return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
         }
 
-        [HttpPost]
+        [HttpGet("getanunturicustom")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult<PagedList<AnuntDTO>>> GetAnunturiCustom([FromQuery]UserParams userParams){
+            var anunturi = await _anuntRepo.GetAnunturiCustomAsync(userParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(anunturi.CurrentPage, anunturi.PageSize, anunturi.TotalCount, anunturi.TotalPages));
+
+            return Ok(_mapper.Map<IReadOnlyList<AnuntDTO>>(anunturi));
+        }        
+
+
+        [HttpGet("getpagesize")]
         [Authorize(Policy = "RequireAdminRole")]
+        public async Task<ActionResult<int>> GetPageSize(){
+            var user =  await _userManager.Users.Where(u => u.Id == User.GetUserId()).FirstOrDefaultAsync();
+
+            int pageSize = await _anuntRepo.GetPageSize(user);
+
+            return Ok(pageSize);
+        }
+
+
+        [HttpGet("getpagesizecustom/{locationId}")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult<int>> GetPageSizeCustom(int locationId){
+            var user = await _userManager.FindByIdAsync(User.GetUserId().ToString());
+
+            if(locationId == 4)
+            {                
+                return Ok(await _anuntRepo.GetPageSizeToate(user)); 
+            }
+
+            if(locationId >= 1 && locationId <= 3)
+            {
+                return Ok(await _anuntRepo.GetPageSizeByLocatieId(Convert.ToInt32(locationId)));
+            }
+
+            int pageSize = await _anuntRepo.GetPageSize(user);
+            return Ok(pageSize);
+        }        
+
+        [HttpPost]
+        [Authorize(Policy = "RequireModeratorRole")]
         public async Task<IActionResult> PostAnunt(AnuntDTO anuntDto){
             int userId = User.GetUserId();
 
@@ -57,7 +101,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{anuntId}")]
-        [Authorize(Policy = "RequireAdminRole")]
+        [Authorize(Policy = "RequireModeratorRole")]
         public async Task<IActionResult> DeleteAnunt(int anuntId){
             await _anuntRepo.DeleteAnunt(anuntId);
             return Ok();

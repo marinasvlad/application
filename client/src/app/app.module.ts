@@ -34,6 +34,8 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { RegisterComponent } from './register/register.component';
 import { InitialScreenComponent } from './initial-screen/initial-screen.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select'; 
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     GrupeComponent,
     EleviComponent,
+    HasRoleDirective,
     ContactComponent,
     RegisterComponent,
     InitialScreenComponent
@@ -57,6 +60,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     FormsModule,
     MatCardModule,
+    MatSelectModule,
     MatSidenavModule,
     MatInputModule,
     MatStepperModule,    

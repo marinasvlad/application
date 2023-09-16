@@ -14,5 +14,7 @@ namespace API.Dtos
         public string Text { get; set; }
 
         public string Data { get; set; }
+
+        public int LocatieId {get; set;}
     }
 }

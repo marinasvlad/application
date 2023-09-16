@@ -12,5 +12,7 @@ namespace Core.Entities
         public string NumeLocatie { get; set; }
 
         public ICollection<AppUser> Elevi { get; set; }
+
+        public ICollection<Anunt> AnunturiLocatie {get; set;}
     }
 }

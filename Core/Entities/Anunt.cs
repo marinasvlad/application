@@ -16,6 +16,10 @@ namespace Core.Entities
         public int AppUserId {get; set;}
 
         public AppUser AppUser {get; set;}
+
+        public int LocatieId {get; set;}
+
+        public Locatie Locatie {get; set;}
         
     }
 }

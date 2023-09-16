@@ -5,10 +5,26 @@
     <p class="font-PE"> Aceasta este o aplicație de management a cursurilor de înot. Ea îndeplinește mai multe funcționalități printre care împărțirea elevilor pe grupe, contabilizarea prezențelor elevilor, publicarea de anunțuri, contact și așa mai departe. 
     </p>
 
-    <button mat-raised-button (click)="openModal(template)">
-      <mat-icon >note_add</mat-icon>
-      Adaugă anunț
-    </button>
+    <div *appHasRole='["Moderator"]' class="row">
+      <div class="col sm-6">
+        <button mat-raised-button (click)="openModal(template)">
+          <mat-icon >note_add</mat-icon>
+          Adaugă anunț
+        </button>
+      </div>
+
+
+      <div class="col-sm-6">
+        <mat-form-field>
+          <mat-label>Selecteaza locatia</mat-label>
+          <mat-select>
+            <mat-option (click)="changeLocatie(locatii[i])" *ngFor="let locatie of locatii; let i = index;" [value]="locatie.value">
+              {{locatie.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>  
+      </div>
+    </div>
     <br>
     <br>
     <div *ngFor="let anunt of anunturi" >
@@ -31,8 +47,25 @@
           </mat-card>
           <br>
     </div>
-    <div class="d-flex justify-content-center" *ngIf="pagination" >
-      <pagination 
+    <div class="d-flex justify-content-center" *ngIf="pagination != undefined" >
+      <pagination *appHasRole='["Moderator"]'
+      class="my-pagination" 
+      [boundaryLinks]="true" 
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [maxSize]="10"
+      [nextText]="'Următoarea'"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChangedCustom($event, locatieId)"
+      previousText="&lsaquo;"
+      extText="&rsaquo;" 
+      firstText="&laquo;" 
+      lastText="&raquo;">
+
+    </pagination>
+
+
+      <pagination *appHasRole='["Member"]'
       class="my-pagination" 
       [boundaryLinks]="true" 
       [totalItems]="pagination.totalItems"
@@ -46,7 +79,7 @@
       firstText="&laquo;" 
       lastText="&raquo;">
 
-</pagination>
+    </pagination>
     </div>
 </div>
 

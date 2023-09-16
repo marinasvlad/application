@@ -71,13 +71,13 @@ namespace Infrastructure.Data
                     await userManager.CreateAsync(usersAdmin,"Pa$$w0rd");
                     await userManager.AddToRoleAsync(usersAdmin, "Admin");                    
     
-                        var vladMarinas = new AppUser{
-                        DisplayName = users[3].DisplayName.ToUpper(),
-                        Email = users[3].Email,
-                        UserName = users[3].Email
-                    };
-                    await userManager.CreateAsync(vladMarinas,"Pa$$w0rd");
-                    await userManager.AddToRoleAsync(vladMarinas,"Admin" );   
+                    //     var vladMarinas = new AppUser{
+                    //     DisplayName = users[3].DisplayName.ToUpper(),
+                    //     Email = users[3].Email,
+                    //     UserName = users[3].Email
+                    // };
+                    // await userManager.CreateAsync(vladMarinas,"Pa$$w0rd");
+                    // await userManager.AddToRoleAsync(vladMarinas,"Admin" );   
                 }
             }
         }
@@ -102,6 +102,58 @@ namespace Infrastructure.Data
 
                 await context.SaveChangesAsync();
            }
-        }          
+        }
+
+
+        public static async Task SeedAnunturi(AppIdentityContext context)
+        {
+           if(!context.Anunturi.Any())
+           {
+
+                var user = await context.Users.FirstOrDefaultAsync(u => u.Id == 2);
+
+                var locatii = await context.Locatii.ToListAsync();
+                for(int i = 1; i <= 40; i++)
+                {
+                    Anunt anunt = new Anunt();
+                    anunt.AppUserId = user.Id;
+                    anunt.AppUser = user;     
+                    anunt.DataAnunt = DateTime.Now;
+                    anunt.Text = "Anuntul " + i + " pus la locatia Water Park";
+                    anunt.Locatie = locatii[0];
+                    anunt.LocatieId = locatii[0].Id;
+                    context.Anunturi.Add(anunt);
+                }
+
+
+                for(int i = 1; i <= 40; i++)
+                {
+                    Anunt anunt = new Anunt();
+                    anunt.AppUserId = user.Id;
+                    anunt.AppUser = user;     
+                    anunt.DataAnunt = DateTime.Now;
+                    anunt.Text = "Anuntul " + i + " pus la locatia Imperial Garden";
+                    anunt.Locatie = locatii[1];
+                    anunt.LocatieId = locatii[1].Id;
+                    context.Anunturi.Add(anunt);
+                }     
+
+
+                for(int i = 1; i <= 40; i++)
+                {
+                    Anunt anunt = new Anunt();
+                    anunt.AppUserId = user.Id;
+                    anunt.AppUser = user;     
+                    anunt.DataAnunt = DateTime.Now;
+                    anunt.Text = "Anuntul " + i + " pus la locatia Bazinul Carol";
+                    anunt.Locatie = locatii[2];
+                    anunt.LocatieId = locatii[2].Id;
+                    context.Anunturi.Add(anunt);
+                }                           
+
+
+                await context.SaveChangesAsync();
+           }
+        }               
     }
 }

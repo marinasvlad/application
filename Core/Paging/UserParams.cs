@@ -11,6 +11,8 @@ namespace Core.Paging
 
         public int pageNumber { get; set; } = 1;
 
+        public int locationId {get; set;}
+
         private int _pageSize = 10;
 
         public int PageSize

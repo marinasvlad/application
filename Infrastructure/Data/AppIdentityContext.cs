@@ -59,6 +59,18 @@ namespace Infrastructure.Data
             .WithOne(b => b.AppUser)
             .HasForeignKey(b => b.AppUserId);
 
+            builder.Entity<Anunt>()
+            .HasOne(a => a.Locatie)
+            .WithMany(a => a.AnunturiLocatie)
+            .HasForeignKey(a => a.LocatieId)
+            .IsRequired(false);
+
+            builder.Entity<Locatie>()
+            .HasMany(l => l.AnunturiLocatie)
+            .WithOne(a => a.Locatie)
+            .HasForeignKey(a => a.LocatieId)
+            .IsRequired(false);            
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             if(Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
