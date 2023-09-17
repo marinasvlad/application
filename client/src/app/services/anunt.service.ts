@@ -92,7 +92,7 @@ export class AnuntService {
     });
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', 'Bearer ' + this.user.token);
-      return this.http.post(this.baseUrl + 'anunt', {Text: anunt.text},{headers})
+      return this.http.post(this.baseUrl + 'anunt', {Text: anunt.text, LocatieId: anunt.locatieId},{headers})
     }
 
     deleteAnunt(id: number){

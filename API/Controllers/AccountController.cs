@@ -134,6 +134,11 @@ namespace API.Controllers
 
             var user = await _userManager.FindByEmailAsync(payload.Email);
 
+            if(user == null)
+            {
+                return BadRequest(new ApiResponse(400, "Userul nu a fost gasit"));
+            }
+            
             return Ok(new UserDto
             {
                 Email = user.Email,
@@ -149,7 +154,10 @@ namespace API.Controllers
             var userObject = await _externalAuthService.GetFacebookPayloadAsync(facebookCodeDTO.code);
 
             var user = await _userManager.FindByEmailAsync(userObject.Item2);
-
+            if(user == null)
+            {
+                return BadRequest(new ApiResponse(400, "Userul nu a fost gasit"));
+            }
             return Ok(new UserDto
             {
                 Email = user.Email,
@@ -222,7 +230,8 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 UserName = registerDto.Email,
                 Locatie = locatie,
-                LocatieId = locatie.Id
+                LocatieId = locatie.Id,
+                NumarSedinte = 8
             };
 
             var results = await _userManager.CreateAsync(user, registerDto.Password);
@@ -260,9 +269,7 @@ namespace API.Controllers
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
             if(contNume != null)
             {
-                //return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." } });
                 return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." ));
-
             }
 
             if(registerDto.LocatieNumar == 0)
@@ -277,7 +284,8 @@ namespace API.Controllers
                 Email = registerDto.Email,
                 UserName = registerDto.Email,
                 Locatie = locatie,
-                LocatieId = locatie.Id
+                LocatieId = locatie.Id,
+                NumarSedinte = 8
             };
 
             var results = await _userManager.CreateAsync(user, "Pa$$w0rd");

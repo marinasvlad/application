@@ -61,8 +61,8 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.42d193c57e2d8a51aac4.js",
-      "PackagePath": "staticwebassets\\main.42d193c57e2d8a51aac4.js"
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.27817e309b0da4afc252.js",
+      "PackagePath": "staticwebassets\\main.27817e309b0da4afc252.js"
     },
     {
       "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",
@@ -73,8 +73,8 @@
       "PackagePath": "staticwebassets\\runtime.4b1540bf51da5ef20c67.js"
     },
     {
-      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\styles.4c90a449dada6d650aee.css",
-      "PackagePath": "staticwebassets\\styles.4c90a449dada6d650aee.css"
+      "Id": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\styles.b47947ec3f4f363b1ee4.css",
+      "PackagePath": "staticwebassets\\styles.b47947ec3f4f363b1ee4.css"
     },
     {
       "Id": "obj\\Release\\net6.0\\staticwebassets\\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props",

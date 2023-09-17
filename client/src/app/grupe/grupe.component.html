@@ -1,3 +1,52 @@
 <div class="container">
-    <h1 class="font-PE" >Grupe</h1>
-</div>
+  <h1 class="font-PE">Grupe</h1>
+  <br>
+  <p class="font-PE">Aici se organizează grupele. Mai jos o sa fie afișate grupele disponibile, data și ora când se țin
+    și posibilitatea de a participa la ele.</p>
+  <p class="font-PE">Ca să participi la o grupă trebuie să dai click pe PARTICIP la grupa respectivă. Dacă dorești să nu
+    mai participi, trebuie să apeși pe RENUNȚ.</p>
+
+  <div *appHasRole='["Moderator"]' class="row">
+    <div class="col sm-6">
+      <button mat-raised-button (click)="openModal(template)">
+        <mat-icon>group_add</mat-icon>
+        Adaugă grupă
+      </button>
+    </div>
+  </div>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Adaugă o grupă</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body ms-5">
+        <mat-form-field>
+
+          <mat-label>Selectează locația</mat-label>
+          <mat-select>
+            <mat-option (click)="changeLocatieDrop(locatiiDropInModal[i])"
+              *ngFor="let loc of locatiiDropInModal; let i = index;" [value]="loc.value">
+              {{loc.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <label *ngIf="locatieIdInDrop != 0">Selectează <strong>data</strong> grupei</label>
+        <br>
+        <br>
+        <div *ngIf="locatieIdInDrop != 0" class="pr-3 pb-3 pe-3 w-auto">
+          <bs-datepicker-inline (bsValueChange)="changedate($event)" [bsValue]="bsInlineValue"></bs-datepicker-inline>
+        </div>
+        <p *ngIf="dataSelectata != undefined">Data selectată este <strong>{{dataSelectata | date: 'dd.MM.yyyy'}}</strong></p>
+        <label *ngIf="dataSelectata != undefined">Selectează <strong>ora</strong> grupei</label>
+        <timepicker *ngIf="dataSelectata != undefined" [(ngModel)]="oraGrupa" [showMeridian]="false" ></timepicker>
+        <br>
+      <button mat-button (click)="modalRef?.hide()">Închide</button>
+      <button [disabled]="oraGrupa == undefined" mat-button [mat-dialog-close]="true" cdkFocusInitial
+        (click)="postGrupa()">Adaugă</button>
+    </div>
+
+  </ng-template>

@@ -24,6 +24,7 @@ namespace Infrastructure.Data
 
         public DbSet<Locatie> Locatii { get; set; }
 
+        public DbSet<Prezenta> Prezente { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -69,7 +70,7 @@ namespace Infrastructure.Data
             .HasMany(l => l.AnunturiLocatie)
             .WithOne(a => a.Locatie)
             .HasForeignKey(a => a.LocatieId)
-            .IsRequired(false);            
+            .IsRequired(false);
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

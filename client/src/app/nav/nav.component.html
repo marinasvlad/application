@@ -8,7 +8,7 @@
           <mat-button-toggle routerLink="grupe" class="vertical-align-content-button" value="italic">
             <mat-icon>group</mat-icon>
           </mat-button-toggle>
-          <mat-button-toggle routerLink="elevi" class="vertical-align-content-button" value="underline">
+          <mat-button-toggle *appHasRole='["Moderator"]' routerLink="elevi" class="vertical-align-content-button" value="underline">
             <mat-icon>person</mat-icon>
           </mat-button-toggle>
           <mat-button-toggle routerLink="contact" class="vertical-align-content-button" value="underline">

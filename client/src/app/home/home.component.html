@@ -38,7 +38,7 @@
                     {{anunt.text}}
                 </p>
               </mat-card-content>        
-            <mat-card-actions align="start">
+            <mat-card-actions *appHasRole='["Moderator"]'  align="start">
               <button (click)="stergeAnunt(anunt.id)" mat-button>
                 <mat-icon>delete</mat-icon>                
                 Șterge
@@ -78,10 +78,10 @@
       extText="&rsaquo;" 
       firstText="&laquo;" 
       lastText="&raquo;">
-
     </pagination>
     </div>
 </div>
+
 
 <ng-template #template>
   <div class="modal-header">
@@ -91,7 +91,17 @@
     </button>
   </div>
   <div class="modal-body">
-            <mat-form-field class="mat-form-field-class" >
+    <br>
+    <mat-form-field>
+      <mat-label>Selecteaza locatia</mat-label>
+      <mat-select>
+        <mat-option (click)="changeLocatieDrop(locatiiDropInModal[i])" *ngFor="let loc of locatiiDropInModal; let i = index;" [value]="loc.value">
+          {{loc.viewValue}}
+        </mat-option>
+      </mat-select>
+      <br>
+    </mat-form-field>    
+            <mat-form-field *ngIf="locatieIdInDrop != 0" class="mat-form-field-class" >
               <textarea [(ngModel)]="inputValue" class="text-area-class" matInput placeholder="Scrie aici anunțul pe care vrei să îl adaugi"></textarea>
             </mat-form-field>
             <br>

@@ -37,6 +37,14 @@ export class HomeComponent implements OnInit {
     {value: 3, viewValue: 'Bazinul Carol'},
     {value: 4, viewValue: 'Toate locatiile'}
   ];
+
+  locatiiDropInModal: Locatie[] = [
+    {value: 1, viewValue: 'Waterpark'},
+    {value: 2, viewValue: 'Imperial Garden'},
+    {value: 3, viewValue: 'Bazinul Carol'}
+    ];
+
+  locatieIdInDrop: number = 0; 
   
   locatieId:number = 4;
 
@@ -52,7 +60,6 @@ export class HomeComponent implements OnInit {
     else if(this.user.roles.includes("Member"))
     {
       this.getUsersPageSize();
-      this.loadAnunturi();
     }
   }
 
@@ -73,14 +80,18 @@ export class HomeComponent implements OnInit {
       {
         this.pageSize = 10;
       }
+      this.loadAnunturi();
     }
     );
   }
 
   changeLocatie(locatie: Locatie){
-    console.log('Ai selectat ' + locatie.value + ' cu idUl ' + locatie.viewValue);
     this.locatieId = locatie.value;
     this.getPageSizeCustom(this.locatieId);
+  }
+
+  changeLocatieDrop(locatie: Locatie){
+    this.locatieIdInDrop = locatie.value;
   }
 
   loadAnunturi(){
@@ -89,6 +100,7 @@ export class HomeComponent implements OnInit {
         if(response.pagination && response.result){
           this.anunturi = response.result;
           this.pagination = response.pagination;
+          
         }
       }
     });
@@ -107,21 +119,23 @@ export class HomeComponent implements OnInit {
 
   stergeAnunt(id: number){
     this.anuntService.deleteAnunt(id).subscribe(res => {
-      this.loadAnunturi();
+      this.getPageSizeCustom(this.locatieId);
     });
   }
 
   openModal(template: TemplateRef<any>){
     this.inputValue = '';
+    this.locatieIdInDrop = 0;
     this.modalRef = this.modalService.show(template);
   }
 
   postAnunt(){
     let anunt: Anunt = new Anunt();
     anunt.text = this.inputValue;
+    anunt.locatieId = this.locatieIdInDrop;
     this.anuntService.postAnunt(anunt).subscribe(() => {
       this.modalRef?.hide();
-      this.loadAnunturi();
+      this.getPageSizeCustom(this.locatieId);
     });
   }
 

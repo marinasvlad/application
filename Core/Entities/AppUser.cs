@@ -22,7 +22,7 @@ namespace Core.Entities
 
         public ICollection<Anunt> Anunturi { get; set; }
         
-        public int NumarSedinteRamase { get; set; }
+        public int NumarSedinte { get; set; }
 
     }
 }

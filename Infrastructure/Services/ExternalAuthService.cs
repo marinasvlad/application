@@ -25,12 +25,12 @@ namespace Infrastructure.Services
         {
             GoogleClientId = configuration["GoogleAuth:ClientId"];
             GoogleClientSecret = configuration["GoogleAuth:ClientSecret"];
-            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
-            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
+            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
+            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
             FacebookClientId = configuration["FacebookAuth:ClientId"];
             FacebookClientSecret = configuration["FacebookAuth:ClientSecret"];
-            FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUriLocal"];
-            //FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUri"];            
+            //FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUriLocal"];
+            FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUri"];            
 
         }
 
@@ -87,7 +87,7 @@ namespace Infrastructure.Services
             using (var client = new HttpClient())
             {
                 var tokenEndpoint =
-                 $"https://graph.facebook.com/v17.0/oauth/access_token?client_id="+ FacebookClientId + "&redirect_uri=http://test.borgdesign.ro/&client_secret=" + FacebookClientSecret + "&code=" + authCode;
+                 $"https://graph.facebook.com/v17.0/oauth/access_token?client_id="+ FacebookClientId + "&redirect_uri=" + FacebookRedirectionUri + "/&client_secret=" + FacebookClientSecret + "&code=" + authCode;
 
                 var response = await client.GetAsync(tokenEndpoint);
 

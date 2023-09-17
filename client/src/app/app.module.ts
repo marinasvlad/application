@@ -36,6 +36,11 @@ import { InitialScreenComponent } from './initial-screen/initial-screen.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select'; 
 import { HasRoleDirective } from './directives/has-role.directive';
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { DatePipe } from '@angular/common';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -63,15 +68,19 @@ import { HasRoleDirective } from './directives/has-role.directive';
     MatSelectModule,
     MatSidenavModule,
     MatInputModule,
-    MatStepperModule,    
+    MatStepperModule,
+    MatDatepickerModule,
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     MatListModule,
     MatFormFieldModule,
     MatButtonModule,
     MatMenuModule,
     MatButtonToggleModule,
     NgxSpinnerModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
@@ -81,7 +90,8 @@ import { HasRoleDirective } from './directives/has-role.directive';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS,useClass: LoadingInterceptor, multi: true},
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

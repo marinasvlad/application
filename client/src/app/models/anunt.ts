@@ -3,4 +3,5 @@ export class Anunt {
     autor: string;
     text: string;
     data: string;
+    locatieId: number;
 }

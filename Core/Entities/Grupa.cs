@@ -10,5 +10,13 @@ namespace Core.Entities
         public int Id { get; set; }
 
         public ICollection<AppUser> Elevi { get; set; }
+
+        public DateTime DataGrupa { get; set; }
+
+        public DateTime OraGrupa { get; set; }
+
+        public int LocatieId { get; set; }
+
+        public Locatie Locatie { get; set; }
     }
 }

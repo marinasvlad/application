@@ -32,7 +32,7 @@ namespace Infrastructure.Data
 
         }
 
-        public static async Task SeedUsers(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
+        public static async Task SeedUsers(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager, AppIdentityContext context)
         {
             if(!userManager.Users.Any())
             {
@@ -48,7 +48,7 @@ namespace Infrastructure.Data
                     var userMember = new AppUser{
                         DisplayName = users[0].DisplayName.ToUpper(),
                         Email = users[0].Email,
-                        UserName = users[0].Email
+                        UserName = users[0].Email,
                     };
                     await userManager.CreateAsync(userMember,"Pa$$w0rd");
                     await userManager.AddToRoleAsync(userMember, "Member");
@@ -69,7 +69,60 @@ namespace Infrastructure.Data
                     };
 
                     await userManager.CreateAsync(usersAdmin,"Pa$$w0rd");
-                    await userManager.AddToRoleAsync(usersAdmin, "Admin");                    
+                    await userManager.AddToRoleAsync(usersAdmin, "Admin");
+
+
+                    var locatii = await context.Locatii.ToListAsync();
+
+                    for(int i = 1; i <= 15; i++)
+                    {
+                        var userWaterPark = new AppUser{
+                        DisplayName = "Member " + i + " WaterPark",
+                        Email = "memberwaterpark" + i + "@test.com",
+                        UserName = "memberwaterpark" + i + "@test.com",
+                        LocatieId = locatii[0].Id,
+                        Locatie = locatii[0],
+                        NumarSedinte = 8
+                        };
+
+
+                        await userManager.CreateAsync(userWaterPark,"Pa$$w0rd");
+                        await userManager.AddToRoleAsync(userWaterPark, "Member");
+
+                    }
+
+                    for(int i = 1; i <= 15; i++)
+                    {
+                        var userWaterPark = new AppUser{
+                        DisplayName = "Member " + i + " ImperialGarden",
+                        Email = "memberimperialgarden" + i + "@test.com",
+                        UserName = "memberimperialgarden" + i + "@test.com",
+                        LocatieId = locatii[1].Id,
+                        Locatie = locatii[1],
+                        NumarSedinte = 8                        
+                        };
+
+                        
+                        await userManager.CreateAsync(userWaterPark,"Pa$$w0rd");
+                        await userManager.AddToRoleAsync(userWaterPark, "Member");
+
+                    }
+
+                    for(int i = 1; i <= 15; i++)
+                    {
+                        var userWaterPark = new AppUser{
+                        DisplayName = "Member " + i + " BaziunulCarol",
+                        Email = "memberbazinulcarol" + i + "@test.com",
+                        UserName = "memberbazinulcarol" + i + "@test.com",
+                        LocatieId = locatii[2].Id,
+                        Locatie = locatii[2],
+                        NumarSedinte = 8                        
+                        };
+
+                        await userManager.CreateAsync(userWaterPark,"Pa$$w0rd");
+                        await userManager.AddToRoleAsync(userWaterPark, "Member");
+
+                    }                                                         
     
                     //     var vladMarinas = new AppUser{
                     //     DisplayName = users[3].DisplayName.ToUpper(),

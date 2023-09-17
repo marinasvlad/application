@@ -9,7 +9,7 @@ namespace Core.Interfaces
 {
     public interface IAnuntRepository
     {
-        Task<PagedList<Anunt>> GetAnunturiAsync(UserParams userParams);
+        Task<PagedList<Anunt>> GetAnunturiAsync(UserParams userParams, int locatieId);
 
         Task<PagedList<Anunt>> GetAnunturiToateLocatiileAsync(UserParams userParams);
         Task<PagedList<Anunt>> GetAnunturiCustomAsync(UserParams userParams);

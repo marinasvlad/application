@@ -31,9 +31,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "RequireModeratorRole")]
+        [Authorize(Policy = "RequireMemberRole")]
         public async Task<ActionResult<PagedList<AnuntDTO>>> GetAnunturi([FromQuery]UserParams userParams){
-            var anunturi = await _anuntRepo.GetAnunturiAsync(userParams);
+            var user = await _userManager.FindByIdAsync(User.GetUserId().ToString());
+
+            var anunturi = await _anuntRepo.GetAnunturiAsync(userParams, Convert.ToInt32(user.LocatieId));
 
             Response.AddPaginationHeader(new PaginationHeader(anunturi.CurrentPage, anunturi.PageSize, anunturi.TotalCount, anunturi.TotalPages));
 
@@ -52,9 +54,9 @@ namespace API.Controllers
 
 
         [HttpGet("getpagesize")]
-        [Authorize(Policy = "RequireAdminRole")]
+        [Authorize(Policy = "RequireMemberRole")]
         public async Task<ActionResult<int>> GetPageSize(){
-            var user =  await _userManager.Users.Where(u => u.Id == User.GetUserId()).FirstOrDefaultAsync();
+            var user =  await _userManager.Users.Where(u => u.Id == User.GetUserId()).Include(a => a.Locatie).FirstOrDefaultAsync();
 
             int pageSize = await _anuntRepo.GetPageSize(user);
 
@@ -92,7 +94,8 @@ namespace API.Controllers
                 Text = anuntDto.Text,
                 DataAnunt = DateTime.Now.ToUniversalTime(),
                 AppUser = user,
-                AppUserId = user.Id
+                AppUserId = user.Id,
+                LocatieId = anuntDto.LocatieId
             };
 
             await _anuntRepo.PostAnunt(anunt);

@@ -1,0 +1,17 @@
+::ng-deep .bs-datepicker-body table td.week span 
+{
+  color: #4b4b4b !important; 
+}
+
+::ng-deep .bs-datepicker-body table td span.selected
+{
+  background-color: #4b4b4b !important; 
+}
+
+::ng-deep .bs-datepicker-head{
+    background-color: #4b4b4b !important; 
+}
+
+::ng-deep span.bs-chevron{ 
+    color: #4b4b4b;
+}

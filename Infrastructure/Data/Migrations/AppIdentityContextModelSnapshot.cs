@@ -114,7 +114,7 @@ namespace Infrastructure.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumarSedinteRamase")
+                    b.Property<int>("NumarSedinte")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("PasswordHash")
@@ -176,7 +176,18 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("DataGrupa")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LocatieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OraGrupa")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("LocatieId");
 
                     b.ToTable("Grupe");
                 });
@@ -193,6 +204,38 @@ namespace Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locatii");
+                });
+
+            modelBuilder.Entity("Core.Entities.Prezenta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LocatieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("Start")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Stop")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prezente");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -328,6 +371,17 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Grupa", b =>
+                {
+                    b.HasOne("Core.Entities.Locatie", "Locatie")
+                        .WithMany()
+                        .HasForeignKey("LocatieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Locatie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

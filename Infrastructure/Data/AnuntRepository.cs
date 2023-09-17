@@ -27,9 +27,9 @@ namespace Infrastructure.Data
 
         }
 
-        public async Task<PagedList<Anunt>> GetAnunturiAsync(UserParams userParams)
+        public async Task<PagedList<Anunt>> GetAnunturiAsync(UserParams userParams, int locatieId)
         {
-            var query = _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).Where(a => a.AppUser.LocatieId == userParams.locationId).OrderByDescending(a => a.DataAnunt).AsNoTracking();
+            var query = _context.Anunturi.OrderBy(a => a.DataAnunt).Include(a => a.AppUser).Where(a => a.LocatieId == locatieId).OrderByDescending(a => a.DataAnunt).AsNoTracking();
 
             return await PagedList<Anunt>.CreateAsync(query, userParams.pageNumber, userParams.PageSize);
         }
@@ -71,14 +71,14 @@ namespace Infrastructure.Data
 
         public async Task<int> GetPageSize(AppUser user)
         {
-            var anunturi = await _context.Anunturi.Where(a => a.AppUser.LocatieId == user.LocatieId).ToListAsync();
+            var anunturi = await _context.Anunturi.Where(a => a.LocatieId == user.LocatieId).ToListAsync();
 
             return anunturi.Count;
         }
 
         public async Task<int> GetPageSizeByLocatieId(int locatieId)
         {
-            var anunturi = await _context.Anunturi.Where(a => a.AppUser.LocatieId == locatieId).ToListAsync();
+            var anunturi = await _context.Anunturi.Where(a => a.LocatieId == locatieId).ToListAsync();
 
             return anunturi.Count;
         }
