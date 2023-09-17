@@ -229,7 +229,6 @@ namespace API.Controllers
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 UserName = registerDto.Email,
-                Locatie = locatie,
                 LocatieId = locatie.Id,
                 NumarSedinte = 8
             };
@@ -283,7 +282,6 @@ namespace API.Controllers
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 UserName = registerDto.Email,
-                Locatie = locatie,
                 LocatieId = locatie.Id,
                 NumarSedinte = 8
             };
@@ -292,13 +290,13 @@ namespace API.Controllers
 
             if (!results.Succeeded)
             {
-                return BadRequest(new ApiResponse(400));
+                return BadRequest(new ApiResponse(400, "Contul nu a fost creat!"));
             }
-            var roleResult = await _userManager.AddToRolesAsync(user,new[] {"Admin","Moderator","Member"});
+            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
             if (!roleResult.Succeeded)
             {
-                return BadRequest(new ApiResponse(400));
+                return BadRequest(new ApiResponse(400, "Contul nu a fost creat!"));
             }
 
             await _locatiiRepo.AddNewUserToLocatieAsync(user);

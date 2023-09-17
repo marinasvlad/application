@@ -14,6 +14,132 @@
       </button>
     </div>
   </div>
+  
+  <br>
+
+  <div *appHasRole='["Moderator"]' class="row">
+    <h4 class="font-PE"><strong>Grupele active: </strong></h4>
+  </div>
+
+  <br>
+
+  <div *appHasRole='["Moderator"]'>
+    <div *ngFor="let grupaActiva of grupeActive">
+      <mat-card class="locatie-card" *ngIf="grupaActiva.locatieId == 1">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Water Park</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/water-park.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: începători/intermediari/avansați</p>
+          <p class="font-PE"><strong>Data</strong>: {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{grupaActiva.oraGrupa | date: 'HH:mm'}}</p>        
+          <p class="font-PE"><strong>Participanti</strong>: {{grupaActiva.elevi.length}}</p>
+          <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)" ><mat-icon>delete</mat-icon>
+            Șterge grupă</button>          
+      </mat-card-content>
+      </mat-card>
+      <mat-card class="locatie-card" *ngIf="grupaActiva.locatieId == 2">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Imperial Garden</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/imperial-garden.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Drumul Industriilor 17, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: începători</p>
+          <p class="font-PE"><strong>Data</strong>: {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{grupaActiva.oraGrupa | date: 'HH:mm'}}</p>
+          <p class="font-PE"><strong>Participanti</strong>: {{grupaActiva.elevi.length}}</p>
+          <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)" ><mat-icon>delete</mat-icon>
+            Șterge grupă</button>          
+      </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="locatie-card" *ngIf="grupaActiva.locatieId == 3">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Bazinul Carol</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/bazin-carol.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Bibescu 30, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: intermediari/avansați</p>
+          <p class="font-PE"><strong>Data</strong>: {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{grupaActiva.oraGrupa | date: 'HH:mm'}}</p>        
+          <p class="font-PE"><strong>Participanti</strong>: {{grupaActiva.elevi.length}}</p>
+          <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)" ><mat-icon>delete</mat-icon>
+            Șterge grupă</button>          
+      </mat-card-content>
+      </mat-card>
+      <br>    
+    </div>
+  </div>
+
+  <br>
+
+  <div *appHasRole='["Member"]' class="row">
+    <h4 class="font-PE"><strong>Grupa activă la care poți participa: </strong></h4>
+  </div>
+
+  <br>
+
+  <div *appHasRole='["Member"]'>
+    <div *ngIf="urmatoareaGrupaActiva != undefined">
+      <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 1">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Water Park</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/water-park.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: începători/intermediari/avansați</p>
+          <p class="font-PE"><strong>Data</strong>: {{urmatoareaGrupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{urmatoareaGrupaActiva.oraGrupa | date: 'HH:mm'}}</p>        
+          <button *ngIf="urmatoareaGrupaActiva.particip == false" mat-raised-button color="primary" (click)="particip(urmatoareaGrupaActiva.id)" ><mat-icon>person_add</mat-icon>
+            Particip</button>
+          <button *ngIf="urmatoareaGrupaActiva.particip == true" mat-raised-button color="warn" (click)="renunt(urmatoareaGrupaActiva.id)" ><mat-icon>cancel</mat-icon>
+            Renunț</button>                    
+      </mat-card-content>
+      </mat-card>
+      <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 2">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Imperial Garden</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/imperial-garden.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Drumul Industriilor 17, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: începători</p>
+          <p class="font-PE"><strong>Data</strong>: {{urmatoareaGrupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{urmatoareaGrupaActiva.oraGrupa | date: 'HH:mm'}}</p>
+          <button *ngIf="urmatoareaGrupaActiva.particip == false" mat-raised-button color="primary" (click)="particip(urmatoareaGrupaActiva.id)" ><mat-icon>person_add</mat-icon>
+            Particip</button>
+          <button *ngIf="urmatoareaGrupaActiva.particip == true" mat-raised-button color="warn" (click)="renunt(urmatoareaGrupaActiva.id)" ><mat-icon>cancel</mat-icon>
+            Renunț</button>                         
+      </mat-card-content>
+      </mat-card>
+      
+      <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 3">
+        <mat-card-title-group>
+            <mat-card-title class="font-PE"><strong>Bazinul Carol</strong></mat-card-title>
+            <img mat-card-sm-image src="../../assets/bazin-carol.jpg">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Bibescu 30, Craiova</p>
+          <p class="font-PE"><strong>Nivel</strong>: intermediari/avansați</p>
+          <p class="font-PE"><strong>Data</strong>: {{urmatoareaGrupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}</p>
+          <p class="font-PE"><strong>Ora</strong>: {{urmatoareaGrupaActiva.oraGrupa | date: 'HH:mm'}}</p>        
+          <p class="font-PE"><strong>Participanti</strong>: {{urmatoareaGrupaActiva.elevi.length}}</p>
+          <button *ngIf="urmatoareaGrupaActiva.particip == false" mat-raised-button color="primary" (click)="particip(urmatoareaGrupaActiva.id)" ><mat-icon>person_add</mat-icon>
+            Particip</button>
+          <button *ngIf="urmatoareaGrupaActiva.particip == true" mat-raised-button color="warn" (click)="renunt(urmatoareaGrupaActiva.id)" ><mat-icon>cancel</mat-icon>
+            Renunț</button>             
+      </mat-card-content>
+      </mat-card>
+      <br>    
+    </div>
+  </div>  
+  
+  <br>
 
   <ng-template #template>
     <div class="modal-header">
@@ -22,7 +148,7 @@
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
-    <div class="modal-body ms-5">
+    <div class="modal-body">
         <mat-form-field>
 
           <mat-label>Selectează locația</mat-label>
@@ -45,8 +171,7 @@
         <timepicker *ngIf="dataSelectata != undefined" [(ngModel)]="oraGrupa" [showMeridian]="false" ></timepicker>
         <br>
       <button mat-button (click)="modalRef?.hide()">Închide</button>
-      <button [disabled]="oraGrupa == undefined" mat-button [mat-dialog-close]="true" cdkFocusInitial
-        (click)="postGrupa()">Adaugă</button>
+      <button [disabled]="oraGrupa == undefined" mat-button cdkFocusInitial (click)="postGrupa()">Adaugă</button>
     </div>
 
   </ng-template>

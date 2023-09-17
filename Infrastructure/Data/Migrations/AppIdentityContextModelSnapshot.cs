@@ -179,6 +179,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("DataGrupa")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("Efectuata")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("LocatieId")
                         .HasColumnType("INTEGER");
 
@@ -341,17 +344,13 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.AppUser", b =>
                 {
-                    b.HasOne("Core.Entities.Grupa", "Grupa")
+                    b.HasOne("Core.Entities.Grupa", null)
                         .WithMany("Elevi")
                         .HasForeignKey("GrupaId");
 
-                    b.HasOne("Core.Entities.Locatie", "Locatie")
+                    b.HasOne("Core.Entities.Locatie", null)
                         .WithMany("Elevi")
                         .HasForeignKey("LocatieId");
-
-                    b.Navigation("Grupa");
-
-                    b.Navigation("Locatie");
                 });
 
             modelBuilder.Entity("Core.Entities.AppUserRole", b =>

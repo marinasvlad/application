@@ -81,7 +81,6 @@ namespace Infrastructure.Data
                         Email = "memberwaterpark" + i + "@test.com",
                         UserName = "memberwaterpark" + i + "@test.com",
                         LocatieId = locatii[0].Id,
-                        Locatie = locatii[0],
                         NumarSedinte = 8
                         };
 
@@ -98,7 +97,6 @@ namespace Infrastructure.Data
                         Email = "memberimperialgarden" + i + "@test.com",
                         UserName = "memberimperialgarden" + i + "@test.com",
                         LocatieId = locatii[1].Id,
-                        Locatie = locatii[1],
                         NumarSedinte = 8                        
                         };
 
@@ -115,7 +113,6 @@ namespace Infrastructure.Data
                         Email = "memberbazinulcarol" + i + "@test.com",
                         UserName = "memberbazinulcarol" + i + "@test.com",
                         LocatieId = locatii[2].Id,
-                        Locatie = locatii[2],
                         NumarSedinte = 8                        
                         };
 

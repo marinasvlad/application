@@ -56,7 +56,7 @@ namespace API.Controllers
         [HttpGet("getpagesize")]
         [Authorize(Policy = "RequireMemberRole")]
         public async Task<ActionResult<int>> GetPageSize(){
-            var user =  await _userManager.Users.Where(u => u.Id == User.GetUserId()).Include(a => a.Locatie).FirstOrDefaultAsync();
+            var user =  await _userManager.Users.Where(u => u.Id == User.GetUserId()).FirstOrDefaultAsync();
 
             int pageSize = await _anuntRepo.GetPageSize(user);
 

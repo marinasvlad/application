@@ -44,18 +44,6 @@ namespace Infrastructure.Data
             .IsRequired();
 
             builder.Entity<AppUser>()
-            .HasOne(a => a.Grupa)
-            .WithMany(g => g.Elevi)
-            .HasForeignKey(c => c.GrupaId)
-            .IsRequired(false);
-
-            builder.Entity<AppUser>()
-            .HasOne(u => u.Locatie)
-            .WithMany(l => l.Elevi)
-            .HasForeignKey(u => u.LocatieId)
-            .IsRequired(false);
-
-            builder.Entity<AppUser>()
             .HasMany(a => a.Anunturi)
             .WithOne(b => b.AppUser)
             .HasForeignKey(b => b.AppUserId);
