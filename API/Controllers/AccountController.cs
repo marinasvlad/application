@@ -215,12 +215,12 @@ namespace API.Controllers
 
             if(registerDto.Password == string.Empty || registerDto.Password == null)
             {
-                return BadRequest(new ApiResponse(400, "Nu ai completat parola." ));
+                return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
             if(registerDto.LocatieNumar == 0)
             {
-                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia." ));
+                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia."));
             }
             var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
 
@@ -273,8 +273,9 @@ namespace API.Controllers
 
             if(registerDto.LocatieNumar == 0)
             {
-                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia." ));
-            }
+                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia!" ));
+            }    
+
             var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
 
             var user = new AppUser
