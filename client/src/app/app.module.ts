@@ -41,7 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from '@angular/common';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-
+import {MatBadgeModule} from '@angular/material/badge'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +67,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
     MatCardModule,
     MatSelectModule,
     MatSidenavModule,
+    MatBadgeModule,
     MatInputModule,
     MatStepperModule,
     MatDatepickerModule,
