@@ -4,4 +4,5 @@ export class Elev{
     locatieId: string;
     locatie: string;
     numarSedinte: number;
+    prezent: boolean;
 }

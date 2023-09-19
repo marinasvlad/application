@@ -43,6 +43,7 @@ import { DatePipe } from '@angular/common';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatBadgeModule} from '@angular/material/badge'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatStepperModule,
     MatDatepickerModule,
+    AlertModule.forRoot(),
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
@@ -90,7 +92,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true 
-    })
+    }),
+    AlertModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

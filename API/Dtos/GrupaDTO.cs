@@ -21,5 +21,9 @@ namespace API.Dtos
         public IReadOnlyList<AppUser> Elevi { get; set; }
 
         public bool Particip { get; set; }
+
+        public bool Confirmata { get; set; }
+
+        public bool Efectuata { get; set; }
     }
 }

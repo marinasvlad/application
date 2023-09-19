@@ -1,10 +1,14 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Grupa } from '../models/grupa';
 import { GrupeService } from '../services/grupe.service';
 import { IUser } from '../models/user';
 import { AnuntService } from '../services/anunt.service';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale, roLocale } from 'ngx-bootstrap/chronos';
+
+
 
 interface Locatie {
   value: number;
@@ -24,6 +28,8 @@ export class GrupeComponent implements OnInit {
   bsInlineValue: Date;
   oraGrupa: Date;
 
+  grupaEfectuare: Grupa;
+
   imgWidthVariable: string;
 
   grupeActive: Grupa[] = [];
@@ -36,7 +42,9 @@ export class GrupeComponent implements OnInit {
     {value: 3, viewValue: 'Bazinul Carol'}
     ];
 
-  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService) { 
+  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService, localeService: BsLocaleService) { 
+    defineLocale('ro', roLocale);
+    localeService.use('ro');
     this.calculateImageClass();
     window.addEventListener('resize', () => this.calculateImageClass());    
   }
@@ -73,8 +81,13 @@ export class GrupeComponent implements OnInit {
   getUrmatoareaGrupaActiva(){
     this.grupeService.getUrmatoareaGrupaActiva().subscribe(res => {
       this.urmatoareaGrupaActiva = res;
-      console.log(this.urmatoareaGrupaActiva);
     });
+  }
+
+  efectueazaGrupa(grupaActiva: Grupa, template: TemplateRef<any>)
+  {
+    this.grupaEfectuare = grupaActiva;
+    this.modalRef = this.modalService.show(template);
   }
 
   particip(grupaId: number){
@@ -100,7 +113,25 @@ export class GrupeComponent implements OnInit {
     this.user = this.anuntService.getCurrentUser();
   }
   
+  confirmaGrupa(grupaId: number)
+  {
+    this.grupeService.confirmaGrupa(grupaId).subscribe(() => {
+      this.getToateGrupeleActive();
+    });
+  }
 
+  elevPrezent(indexElevPrezent: number)
+  {
+    this.grupaEfectuare.elevi[indexElevPrezent].prezent = !this.grupaEfectuare.elevi[indexElevPrezent].prezent;
+  }  
+
+  
+  renuntaLaConfirmare(grupaId: number)
+  {
+    this.grupeService.renuntaLaConfirmare(grupaId).subscribe(() => {
+      this.getToateGrupeleActive();
+    });
+  }  
 
   openModal(template: TemplateRef<any>){
     this.locatieIdInDrop = 0;
@@ -131,6 +162,13 @@ export class GrupeComponent implements OnInit {
       this.getToateGrupeleActive();
     });
   }
+
+  efectueazaGrupaCuPrezente(){
+    this.grupeService.efectueazaGrupa(this.grupaEfectuare).subscribe(() => {
+      this.modalRef?.hide();
+      this.getToateGrupeleActive();
+    });
+  }  
 
   deleteGrupa(grupaId: number){
     this.grupeService.deleteGrupa(grupaId).subscribe(() => {

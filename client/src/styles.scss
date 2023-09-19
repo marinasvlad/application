@@ -23,3 +23,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* Importing Datepicker SCSS file. */
 @import "~ngx-bootstrap/datepicker/bs-datepicker";
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";

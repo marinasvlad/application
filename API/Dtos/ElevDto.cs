@@ -13,7 +13,11 @@ namespace API.Dtos
         public int? GrupaId { get; set; }
 
         public int? LocatieId { get; set; }
+
+        public string Locatie {get; set;}
         
         public int NumarSedinte { get; set; }
+
+        public bool Prezent {get; set;}
     }
 }

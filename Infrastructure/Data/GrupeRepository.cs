@@ -30,6 +30,15 @@ namespace Infrastructure.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<bool> ConfirmaGrupa(int grupaId)
+        {
+            var grupa = await _context.Grupe.FirstOrDefaultAsync(g => g.Id == grupaId);
+
+            grupa.Confirmata = true;
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
         public async Task<bool> DeleteGrupaById(int grupaId)
         {
             var grupa = await _context.Grupe.Include(g => g.Elevi).FirstOrDefaultAsync(g => g.Id == grupaId);
@@ -37,6 +46,13 @@ namespace Infrastructure.Data
             grupa.Elevi.Clear();
 
             _context.Grupe.Remove(grupa);
+
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> EfectueazaGrupaAsync(Grupa grupa)
+        {
+            grupa.Efectuata = true;
 
             return await _context.SaveChangesAsync() > 0;
         }
@@ -53,7 +69,16 @@ namespace Infrastructure.Data
 
         public async Task<Grupa> GetUrmatoareaGrupaActivaByLocatieId(int locatieId)
         {
-            return await _context.Grupe.Include(g => g.Elevi).FirstOrDefaultAsync(g => g.LocatieId == locatieId);
+            return await _context.Grupe.Include(g => g.Elevi).FirstOrDefaultAsync(g => g.LocatieId == locatieId && g.Efectuata == false && g.DataGrupa.Date >= DateTime.Now.Date);
+        }
+
+        public async Task<bool> RenuntaLaConfirmare(int grupaId)
+        {
+            var grupa = await _context.Grupe.FirstOrDefaultAsync(g => g.Id == grupaId);
+
+            grupa.Confirmata = false;
+
+            return await _context.SaveChangesAsync() > 0;        
         }
 
         public async Task<bool> RenuntElevToGrupa(AppUser elev, Grupa grupa)

@@ -15,7 +15,6 @@ export class GrupeService {
   baseUrl = environment.apiUrl;
   user: IUser;
   private datePipe: DatePipe = new DatePipe('en-US');
-  grupe
 
 
   constructor(private http: HttpClient, private accountService: AccountService) { }
@@ -38,6 +37,7 @@ export class GrupeService {
           grupa.locatieId = parseInt(element["locatieId"].toString());
           grupa.dataGrupa = new Date(this.datePipe.transform(element["dataGrupa"], "YYYY-MM-dd HH:mm"));
           grupa.oraGrupa = new Date(this.datePipe.transform(element["oraGrupa"], "YYYY-MM-dd HH:mm"));
+          grupa.confirmata = element["confirmata"];
           element["elevi"].forEach(elv => {
             let elev = new Elev();
             elev.displayName = elv["displayName"];
@@ -45,6 +45,7 @@ export class GrupeService {
             elev.locatie = elv["locatie"];
             elev.locatieId = elv["locatieId"];
             elev.numarSedinte = elv["numarSedinte"];
+            elev.prezent = false;
             grupa.elevi.push(elev);
           });
           grupe.push(grupa);
@@ -54,6 +55,27 @@ export class GrupeService {
       })
     );
   }
+
+  confirmaGrupa(grupaId: number)
+  {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+    return this.http.get(this.baseUrl + 'grupe/confirmagrupa/' + grupaId, { headers });
+  }
+
+  renuntaLaConfirmare(grupaId: number)
+  {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+    return this.http.get(this.baseUrl + 'grupe/renuntalaconfirmare/' + grupaId, { headers });
+  }  
 
   getUrmatoareaGrupaActiva() {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
@@ -72,6 +94,7 @@ export class GrupeService {
         grupa.dataGrupa = new Date(this.datePipe.transform(response["dataGrupa"], "YYYY-MM-dd HH:mm"));
         grupa.oraGrupa = new Date(this.datePipe.transform(response["oraGrupa"], "YYYY-MM-dd HH:mm"));
         grupa.particip = response["particip"];
+        grupa.confirmata = response["confirmata"];
         return grupa;
       })
     );
@@ -90,6 +113,20 @@ export class GrupeService {
         LocatieId: grupa.locatieId
       }, { headers });
   }
+
+  efectueazaGrupa(grupa: Grupa) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+    return this.http.post(this.baseUrl + 'grupe/efectueazagrupacuprezente',
+      {
+        Id: grupa.id,
+        LocatieId: grupa.locatieId,
+        Elevi: grupa.elevi
+      }, { headers });
+  }  
 
   particip(grupaId: number) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {

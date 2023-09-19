@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace API.Dtos
 {
-    public class Prezenta
+    public class PrezentaDTO
     {
         public int Id { get; set; }
 
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
 
-        public DateTime Start { get; set; }
+        public string Start { get; set; }
 
-        public DateTime Stop { get; set; }
-
-        public int AppUserId { get; set; }
+        public string Stop { get; set; }
 
         public string Email { get; set; }
 
         public string DisplayName { get; set; }
-
-        public int LocatieId { get; set; }
 
         public string Locatie { get; set; }
     }

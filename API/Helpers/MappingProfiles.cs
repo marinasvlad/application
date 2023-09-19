@@ -25,6 +25,10 @@ namespace API.Helpers
             .ForMember(grupaDto => grupaDto.OraGrupa, grupa => grupa.MapFrom(g => g.OraGrupa.ToString("yyyy-MM-dd HH:mm")))
             .ForMember(grupaDto => grupaDto.Elevi, grupa => grupa.MapFrom(g => g.Elevi))
             .ForMember(grupaDto => grupaDto.Locatie, grupa => grupa.MapFrom(g => g.Locatie.NumeLocatie));
+
+            CreateMap<Prezenta, PrezentaDTO>().ForMember(prezentaDto => prezentaDto.Data, prezenta => prezenta.MapFrom(p => p.Data.ToString("yyyy-MM-dd HH:mm")))
+            .ForMember(prezentaDto => prezentaDto.Start, prezenta => prezenta.MapFrom(p => p.Start.ToString("yyyy-MM-dd HH:mm")))
+            .ForMember(prezentaDto => prezentaDto.Stop, prezenta => prezenta.MapFrom(p => p.Stop.ToString("yyyy-MM-dd HH:mm")));
         }
     }
 }

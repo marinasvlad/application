@@ -1,3 +1,33 @@
 <div class="container">
-    <h1 class="font-PE" >Elevi</h1>
+  <h1 class="font-PE">Elevi</h1>
+
+  <br>
+  <p class="font-PE">Mai jos se află prezențele elevilor.</p>
+
+
+  <div class="div table-responsive table-responsive-sm">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nume</th>
+          <th scope="col">Email</th>
+          <th scope="col">Locatie</th>
+          <th scope="col">Data</th>
+          <th scope="col">Start</th>
+          <th scope="col">Stop</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prezenta of prezente; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{prezenta.displayName}}</td>
+          <td>{{prezenta.email}}</td>
+          <td>{{prezenta.locatie}}</td>
+          <td>{{prezenta.data | date: 'dd.MM.yyyy'}}</td>
+          <td>{{prezenta.start | date: 'dd.MM.yyyy'}}</td>
+          <td>{{prezenta.stop | date: 'dd.MM.yyyy'}}</td>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -19,6 +19,8 @@ namespace Core.Entities
 
         public Locatie Locatie { get; set; }
 
+        public bool Confirmata { get; set; }
+
         public bool Efectuata { get; set; }
     }
 }

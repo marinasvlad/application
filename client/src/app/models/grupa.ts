@@ -7,4 +7,6 @@ export class Grupa {
     locatieId: number;
     elevi: Elev[] = [];
     particip: boolean;
+    confirmata: boolean;
+    efectuata: boolean;
 }
