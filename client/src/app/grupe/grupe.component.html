@@ -97,7 +97,7 @@
       <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 1">
         <mat-card-title-group>
             <mat-card-title class="font-PE"><strong>Water Park</strong></mat-card-title>
-            <img mat-card-sm-image src="../../assets/water-park.jpg">
+            <img [ngClass]="imgWidthVariable" class="img-class" mat-card-sm-image src="../../assets/water-park.jpg">
         </mat-card-title-group>
         <mat-card-content>
           <p class="font-PE"><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova<mat-icon> location_on</mat-icon></p>
@@ -113,7 +113,7 @@
       <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 2">
         <mat-card-title-group>
             <mat-card-title class="font-PE"><strong>Imperial Garden</strong></mat-card-title>
-            <img mat-card-sm-image src="../../assets/imperial-garden.jpg">
+            <img [ngClass]="imgWidthVariable" class="img-class" mat-card-sm-image src="../../assets/imperial-garden.jpg">
         </mat-card-title-group>
         <mat-card-content>
           <p class="font-PE"><strong>Adresă</strong>: Drumul Industriilor 17, Craiova<mat-icon> location_on</mat-icon></p>
@@ -130,7 +130,7 @@
       <mat-card class="locatie-card" *ngIf="urmatoareaGrupaActiva.locatieId == 3">
         <mat-card-title-group>
             <mat-card-title class="font-PE"><strong>Bazinul Carol</strong></mat-card-title>
-            <img mat-card-sm-image src="../../assets/bazin-carol.jpg">
+            <img [ngClass]="imgWidthVariable" class="img-class" mat-card-sm-image src="../../assets/bazin-carol.jpg">
         </mat-card-title-group>
         <mat-card-content>
           <p class="font-PE"><strong>Adresă</strong>: Strada Bibescu 30, Craiova<mat-icon> location_on</mat-icon></p>
