@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   thirdFormGroup = this._formBuilder.group({
     thirdCtrl: ['', Validators.required],
   });
+  imgWidthVariable: string;
 
   googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
   facebookLogoUrl: string = "https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg";  
@@ -41,7 +42,24 @@ export class RegisterComponent implements OnInit {
     this.registerOauthDTO.locatieNumar = cardNumber;
   }
   
-  constructor(private _formBuilder: FormBuilder, private accountService: AccountService) { }
+  constructor(private _formBuilder: FormBuilder, private accountService: AccountService) { 
+    this.calculateImageClass();
+    window.addEventListener('resize', () => this.calculateImageClass()); 
+  }
+
+  calculateImageClass() {
+    if(window.innerWidth <= 422){
+      this.imgWidthVariable = 'mat-card-sm-image';
+    }
+    else if(window.innerWidth >= 520 && window.innerWidth <= 600)
+    {
+      this.imgWidthVariable = 'mat-card-md-image';
+    }
+    else if(window.innerWidth >= 1000)
+    {
+      this.imgWidthVariable = 'mat-card-xl-image';
+    }
+  }  
 
   ngOnInit(): void {
     if(this.oauthAccount != '')

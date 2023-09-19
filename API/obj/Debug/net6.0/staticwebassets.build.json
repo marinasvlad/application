@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "j1ab59BL7Aq7+igc0W7zOdw8lCFrA3QTNeXoiMQ3SYA=",
+  "Hash": "2jnJllmdsQcDmfDYSvaoiaFDtJj8FKRFDQiFlR4oSBY=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -272,12 +272,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\main.843808e4e0d9dafce299.js",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\main.5a5ef8aa9b2a4cf993f6.js",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "main.843808e4e0d9dafce299.js",
+      "RelativePath": "main.5a5ef8aa9b2a4cf993f6.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -286,7 +286,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\main.843808e4e0d9dafce299.js"
+      "OriginalItemSpec": "wwwroot\\main.5a5ef8aa9b2a4cf993f6.js"
     },
     {
       "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",

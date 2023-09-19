@@ -27,17 +27,17 @@
     <div *ngFor="let grupaActiva of grupeActive">
       <mat-card class="card-class">
         <mat-card-title-group>
-            <mat-card-title *ngIf="grupaActiva.locatieId == 1" class="font-PE"><strong>Water Park</strong></mat-card-title>
-            <img *ngIf="grupaActiva.locatieId == 1" mat-card-sm-image src="../../assets/water-park.jpg">
+            <mat-card-title *ngIf="grupaActiva.locatieId == 1"  class="font-PE"><strong>Water Park</strong></mat-card-title>
+            <img class="img-class" *ngIf="grupaActiva.locatieId == 1" [ngClass]="imgWidthVariable" src="../../assets/water-park.jpg">
             <mat-card-title *ngIf="grupaActiva.locatieId == 2" class="font-PE"><strong>Imperial Garden</strong></mat-card-title>
-            <img *ngIf="grupaActiva.locatieId == 2" mat-card-sm-image src="../../assets/imperial-garden.jpg">
-            <mat-card-title class="font-PE" *ngIf="grupaActiva.locatieId == 3"><strong>Bazinul Carol</strong></mat-card-title>
-            <img *ngIf="grupaActiva.locatieId == 3" mat-card-sm-image src="../../assets/bazin-carol.jpg">
+            <img class="img-class" *ngIf="grupaActiva.locatieId == 2" [ngClass]="imgWidthVariable" src="../../assets/imperial-garden.jpg">
+            <mat-card-title *ngIf="grupaActiva.locatieId == 3" class="font-PE"><strong>Bazinul Carol</strong></mat-card-title>
+            <img class="img-class" *ngIf="grupaActiva.locatieId == 3" [ngClass]="imgWidthVariable" src="../../assets/bazin-carol.jpg">
             <mat-card-subtitle>
               <p class="font-PE" *ngIf="grupaActiva.locatieId == 1"><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova<mat-icon> location_on</mat-icon></p>
               <p class="font-PE" *ngIf="grupaActiva.locatieId == 2"><strong>Adresă</strong>: Drumul Industriilor 17, Craiova <mat-icon> location_on</mat-icon></p>
               <p class="font-PE" *ngIf="grupaActiva.locatieId == 3"><strong>Adresă</strong>: Strada Bibescu 30, Craiova<mat-icon> location_on</mat-icon></p>
-              <p class="font-PE" *ngIf="grupaActiva.locatieId == 1"><strong>Nivel</strong>: începători/intermediari/avansați<mat-icon>stars</mat-icon></p>
+              <p class="font-PE" *ngIf="grupaActiva.locatieId == 1"><strong>Nivel</strong>: începători/ intermediari/ avansați<mat-icon>stars</mat-icon></p>
               <p class="font-PE" *ngIf="grupaActiva.locatieId == 2"><strong>Nivel</strong>: începători <mat-icon>stars</mat-icon></p>
               <p class="font-PE" *ngIf="grupaActiva.locatieId == 3"><strong>Nivel</strong>: intermediari/avansați<mat-icon>stars</mat-icon></p>
               <p class="font-PE"><strong>Data</strong>: {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}<mat-icon>calendar_today</mat-icon></p>

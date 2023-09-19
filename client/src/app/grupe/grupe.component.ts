@@ -24,6 +24,8 @@ export class GrupeComponent implements OnInit {
   bsInlineValue: Date;
   oraGrupa: Date;
 
+  imgWidthVariable: string;
+
   grupeActive: Grupa[] = [];
   grupeAnterioare: Grupa[] = [];
   urmatoareaGrupaActiva: Grupa = undefined;
@@ -34,11 +36,30 @@ export class GrupeComponent implements OnInit {
     {value: 3, viewValue: 'Bazinul Carol'}
     ];
 
-  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService) { }
+  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService) { 
+    this.calculateImageClass();
+    window.addEventListener('resize', () => this.calculateImageClass());    
+  }
+
+  calculateImageClass() {
+    if(window.innerWidth <= 420){
+      this.imgWidthVariable = 'mat-card-sm-image';
+    }
+    else if(window.innerWidth >= 520 && window.innerWidth <= 600)
+    {
+      this.imgWidthVariable = 'mat-card-md-image';
+    }
+    else if(window.innerWidth >= 600)
+    {
+      this.imgWidthVariable = 'mat-card-lg-image';
+    }
+  }
+
+  
 
   ngOnInit(): void {
    this.getUser();
-
+   
    if(this.user.roles.includes("Moderator") || this.user.roles.includes("Admin"))
    {
     this.getToateGrupeleActive();

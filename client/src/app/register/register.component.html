@@ -79,9 +79,9 @@
             <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Waterpark</strong></mat-card-title>
-                    <img mat-card-sm-image src="../../assets/water-park.jpg">
+                    <img [ngClass]="imgWidthVariable" mat-card-sm-image src="../../assets/water-park.jpg">
                     <mat-card-subtitle>
-                        <p><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova <mat-icon> location_on</mat-icon></p>
+                        <p><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova <mat-icon>location_on</mat-icon></p>
                         <p><strong>Nivel</strong>: începători/intermediari/avansați <mat-icon>stars</mat-icon></p>
                     </mat-card-subtitle>
                 </mat-card-title-group>
@@ -91,7 +91,7 @@
             <mat-card class="locatie-card" (click)="selectCard(2)" [ngClass]="{ 'selected': selectedCard === 2 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Imperial Garden</strong></mat-card-title>
-                    <img mat-card-sm-image src="../../assets/imperial-garden.jpg">
+                    <img [ngClass]="imgWidthVariable" src="../../assets/imperial-garden.jpg">
                     <mat-card-subtitle>
                         <p><strong>Adresă</strong>: Drumul Industriilor 17, Craiova <mat-icon> location_on</mat-icon></p>
                         <p><strong>Nivel</strong>: începători <mat-icon>stars</mat-icon></p>                        
@@ -102,7 +102,7 @@
             <mat-card class="locatie-card" (click)="selectCard(3)" [ngClass]="{ 'selected': selectedCard === 3 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Bazinul Carol</strong></mat-card-title>
-                    <img mat-card-sm-image src="../../assets/bazin-carol.jpg">
+                    <img [ngClass]="imgWidthVariable" src="../../assets/bazin-carol.jpg">
                     <mat-card-subtitle>
                         <p><strong>Adresă</strong>: Strada Bibescu 30, Craiova <mat-icon> location_on</mat-icon></p>
                         <p><strong>Nivel</strong>: intermediari/avansați <mat-icon>stars</mat-icon></p>
@@ -179,7 +179,7 @@
             <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Waterpark</strong></mat-card-title>
-                    <img mat-card-sm-image class="img-locatie" src="../../assets/water-park.jpg">
+                    <img [ngClass]="imgWidthVariable" class="img-locatie" src="../../assets/water-park.jpg">
                 </mat-card-title-group>
                 <mat-card-content>
                     <mat-card-subtitle>
@@ -192,7 +192,7 @@
             <mat-card class="locatie-card" (click)="selectCard(2)" [ngClass]="{ 'selected': selectedCard === 2 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Imperial Garden</strong></mat-card-title>
-                    <img mat-card-sm-image class="img-locatie" src="../../assets/imperial-garden.jpg">
+                    <img [ngClass]="imgWidthVariable" class="img-locatie" src="../../assets/imperial-garden.jpg">
                     <mat-card-subtitle>
                         <p><strong>Adresă</strong>: Drumul Industriilor 17, Craiova <mat-icon> location_on</mat-icon></p>
                         <p><strong>Nivel</strong>: începători <mat-icon>stars</mat-icon></p>                        
@@ -203,7 +203,7 @@
             <mat-card class="locatie-card" (click)="selectCard(3)" [ngClass]="{ 'selected': selectedCard === 3 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Bazinul Carol</strong></mat-card-title>
-                    <img mat-card-sm-image class="img-locatie" src="../../assets/bazin-carol.jpg">
+                    <img [ngClass]="imgWidthVariable" class="img-locatie" src="../../assets/bazin-carol.jpg">
                     <mat-card-subtitle>
                         <p><strong>Adresă</strong>: Strada Bibescu 30, Craiova <mat-icon> location_on</mat-icon></p>
                         <p><strong>Nivel</strong>: intermediari/avansați <mat-icon>stars</mat-icon></p>

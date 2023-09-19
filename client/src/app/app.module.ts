@@ -42,6 +42,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from '@angular/common';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatBadgeModule} from '@angular/material/badge'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +65,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatToolbarModule,
     MatIconModule,
     MatDialogModule,
+    FlexLayoutModule,    
     FormsModule,
     MatCardModule,
     MatSelectModule,

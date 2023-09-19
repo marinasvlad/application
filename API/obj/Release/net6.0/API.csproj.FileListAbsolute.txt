@@ -68,11 +68,6 @@ C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\API.AssemblyInfo.cs
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\API.csproj.CoreCompileInputs.cache
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\API.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets\msbuild.API.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets\msbuild.build.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets\msbuild.buildMultiTargeting.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets\msbuild.buildTransitive.API.props
-C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets.pack.json
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets.build.json
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\staticwebassets.development.json
 C:\Users\Vlad\Projects\Application\API\obj\Release\net6.0\scopedcss\bundle\API.styles.css
