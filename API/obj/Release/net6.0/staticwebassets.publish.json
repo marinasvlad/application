@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UEnOL0t/E+C1oQ3qKaz2qqM8nONgqwNcDKFRNegCgHg=",
+  "Hash": "AzvZcf9h8roINH+MQ+c4U39KRFpWzPa53MwG+WPEymI=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -272,12 +272,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\main.2c0c7441a4403db51257.js",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\main.0dfdacde0281a5f130ec.js",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "main.2c0c7441a4403db51257.js",
+      "RelativePath": "main.0dfdacde0281a5f130ec.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -286,7 +286,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\main.2c0c7441a4403db51257.js"
+      "OriginalItemSpec": "wwwroot\\main.0dfdacde0281a5f130ec.js"
     },
     {
       "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",
@@ -323,12 +323,12 @@
       "OriginalItemSpec": "wwwroot\\runtime.4b1540bf51da5ef20c67.js"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\styles.b47947ec3f4f363b1ee4.css",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\styles.2c20f5e6619c9d00a6bc.css",
       "SourceId": "API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
-      "RelativePath": "styles.b47947ec3f4f363b1ee4.css",
+      "RelativePath": "styles.2c20f5e6619c9d00a6bc.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,7 +337,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\styles.b47947ec3f4f363b1ee4.css"
+      "OriginalItemSpec": "wwwroot\\styles.2c20f5e6619c9d00a6bc.css"
     }
   ]
 }
