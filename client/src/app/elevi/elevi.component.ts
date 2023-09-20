@@ -20,7 +20,7 @@ export class EleviComponent implements OnInit {
    
     if(this.user.roles.includes("Moderator") || this.user.roles.includes("Admin"))
     {
-     this.getToatePrezentele();
+      this.getToatePrezentele();
     }
     else if(this.user.roles.includes("Member"))
     {
