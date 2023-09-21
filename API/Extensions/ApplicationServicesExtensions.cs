@@ -26,6 +26,7 @@ namespace API.Extensions
                 opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
                 //opt.UseSqlite(config.GetConnectionString("SqliteConnection"));
             });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<ApiBehaviorOptions>(options => {
                 options.InvalidModelStateResponseFactory = actionContext =>

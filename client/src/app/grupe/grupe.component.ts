@@ -55,11 +55,11 @@ export class GrupeComponent implements OnInit {
     }
     else if(window.innerWidth >= 520 && window.innerWidth <= 600)
     {
-      this.imgWidthVariable = 'mat-card-md-image';
+      this.imgWidthVariable = 'mat-card-lg-image';
     }
     else if(window.innerWidth >= 600)
     {
-      this.imgWidthVariable = 'mat-card-lg-image';
+      this.imgWidthVariable = 'mat-card-xl-image';
     }
   }
 
