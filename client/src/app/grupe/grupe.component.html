@@ -41,57 +41,60 @@
           </mat-card-title>
           <img class="img-class" *ngIf="grupaActiva.locatieId == 3" [ngClass]="imgWidthVariable"
             src="../../assets/bazin-carol.jpg">
-          <mat-card-subtitle>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
-              <mat-icon> location_on</mat-icon> Strada Banul Stepan 2A, Craiova
-            </p>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 2">
-              <mat-icon> location_on</mat-icon> Drumul Industriilor 17, Craiova
-            </p>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
-              <mat-icon> location_on</mat-icon> Strada Bibescu 30, Craiova
-            </p>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
-              <mat-icon>stars</mat-icon> începători/ intermediari/ avansați
-            </p>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 2">
-              <mat-icon>stars</mat-icon> începători
-            </p>
-            <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
-              <mat-icon>stars</mat-icon> intermediari/avansați
-            </p>
-            <p class="font-PE">
-              <mat-icon>calendar_today</mat-icon> {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}
-            </p>
-            <p class="font-PE">
-              <mat-icon>access_time</mat-icon> {{grupaActiva.oraGrupa | date: 'HH:mm'}}
-            </p>
-            <p class="font-PE">
-              <mat-icon matBadge="{{grupaActiva.elevi.length}}" matBadgeColor="primary">person</mat-icon>
-            </p>
-
-            <button *ngIf="grupaActiva.confirmata == false" mat-raised-button (click)="confirmaGrupa(grupaActiva.id)">
-              <mat-icon>done</mat-icon>
-              Confirmă grupa
-            </button>          
-            <button *ngIf="grupaActiva.confirmata == true" mat-raised-button (click)="renuntaLaConfirmare(grupaActiva.id)">
-              <mat-icon>cancel_presentation</mat-icon>
-              Renunță la confirmare
-            </button>          
-            <br>
-            <br>      
-            <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)">
-              <mat-icon>delete</mat-icon>
-              Șterge grupă
-            </button>
-            <br>
-            <br>
-            <button mat-raised-button (click)="efectueazaGrupa(grupaActiva, efectueazaModal)">
-              <mat-icon>check_circle</mat-icon>
-              Efectuează grupa
-            </button>              
-          </mat-card-subtitle>
         </mat-card-title-group>
+        
+        <mat-card-content>
+
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
+            <mat-icon> location_on</mat-icon> Strada Banul Stepan 2A, Craiova
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 2">
+            <mat-icon> location_on</mat-icon> Drumul Industriilor 17, Craiova
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
+            <mat-icon> location_on</mat-icon> Strada Bibescu 30, Craiova
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
+            <mat-icon>stars</mat-icon> începători/ intermediari/ avansați
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 2">
+            <mat-icon>stars</mat-icon> începători
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
+            <mat-icon>stars</mat-icon> intermediari/avansați
+          </p>
+          <p class="font-PE">
+            <mat-icon>calendar_today</mat-icon> {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}
+          </p>
+          <p class="font-PE">
+            <mat-icon>access_time</mat-icon> {{grupaActiva.oraGrupa | date: 'HH:mm'}}
+          </p>
+          <p class="font-PE">
+            <mat-icon matBadge="{{grupaActiva.elevi.length}}" matBadgeColor="primary">person</mat-icon>
+          </p>
+
+          <button *ngIf="grupaActiva.confirmata == false" mat-raised-button (click)="confirmaGrupa(grupaActiva.id)">
+            <mat-icon>done</mat-icon>
+            Confirmă grupa
+          </button>          
+          <button *ngIf="grupaActiva.confirmata == true" mat-raised-button (click)="renuntaLaConfirmare(grupaActiva.id)">
+            <mat-icon>cancel_presentation</mat-icon>
+            Renunță la confirmare
+          </button>          
+          <br>
+          <br>      
+          <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)">
+            <mat-icon>delete</mat-icon>
+            Șterge grupă
+          </button>
+          <br>
+          <br>
+          <button mat-raised-button (click)="efectueazaGrupa(grupaActiva, efectueazaModal)">
+            <mat-icon>check_circle</mat-icon>
+            Efectuează grupa
+          </button>
+
+        </mat-card-content>
       </mat-card>
       <br>
     </div>
