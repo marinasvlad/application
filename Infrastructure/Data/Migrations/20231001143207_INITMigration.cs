@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class Migrations : Migration
+    public partial class INITMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,25 @@ namespace Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inscrieri",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DisplayName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    NumarDeTelefon = table.Column<string>(type: "text", nullable: true),
+                    Nivel = table.Column<string>(type: "text", nullable: true),
+                    Varsta = table.Column<int>(type: "integer", nullable: false),
+                    DataCerere = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inscrieri", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,6 +130,9 @@ namespace Infrastructure.Data.Migrations
                     DisplayName = table.Column<string>(type: "text", nullable: true),
                     GrupaId = table.Column<int>(type: "integer", nullable: true),
                     LocatieId = table.Column<int>(type: "integer", nullable: true),
+                    NivelId = table.Column<int>(type: "integer", nullable: true),
+                    Varsta = table.Column<int>(type: "integer", nullable: true),
+                    NumarDeTelefon = table.Column<string>(type: "text", nullable: true),
                     NumarSedinte = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -337,6 +359,9 @@ namespace Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Inscrieri");
 
             migrationBuilder.DropTable(
                 name: "Prezente");

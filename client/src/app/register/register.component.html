@@ -35,6 +35,12 @@
     <br>
 </div>
 
+
+
+<!--cont nou cu google ouath-->
+
+
+
 <mat-stepper *ngIf="contNouStepperOauthVisible == true" orientation="vertical">
     <mat-step>
         <ng-template matStepLabel>Nume și prenume</ng-template>
@@ -71,12 +77,42 @@
         </ng-template>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Locație</ng-template>
+        <ng-template matStepLabel>Nivel și vârstă</ng-template>
         <ng-template matStepContent>
-            <mat-label>Dă-i click pe locația la care vrei să participi</mat-label>
+            <mat-label>Alege nivelul tău și vârsta</mat-label>
             <br>
-            <br>          
-            <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
+            <br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Alege nivelul</mat-label>
+                            <mat-select [(ngModel)]="nivel" name="nivel">
+                              <mat-option *ngFor="let niv of nivele" [value]="niv.value">
+                                {{niv.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Alege vârsta</mat-label>
+                            <mat-select [(ngModel)]="varsta" name="varsta">
+                              <mat-option *ngFor="let vars of varste" [value]="vars.value">
+                                {{vars.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+
+            <!-- <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Waterpark</strong></mat-card-title>
                     <img [ngClass]="imgWidthVariable" mat-card-sm-image src="../../assets/water-park.jpg">
@@ -108,9 +144,12 @@
                         <p><strong>Nivel</strong>: intermediari/avansați <mat-icon>stars</mat-icon></p>
                     </mat-card-subtitle>
                 </mat-card-title-group>
-            </mat-card>
+            </mat-card> -->
+
+
+
             <div>
-                <p>Selectează locația la care vrei să participi</p>
+                <p>După ce ai selectat nivelul și vârsta apasă pe Următorul.</p>
                 <button mat-button matStepperPrevious>Înapoi</button>
                 <button mat-button matStepperNext>Următorul</button>
             </div>
@@ -130,6 +169,10 @@
 
 
 
+
+
+<!--cont nou fara google ouath-->
+
 <mat-stepper *ngIf="contNouStepperVisible == true" orientation="vertical">
     <mat-step>
         <ng-template matStepLabel>Nume și prenume</ng-template>
@@ -147,7 +190,7 @@
         </ng-template>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Email și parola</ng-template>
+        <ng-template matStepLabel>Email, număr de telefon și parolă</ng-template>
         <ng-template matStepContent>
             <form [formGroup]="secondFormGroup">
                 <mat-form-field>
@@ -161,22 +204,56 @@
                     <input [(ngModel)]="parola" type="password" matInput placeholder="parola1234" formControlName="secondCtrl"
                         required>
                 </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Telefon</mat-label>
+                    <input [(ngModel)]="numarDeTelefon" type="tel" matInput placeholder="0765212641" formControlName="secondCtrl" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
+                <br>                            
             </form>
 
             <div>
-                <p>Completează adresa de email.</p>
+                <p>Completează adresa de email, parola și numărul de telefon.</p>
                 <button mat-button matStepperPrevious>Înapoi</button>
                 <button mat-button matStepperNext>Următorul</button>
             </div>
         </ng-template>
     </mat-step>
     <mat-step>
-        <ng-template matStepLabel>Locație</ng-template>
+        <ng-template matStepLabel>Nivel și vârstă</ng-template>
         <ng-template matStepContent>
-            <mat-label>Dă-i click pe locația la care vrei să participi</mat-label>
+            <mat-label>Alege nivelul tău și vârsta</mat-label>
             <br>
-            <br>          
-            <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
+            <br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Alege nivelul</mat-label>
+                            <mat-select [(ngModel)]="nivel" name="nivel">
+                              <mat-option *ngFor="let niv of nivele" [value]="niv.value">
+                                {{niv.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <mat-form-field>
+                            <mat-label>Alege vârsta</mat-label>
+                            <mat-select [(ngModel)]="varsta" name="varsta">
+                              <mat-option *ngFor="let vars of varste" [value]="vars.value">
+                                {{vars.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <mat-card class="locatie-card" (click)="selectCard(1)" [ngClass]="{ 'selected': selectedCard === 1 }">
                 <mat-card-title-group>
                     <mat-card-title><strong>Waterpark</strong></mat-card-title>
                     <img [ngClass]="imgWidthVariable" class="img-locatie" src="../../assets/water-park.jpg">
@@ -209,9 +286,9 @@
                         <p><mat-icon>stars</mat-icon> intermediari/avansați</p>
                     </mat-card-subtitle>                    
                 </mat-card-title-group>
-            </mat-card>
+            </mat-card> -->
             <div>
-                <p>Selectează locația la care vrei să participi</p>
+                <p>După ce ai selectat nivelul și vârsta apasă pe Următorul.</p>
                 <button mat-button matStepperPrevious>Înapoi</button>
                 <button mat-button matStepperNext>Următorul</button>
             </div>

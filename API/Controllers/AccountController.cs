@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
@@ -31,10 +32,12 @@ namespace API.Controllers
 
         private readonly IExternalAuthService _externalAuthService;
         private readonly ILocatiiRepository _locatiiRepo;
+        private readonly IInscrieriRepository _inscrieriRepo;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService,
-         IMapper mapper, IExternalAuthService externalAuthService, ILocatiiRepository locatiiRepo)
+         IMapper mapper, IExternalAuthService externalAuthService, ILocatiiRepository locatiiRepo, IInscrieriRepository inscrieriRepo)
         {
+            _inscrieriRepo = inscrieriRepo;
             _locatiiRepo = locatiiRepo;
             _externalAuthService = externalAuthService;
             _mapper = mapper;
@@ -192,12 +195,73 @@ namespace API.Controllers
             facebookRegisterDTO.Email = payload.Item2;
             facebookRegisterDTO.DisplayName = payload.Item1;
             facebookRegisterDTO.Provider = "Facebook";
-            string googleRegisterJsonString = JsonConvert.SerializeObject(facebookRegisterDTO);
-            return googleRegisterJsonString;
+            string facebookRegisterJsonString = JsonConvert.SerializeObject(facebookRegisterDTO);
+            return facebookRegisterJsonString;
         }        
 
+        // [HttpPost("register")]
+        // public async Task<ActionResult> Register(RegisterDto registerDto)
+        // {
+        //     if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
+        //     {
+        //         return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
+
+        //     }
+
+        //     var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
+        //     if(contNume != null)
+        //     {
+        //         //return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." } });
+        //         return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
+
+        //     }
+
+        //     if(registerDto.Password == string.Empty || registerDto.Password == null)
+        //     {
+        //         return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
+        //     }
+
+        //     if(registerDto.LocatieNumar == 0)
+        //     {
+        //         return BadRequest(new ApiResponse(400, "Nu ai selectat locatia."));
+        //     }
+        //     var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
+
+        //     var user = new AppUser
+        //     {
+        //         DisplayName = registerDto.DisplayName,
+        //         Email = registerDto.Email,
+        //         UserName = registerDto.Email,
+        //         LocatieId = locatie.Id,
+        //         NumarSedinte = 8
+        //     };
+
+        //     var results = await _userManager.CreateAsync(user, registerDto.Password);
+
+        //     if (!results.Succeeded)
+        //     {
+        //         return BadRequest(new ApiResponse(400));
+        //     }
+        //     var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+
+        //     if (!roleResult.Succeeded)
+        //     {
+        //         return BadRequest(new ApiResponse(400));
+        //     }
+
+        //     await _locatiiRepo.AddNewUserToLocatieAsync(user);
+
+        //     return Ok(new UserDto
+        //     {
+        //         Email = user.Email,
+        //         Token = await _tokenService.CreateToken(user),
+        //         DisplayName = user.DisplayName
+        //     });
+        // }
+
+
         [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterDto registerDto)
+        public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
@@ -208,7 +272,6 @@ namespace API.Controllers
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
             if(contNume != null)
             {
-                //return BadRequest(new ApiValidationErrorResponse { Errors = new[] { "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." } });
                 return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
 
             }
@@ -218,47 +281,52 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
-            if(registerDto.LocatieNumar == 0)
-            {
-                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia."));
-            }
-            var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
 
-            var user = new AppUser
+            if(registerDto.NumarDeTelefon.Count() != 10)
             {
+                return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să aibă 10 cifre. Exemplu de număr de telefon: 0723121311."));
+            }
+
+            foreach(char c in registerDto.NumarDeTelefon)
+            {
+                if(c < '0' || c > '9')
+                {
+                    return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
+                }
+            }
+
+            if(registerDto.Nivel != "incepator" && registerDto.Nivel != "mediu" && registerDto.Nivel != "avansat")
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
+            }
+
+
+            if(registerDto.Varsta < 7 || registerDto.Varsta > 19)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat vârsta."));
+            }
+
+            var inscriere = new Inscriere{
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email,
-                LocatieId = locatie.Id,
-                NumarSedinte = 8
+                Password = registerDto.Password,
+                NumarDeTelefon = registerDto.NumarDeTelefon,
+                Nivel = registerDto.Nivel,
+                Varsta = registerDto.Varsta,
+                DataCerere = DateTime.Now
             };
 
-            var results = await _userManager.CreateAsync(user, registerDto.Password);
+            await _inscrieriRepo.AdaugaInscriereAsync(inscriere);
 
-            if (!results.Succeeded)
-            {
-                return BadRequest(new ApiResponse(400));
-            }
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+            var raspuns = new { raspuns = "success" };
 
-            if (!roleResult.Succeeded)
-            {
-                return BadRequest(new ApiResponse(400));
-            }
+            return Ok(raspuns);
 
-            await _locatiiRepo.AddNewUserToLocatieAsync(user);
-
-            return Ok(new UserDto
-            {
-                Email = user.Email,
-                Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
-            });
-        }
+        }        
 
 
         [HttpPost("oauthregister")]
-        public async Task<ActionResult> GoogleRegister(OauthRegisterDTO registerDto)
+        public async Task<ActionResult<string>> GoogleRegister(OauthRegisterDTO registerDto)
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
@@ -271,44 +339,44 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." ));
             }
 
-            if(registerDto.LocatieNumar == 0)
-            {
-                return BadRequest(new ApiResponse(400, "Nu ai selectat locatia!" ));
-            }    
 
-            var locatie = await _locatiiRepo.GetLocatieByIdAsync(registerDto.LocatieNumar);
-
-            var user = new AppUser
+            if(registerDto.NumarDeTelefon.Count() != 10)
             {
+                return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să aibă 10 cifre. Exemplu de număr de telefon: 0723121311."));
+            }
+
+            foreach(char c in registerDto.NumarDeTelefon)
+            {
+                if(c < '0' || c > '9')
+                {
+                    return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
+                }
+            }
+
+            if(registerDto.Nivel != "incepator" || registerDto.Nivel != "mediu" || registerDto.Nivel != "avansat")
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
+            }
+
+
+            if(registerDto.Varsta < 7 || registerDto.Varsta > 19)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat vârsta."));
+            }
+
+            var inscriere = new Inscriere{
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Email,
-                LocatieId = locatie.Id,
-                NumarSedinte = 8
+                NumarDeTelefon = registerDto.NumarDeTelefon,
+                Nivel = registerDto.Nivel,
+                Varsta = registerDto.Varsta,
+                DataCerere = DateTime.Now
             };
 
-            var results = await _userManager.CreateAsync(user, "Pa$$w0rd");
+            await _inscrieriRepo.AdaugaInscriereAsync(inscriere);
 
-            if (!results.Succeeded)
-            {
-                return BadRequest(new ApiResponse(400, "Contul nu a fost creat!"));
-            }
-            var roleResult = await _userManager.AddToRoleAsync(user, "Member");
-
-            if (!roleResult.Succeeded)
-            {
-                return BadRequest(new ApiResponse(400, "Contul nu a fost creat!"));
-            }
-
-            await _locatiiRepo.AddNewUserToLocatieAsync(user);
-
-            return Ok(new UserDto
-            {
-                Email = user.Email,
-                Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
-            });        
-        }        
+            return Ok("succes");        
+        }
 
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)

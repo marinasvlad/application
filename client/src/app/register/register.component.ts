@@ -4,6 +4,17 @@ import { AccountService } from '../services/account.service';
 import { RegisterDTO } from '../models/registerDTO';
 import { RegisterOauthDTO } from '../models/registerOauthDTO';
 
+interface Nivel {
+  value: string;
+  viewValue: string;
+}
+
+interface Varsta {
+  value: number;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -29,11 +40,38 @@ export class RegisterComponent implements OnInit {
 
   selectedCard: number | null = null;
 
+  varsta: number;
+
+  numarDeTelefon: string;
+
+  nivele: Nivel[] = [
+    {value: 'incepator', viewValue: 'Începător'},
+    {value: 'mediu', viewValue: 'Mediu'},
+    {value: 'avansat', viewValue: 'Avavnsat'},
+  ];
+
+  varste: Varsta[] = [
+    {value: 7, viewValue: '7 ani'},
+    {value: 8, viewValue: '8 ani'},
+    {value: 9, viewValue: '9 ani'},
+    {value: 10, viewValue: '10 ani'},
+    {value: 11, viewValue: '11 ani'},
+    {value: 12, viewValue: '12 ani'},
+    {value: 13, viewValue: '13 ani'},
+    {value: 14, viewValue: '14 ani'},
+    {value: 15, viewValue: '15 ani'},
+    {value: 16, viewValue: '16 ani'},
+    {value: 17, viewValue: '17 ani'},
+    {value: 18, viewValue: '18 ani'},
+    {value: 19, viewValue: 'Mai mult de 18 ani'}
+  ];
+
   contNouStepperVisible: boolean = false;
   contNouStepperOauthVisible: boolean = false;
   numeSiPrenume: string;
   email: string;
   parola: string;
+  nivel: string;
   registerOauthDTO: RegisterOauthDTO = new RegisterOauthDTO();
 
   selectCard(cardNumber: number) {
@@ -93,10 +131,15 @@ export class RegisterComponent implements OnInit {
     registerDTO.displayName = this.numeSiPrenume;
     registerDTO.email = this.email;
     registerDTO.parola = this.parola;
-    registerDTO.locatieNumar = this.locatieSelectata;
-    this.accountService.registerCont(registerDTO).subscribe(() => {
-      window.location.reload();
-    })
+    registerDTO.nivel = this.nivel;
+    registerDTO.numarDeTelefon = this.numarDeTelefon;
+    registerDTO.varsta = this.varsta;
+    this.accountService.registerCont(registerDTO).subscribe(res => {
+      if(res["raspuns"] == "success")
+      {
+        
+      }
+    });
   }
 
   createGoogleOauthAccount(){

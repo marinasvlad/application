@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppIdentityContext))]
-    [Migration("20230923221315_Migrations")]
-    partial class Migrations
+    [Migration("20231001143207_INITMigration")]
+    partial class INITMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,6 +119,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int?>("NivelId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -126,6 +129,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NumarDeTelefon")
+                        .HasColumnType("text");
 
                     b.Property<int>("NumarSedinte")
                         .HasColumnType("integer");
@@ -148,6 +154,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
+
+                    b.Property<int?>("Varsta")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -211,6 +220,40 @@ namespace Infrastructure.Data.Migrations
                     b.HasIndex("LocatieId");
 
                     b.ToTable("Grupe");
+                });
+
+            modelBuilder.Entity("Core.Entities.Inscriere", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCerere")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nivel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NumarDeTelefon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Varsta")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Inscrieri");
                 });
 
             modelBuilder.Entity("Core.Entities.Locatie", b =>

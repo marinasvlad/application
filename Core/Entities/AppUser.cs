@@ -16,8 +16,15 @@ namespace Core.Entities
 
         public int? LocatieId { get; set; }
 
+        public int? NivelId { get; set; }
+
+        public int? Varsta { get; set; }
+
+        public string NumarDeTelefon { get; set; }
+
         public ICollection<Anunt> Anunturi { get; set; }
         
         public int NumarSedinte { get; set; }
+
     }
 }

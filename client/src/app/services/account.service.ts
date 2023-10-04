@@ -43,19 +43,9 @@ export class AccountService {
       {DisplayName: registerDto.displayName,
       Email: registerDto.email,
       Password: registerDto.parola,
-      LocatieNumar: registerDto.locatieNumar}).pipe(
-        map((response: IUser) => {
-          const user = response;
-          if(user)
-          {
-            const roles = this.getDecodedToken(user.token).role;
-            user.roles = [];
-            Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-            localStorage.setItem('userApplication', JSON.stringify(user));
-            this.currentUserSource.next(user);
-          }
-        })
-      );
+      NumarDeTelefon: registerDto.numarDeTelefon,
+      Nivel: registerDto.nivel,
+      Varsta: registerDto.varsta});
     }
 
   createOauthGoogleAccount(registerDto: RegisterOauthDTO){

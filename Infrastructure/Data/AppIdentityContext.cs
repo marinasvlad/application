@@ -26,6 +26,8 @@ namespace Infrastructure.Data
 
         public DbSet<Prezenta> Prezente { get; set; }
 
+        public DbSet<Inscriere> Inscrieri{ get; set;}
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 

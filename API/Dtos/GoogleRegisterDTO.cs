@@ -12,8 +12,12 @@ namespace API.Dtos
 
         public string Email { get; set; }
 
-        public int LocatieNumar { get; set; }
-
         public string Provider { get; set; }
+
+        public string NumarDeTelefon { get; set; }
+
+        public string Nivel { get; set; }
+        
+        public int Varsta { get; set; }        
     }
 }

@@ -78,10 +78,10 @@ namespace Infrastructure.Data
                     {
                         var userWaterPark = new AppUser{
                         DisplayName = "Member " + i + " WaterPark",
-                        Email = "memberwaterpark" + i + "@test.com",
-                        UserName = "memberwaterpark" + i + "@test.com",
+                        Email = "memberwp" + i + "@test.com",
+                        UserName = "memberwp" + i + "@test.com",
                         LocatieId = locatii[0].Id,
-                        NumarSedinte = 8
+                        NumarSedinte = 10
                         };
 
 
@@ -94,8 +94,8 @@ namespace Infrastructure.Data
                     {
                         var userWaterPark = new AppUser{
                         DisplayName = "Member " + i + " ImperialGarden",
-                        Email = "memberimperialgarden" + i + "@test.com",
-                        UserName = "memberimperialgarden" + i + "@test.com",
+                        Email = "memberig" + i + "@test.com",
+                        UserName = "memberig" + i + "@test.com",
                         LocatieId = locatii[1].Id,
                         NumarSedinte = 8                        
                         };
@@ -110,8 +110,8 @@ namespace Infrastructure.Data
                     {
                         var userWaterPark = new AppUser{
                         DisplayName = "Member " + i + " BaziunulCarol",
-                        Email = "memberbazinulcarol" + i + "@test.com",
-                        UserName = "memberbazinulcarol" + i + "@test.com",
+                        Email = "memberbc" + i + "@test.com",
+                        UserName = "memberbc" + i + "@test.com",
                         LocatieId = locatii[2].Id,
                         NumarSedinte = 8                        
                         };
