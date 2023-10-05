@@ -57,7 +57,7 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<AppIdentityContext>();
-    await context.Database.MigrateAsync();
+    //await context.Database.MigrateAsync();
     if(app.Environment.IsDevelopment())
     {
         var roleManager = services.GetRequiredService<RoleManager<AppRole>>();

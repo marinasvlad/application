@@ -52,63 +52,72 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailFromClaimsPrincipal(User);
 
-            return new UserDto
+            if (user != null)
             {
-                Email = user.Email,
-                Token = await _tokenService.CreateToken(user),
-                DisplayName = user.DisplayName
-            };
+                return new UserDto
+                {
+                    Email = user.Email,
+                    Token = await _tokenService.CreateToken(user),
+                    DisplayName = user.DisplayName
+                };
+            }
+            
+            return Ok();
         }
 
         [HttpGet("getgoogleloginurl")]
         public ActionResult<AuthUrlDTO> GetGoogleLoginUrl()
         {
             string url = _externalAuthService.GetGoogleLoginUrl();
-            var googleUrlDTO = new AuthUrlDTO{
+            var googleUrlDTO = new AuthUrlDTO
+            {
                 Url = url
             };
             return Ok(googleUrlDTO);
-        }   
+        }
 
         [HttpGet("getfacebookloginurl")]
         public ActionResult<AuthUrlDTO> GetFacebookLoginUrl()
         {
             string url = _externalAuthService.GetFacebookLoginUrl();
-            var facebookUrlDto = new AuthUrlDTO{
+            var facebookUrlDto = new AuthUrlDTO
+            {
                 Url = url
             };
             return Ok(facebookUrlDto);
-        }           
+        }
 
         [HttpGet("getgoogleregisterurl")]
         public ActionResult<AuthUrlDTO> GetGoogleRegisterUrl()
         {
             string url = _externalAuthService.GetGoogleRegisterUrl();
-            var googleUrlDTO = new AuthUrlDTO{
+            var googleUrlDTO = new AuthUrlDTO
+            {
                 Url = url
             };
             return Ok(googleUrlDTO);
-        }      
+        }
 
         [HttpGet("getfacebookregisterurl")]
         public ActionResult<AuthUrlDTO> GetFacebookRegisterUrl()
         {
             string url = _externalAuthService.GetFacebookRegisterUrl();
-            var googleUrlDTO = new AuthUrlDTO{
+            var googleUrlDTO = new AuthUrlDTO
+            {
                 Url = url
             };
             return Ok(googleUrlDTO);
-        }                
+        }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            if(loginDto.Email == null)
+            if (loginDto.Email == null)
             {
                 return BadRequest(new ApiResponse(400, "Nu ai completat adresa de email!"));
             }
 
-            if(loginDto.Password == null)
+            if (loginDto.Password == null)
             {
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola!"));
             }
@@ -137,11 +146,11 @@ namespace API.Controllers
 
             var user = await _userManager.FindByEmailAsync(payload.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new ApiResponse(400, "Userul nu a fost gasit"));
             }
-            
+
             return Ok(new UserDto
             {
                 Email = user.Email,
@@ -157,7 +166,7 @@ namespace API.Controllers
             var userObject = await _externalAuthService.GetFacebookPayloadAsync(facebookCodeDTO.code);
 
             var user = await _userManager.FindByEmailAsync(userObject.Item2);
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new ApiResponse(400, "Userul nu a fost gasit"));
             }
@@ -182,7 +191,7 @@ namespace API.Controllers
 
             string googleRegisterJsonString = JsonConvert.SerializeObject(googleRegisterDTO);
             return googleRegisterJsonString;
-        }        
+        }
 
         [HttpPost("getfacebookpayload")]
         public async Task<ActionResult<string>> GetFacebookPayload(AuthCodeDTO facebookAuthCodeDTO)
@@ -197,7 +206,7 @@ namespace API.Controllers
             facebookRegisterDTO.Provider = "Facebook";
             string facebookRegisterJsonString = JsonConvert.SerializeObject(facebookRegisterDTO);
             return facebookRegisterJsonString;
-        }        
+        }
 
         // [HttpPost("register")]
         // public async Task<ActionResult> Register(RegisterDto registerDto)
@@ -270,43 +279,44 @@ namespace API.Controllers
             }
 
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
-            if(contNume != null)
+            if (contNume != null)
             {
                 return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
 
             }
 
-            if(registerDto.Password == string.Empty || registerDto.Password == null)
+            if (registerDto.Password == string.Empty || registerDto.Password == null)
             {
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
 
-            if(registerDto.NumarDeTelefon.Count() != 10)
+            if (registerDto.NumarDeTelefon.Count() != 10)
             {
                 return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să aibă 10 cifre. Exemplu de număr de telefon: 0723121311."));
             }
 
-            foreach(char c in registerDto.NumarDeTelefon)
+            foreach (char c in registerDto.NumarDeTelefon)
             {
-                if(c < '0' || c > '9')
+                if (c < '0' || c > '9')
                 {
                     return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
                 }
             }
 
-            if(registerDto.Nivel != "incepator" && registerDto.Nivel != "mediu" && registerDto.Nivel != "avansat")
+            if (registerDto.Nivel != "incepator" && registerDto.Nivel != "mediu" && registerDto.Nivel != "avansat")
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
             }
 
 
-            if(registerDto.Varsta < 7 || registerDto.Varsta > 19)
+            if (registerDto.Varsta < 7 || registerDto.Varsta > 19)
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat vârsta."));
             }
 
-            var inscriere = new Inscriere{
+            var inscriere = new Inscriere
+            {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 Password = registerDto.Password,
@@ -322,7 +332,7 @@ namespace API.Controllers
 
             return Ok(raspuns);
 
-        }        
+        }
 
 
         [HttpPost("oauthregister")]
@@ -330,41 +340,42 @@ namespace API.Controllers
         {
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
-                return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont." ));
+                return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
             }
 
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
-            if(contNume != null)
+            if (contNume != null)
             {
-                return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența." ));
+                return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
             }
 
 
-            if(registerDto.NumarDeTelefon.Count() != 10)
+            if (registerDto.NumarDeTelefon.Count() != 10)
             {
                 return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să aibă 10 cifre. Exemplu de număr de telefon: 0723121311."));
             }
 
-            foreach(char c in registerDto.NumarDeTelefon)
+            foreach (char c in registerDto.NumarDeTelefon)
             {
-                if(c < '0' || c > '9')
+                if (c < '0' || c > '9')
                 {
                     return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
                 }
             }
 
-            if(registerDto.Nivel != "incepator" || registerDto.Nivel != "mediu" || registerDto.Nivel != "avansat")
+            if (registerDto.Nivel != "incepator" || registerDto.Nivel != "mediu" || registerDto.Nivel != "avansat")
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
             }
 
 
-            if(registerDto.Varsta < 7 || registerDto.Varsta > 19)
+            if (registerDto.Varsta < 7 || registerDto.Varsta > 19)
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat vârsta."));
             }
 
-            var inscriere = new Inscriere{
+            var inscriere = new Inscriere
+            {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
                 NumarDeTelefon = registerDto.NumarDeTelefon,
@@ -375,7 +386,7 @@ namespace API.Controllers
 
             await _inscrieriRepo.AdaugaInscriereAsync(inscriere);
 
-            return Ok("succes");        
+            return Ok("succes");
         }
 
         [HttpGet("emailexists")]

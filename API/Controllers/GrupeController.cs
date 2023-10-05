@@ -32,7 +32,8 @@ namespace API.Controllers
 
         [HttpGet("gettoategrupeleactive")]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<IReadOnlyList<GrupaDTO>>> GetToateGrupeleActive(){
+        public async Task<ActionResult<IReadOnlyList<GrupaDTO>>> GetToateGrupeleActive()
+        {
             var grupe = await _grupeRepo.GetToateGrupeleActive();
 
             return Ok(_mapper.Map<IReadOnlyList<GrupaDTO>>(grupe));
@@ -40,29 +41,36 @@ namespace API.Controllers
 
         [HttpGet("geturmatoareagrupaactiva")]
         [Authorize(Policy = "RequireMemberRole")]
-        public async Task<ActionResult<GrupaDTO>> GetUrmatoareaGrupaActiva(){
-            
+        public async Task<ActionResult<GrupaDTO>> GetUrmatoareaGrupaActiva()
+        {
+
             int userId = User.GetUserId();
 
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
             var grupa = await _grupeRepo.GetUrmatoareaGrupaActivaByLocatieId((int)user.LocatieId);
             var grupaDto = _mapper.Map<GrupaDTO>(grupa);
-            if(grupa.Elevi.Contains(user))
+
+            if (grupa != null)
             {
-                grupaDto.Particip = true;
+                if (grupa.Elevi.Contains(user))
+                {
+                    grupaDto.Particip = true;
+                }
+                else
+                {
+                    grupaDto.Particip = false;
+                }
             }
-            else
-            {
-                grupaDto.Particip = false;
-            }
+
             return Ok(grupaDto);
         }
 
         [HttpGet("particip/{grupaId}")]
         [Authorize(Policy = "RequireMemberRole")]
-        public async Task<ActionResult<bool>> Particip(int grupaId){
-            
+        public async Task<ActionResult<bool>> Particip(int grupaId)
+        {
+
             int userId = User.GetUserId();
 
             var user = await _userManager.FindByIdAsync(userId.ToString());
@@ -74,8 +82,9 @@ namespace API.Controllers
 
         [HttpGet("renunt/{grupaId}")]
         [Authorize(Policy = "RequireMemberRole")]
-        public async Task<ActionResult<bool>> Renunt(int grupaId){
-            
+        public async Task<ActionResult<bool>> Renunt(int grupaId)
+        {
+
             int userId = User.GetUserId();
 
             var user = await _userManager.FindByIdAsync(userId.ToString());
@@ -87,17 +96,19 @@ namespace API.Controllers
 
         [HttpPost("postgrupa")]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<bool>> PostGrupa(GrupaDTO grupaDto){
-            
+        public async Task<ActionResult<bool>> PostGrupa(GrupaDTO grupaDto)
+        {
+
             DateTime dataGrupa = DateTime.ParseExact(grupaDto.DataGrupa, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             DateTime oraGrupa = DateTime.ParseExact(grupaDto.OraGrupa, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             var locatie = await _locaiiRepo.GetLocatieByIdAsync(grupaDto.LocatieId);
-            Grupa grupa = new Grupa{
+            Grupa grupa = new Grupa
+            {
                 DataGrupa = dataGrupa,
                 OraGrupa = oraGrupa,
                 LocatieId = locatie.Id,
                 Locatie = locatie
-            };            
+            };
 
             return Ok(await _grupeRepo.AddNewGrupa(grupa));
         }
@@ -114,7 +125,7 @@ namespace API.Controllers
         public async Task<ActionResult<bool>> RenuntaLaConfirmare(int grupaId)
         {
             return Ok(await _grupeRepo.RenuntaLaConfirmare(grupaId));
-        }        
+        }
 
         [HttpDelete("deletegrupa/{grupaId}")]
         [Authorize(Policy = "RequireModeratorRole")]
@@ -129,19 +140,19 @@ namespace API.Controllers
         {
             var locatie = await _locaiiRepo.GetLocatieByIdAsync(grupaDTO.LocatieId);
             var grupa = await _grupeRepo.GetGrupaByIdAsync(grupaDTO.Id);
-            foreach(var elev in grupaDTO.Elevi)
+            foreach (var elev in grupaDTO.Elevi)
             {
-                if(elev.Prezent == true)
+                if (elev.Prezent == true)
                 {
-                var user = await _userManager.FindByIdAsync(elev.Id.ToString());
+                    var user = await _userManager.FindByIdAsync(elev.Id.ToString());
                     user.NumarSedinte--;
-                await _prezenteRepo.SetPrezentaByUserAndGrupa(user, grupa, locatie.NumeLocatie);
+                    await _prezenteRepo.SetPrezentaByUserAndGrupa(user, grupa, locatie.NumeLocatie);
                 }
             }
 
             bool efectuat = await _grupeRepo.EfectueazaGrupaAsync(grupa);
             return Ok(efectuat);
         }
-        
+
     }
 }
