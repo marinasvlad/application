@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/PRCynzxk++TGzVG+7jHK8Glp6PxhQGcChgDdrJCEcY=",
+  "Hash": "oM4DJHoV80RZpt4htwjaggoS+epJB5ycqR2Df9d0icQ=",
   "Source": "API",
   "BasePath": "_content/API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "API\\wwwroot",
       "Source": "API",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\3rdpartylicenses.txt",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\3rdpartylicenses.txt",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "3rdpartylicenses.txt",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\3rdpartylicenses.txt"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\appLogo.png",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\appLogo.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/appLogo.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\appLogo.png"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\bazin-carol.jpg",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\bazin-carol.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/bazin-carol.jpg",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\bazin-carol.jpg"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_focus_web.png",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\btn_google_signin_light_focus_web.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/btn_google_signin_light_focus_web.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\btn_google_signin_light_focus_web.png"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_normal_web.png",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\btn_google_signin_light_normal_web.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/btn_google_signin_light_normal_web.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\btn_google_signin_light_normal_web.png"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\btn_google_signin_light_pressed_web.png",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\btn_google_signin_light_pressed_web.png",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/btn_google_signin_light_pressed_web.png",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\btn_google_signin_light_pressed_web.png"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\imperial-garden.jpg",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\imperial-garden.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/imperial-garden.jpg",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\imperial-garden.jpg"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\assets\\water-park.jpg",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\assets\\water-park.jpg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "assets/water-park.jpg",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\assets\\water-park.jpg"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\favicon.ico",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\favicon.ico",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\fontawesome-webfont.1e59d2330b4c6deb84b3.ttf"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.20fd1704ea223900efa9.woff2",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\fontawesome-webfont.20fd1704ea223900efa9.woff2",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fontawesome-webfont.20fd1704ea223900efa9.woff2",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\fontawesome-webfont.20fd1704ea223900efa9.woff2"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.8b43027f47b20503057d.eot",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\fontawesome-webfont.8b43027f47b20503057d.eot",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fontawesome-webfont.8b43027f47b20503057d.eot",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\fontawesome-webfont.8b43027f47b20503057d.eot"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\fontawesome-webfont.f691f37e57f04c152e23.woff",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\fontawesome-webfont.f691f37e57f04c152e23.woff",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "fontawesome-webfont.f691f37e57f04c152e23.woff",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\fontawesome-webfont.f691f37e57f04c152e23.woff"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\index.html",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\main.3686c1c9b12a38755026.js",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\main.3686c1c9b12a38755026.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "main.3686c1c9b12a38755026.js",
       "AssetKind": "All",
@@ -289,10 +289,10 @@
       "OriginalItemSpec": "wwwroot\\main.3686c1c9b12a38755026.js"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\polyfills.87860c810a59379dbd9b.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "polyfills.87860c810a59379dbd9b.js",
       "AssetKind": "All",
@@ -306,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\polyfills.87860c810a59379dbd9b.js"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\runtime.4b1540bf51da5ef20c67.js",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\runtime.4b1540bf51da5ef20c67.js",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "runtime.4b1540bf51da5ef20c67.js",
       "AssetKind": "All",
@@ -323,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\runtime.4b1540bf51da5ef20c67.js"
     },
     {
-      "Identity": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\styles.2c20f5e6619c9d00a6bc.css",
+      "Identity": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\styles.2c20f5e6619c9d00a6bc.css",
       "SourceId": "API",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Vlad\\Projects\\Application\\API\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Vlad\\Projects\\application\\API\\wwwroot\\",
       "BasePath": "_content/API",
       "RelativePath": "styles.2c20f5e6619c9d00a6bc.css",
       "AssetKind": "All",

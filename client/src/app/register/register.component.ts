@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Self } from '@angular/core';
 import {  FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { RegisterDTO } from '../models/registerDTO';
@@ -22,6 +22,8 @@ interface Varsta {
 })
 export class RegisterComponent implements OnInit {
   @Input() oauthAccount: string;
+  @Output() confirmation = new EventEmitter<string>();
+
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -31,6 +33,7 @@ export class RegisterComponent implements OnInit {
   thirdFormGroup = this._formBuilder.group({
     thirdCtrl: ['', Validators.required],
   });
+
   imgWidthVariable: string;
 
   googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
@@ -137,7 +140,7 @@ export class RegisterComponent implements OnInit {
     this.accountService.registerCont(registerDTO).subscribe(res => {
       if(res["raspuns"] == "success")
       {
-        
+        this.confirmation.emit("success");
       }
     });
   }

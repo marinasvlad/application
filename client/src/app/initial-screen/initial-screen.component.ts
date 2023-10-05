@@ -14,6 +14,7 @@ import { Location } from '@angular/common';
 })
 export class InitialScreenComponent implements OnInit {
   baseUrl = environment.apiUrl;
+  confirmareCerere: string = '';
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private location: Location) { }
 
@@ -22,6 +23,9 @@ export class InitialScreenComponent implements OnInit {
   registerGoogleVisible:boolean = false;
   initialButtonsVisible:boolean = true;
   oauthAccount: string = '';
+  confirmareAlert: boolean = false;
+
+
   private currentUserSource = new ReplaySubject<IUser>(1);
 
   ngOnInit(): void {
@@ -43,6 +47,18 @@ export class InitialScreenComponent implements OnInit {
   registerClick(){
     this.registerVisible = true;
     this.initialButtonsVisible = false;
+  }
+
+  handleValueFromChild(value: string) {
+    this.confirmareCerere = value;
+    if(this.confirmareCerere == 'success')
+    {
+      this.signInVisible = false;
+      this.registerVisible = false;
+      this.initialButtonsVisible = true;
+      this.registerGoogleVisible = false;
+      this.confirmareAlert = true;
+    }
   }
 
 
