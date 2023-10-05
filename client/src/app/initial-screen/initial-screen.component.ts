@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { ReplaySubject } from 'rxjs';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-initial-screen',
@@ -16,7 +17,7 @@ export class InitialScreenComponent implements OnInit {
   baseUrl = environment.apiUrl;
   confirmareCerere: string = '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private location: Location) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private location: Location, private _snackBar: MatSnackBar) { }
 
   signInVisible:boolean = false;
   registerVisible:boolean = false;
@@ -58,7 +59,12 @@ export class InitialScreenComponent implements OnInit {
       this.initialButtonsVisible = true;
       this.registerGoogleVisible = false;
       this.confirmareAlert = true;
+      this.openSnackBar("Cerere înregistrată", "Ok");
     }
+  }
+
+  openSnackBar(mesaj: string, actiune: string) {
+    this._snackBar.open(mesaj, actiune)
   }
 
 

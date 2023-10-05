@@ -43,6 +43,7 @@ import { DatePipe } from '@angular/common';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatBadgeModule} from '@angular/material/badge'; 
 import { AlertModule } from 'ngx-bootstrap/alert';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     MatSidenavModule,
     MatBadgeModule,
     MatInputModule,
+    MatSnackBarModule,
     MatStepperModule,
     MatDatepickerModule,
     AlertModule.forRoot(),
