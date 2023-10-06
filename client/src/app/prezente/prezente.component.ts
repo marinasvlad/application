@@ -6,13 +6,15 @@ import { AnuntService } from '../services/anunt.service';
 import { PrezenteService } from '../services/prezente.service';
 
 @Component({
-  selector: 'app-elevi',
-  templateUrl: './elevi.component.html',
-  styleUrls: ['./elevi.component.scss', '../shared/style.scss']
+  selector: 'app-prezente',
+  templateUrl: './prezente.component.html',
+  styleUrls: ['./prezente.component.scss' , '../shared/style.scss']
 })
-export class EleviComponent implements OnInit {
+export class PrezenteComponent implements OnInit {
   user: IUser;
   prezente: Prezenta[];
+  locatieId:number = 4;
+
   constructor(private anuntService: AnuntService, private datePipe: DatePipe, private prezenteService: PrezenteService) { }
 
   ngOnInit(): void {
@@ -45,5 +47,4 @@ export class EleviComponent implements OnInit {
       this.prezente = res;
     });
   }
-
 }

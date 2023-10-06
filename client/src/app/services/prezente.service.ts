@@ -10,7 +10,7 @@ import { AccountService } from './account.service';
 @Injectable({
   providedIn: 'root'
 })
-export class EleviService {
+export class PrezenteService {
   baseUrl = environment.apiUrl;
   user: IUser;
   private datePipe: DatePipe = new DatePipe('en-US');
@@ -26,8 +26,8 @@ export class EleviService {
 
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer ' + this.user.token);
-
-    return this.http.get<Prezenta[]>(this.baseUrl + 'elevi/getprezentetotielevii', { headers }).pipe(
+    return this.http.get<Prezenta[]>(this.baseUrl + 'prezente/getprezentetotielevii', { headers })
+    .pipe(
       map(response => {
         let prezente: Prezenta[] = [];
         response.forEach(element => {
@@ -41,7 +41,6 @@ export class EleviService {
           prezenta.stop =   new Date(this.datePipe.transform(element["stop"], "YYYY-MM-dd HH:mm"));
           prezente.push(prezenta);
         });
-
         return prezente;
       })
     );
@@ -56,7 +55,7 @@ export class EleviService {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer ' + this.user.token);
 
-    return this.http.get<Prezenta[]>(this.baseUrl + 'elevi/getprezenteformember', { headers }).pipe(
+    return this.http.get<Prezenta[]>(this.baseUrl + 'prezente/getprezenteformember', { headers }).pipe(
       map(response => {
         let prezente: Prezenta[] = [];
         response.forEach(element => {

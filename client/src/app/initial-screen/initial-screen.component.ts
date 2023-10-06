@@ -59,7 +59,7 @@ export class InitialScreenComponent implements OnInit {
       this.initialButtonsVisible = true;
       this.registerGoogleVisible = false;
       this.confirmareAlert = true;
-      this.openSnackBar("Cerere înregistrată", "Ok");
+      this.openSnackBar("Cerere înregistrată. Vei primi un email de activare a contului", "Ok");
     }
   }
 

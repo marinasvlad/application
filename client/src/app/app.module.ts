@@ -44,6 +44,9 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {MatBadgeModule} from '@angular/material/badge'; 
 import { AlertModule } from 'ngx-bootstrap/alert';
 import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+import { ManagementComponent } from './management/management.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PrezenteComponent } from './prezente/prezente.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HasRoleDirective,
     ContactComponent,
     RegisterComponent,
-    InitialScreenComponent
+    InitialScreenComponent,
+    ManagementComponent,
+    PrezenteComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSidenavModule,
     MatBadgeModule,
     MatInputModule,
+    MatTabsModule,
     MatSnackBarModule,
     MatStepperModule,
     MatDatepickerModule,
