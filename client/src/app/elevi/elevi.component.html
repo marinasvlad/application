@@ -16,7 +16,7 @@
            [formControl]="myControl"
            [matAutocomplete]="auto">
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let elev of filteredOptions | async" [value]="elev.displayName" (click)="getElevById(elev.id)">
+      <mat-option (onSelectionChange)="getElevById(elev.id)" *ngFor="let elev of filteredOptions | async" [value]="elev.displayName" (click)="getElevById(elev.id)">
         {{elev.displayName}}
       </mat-option>
     </mat-autocomplete>
@@ -35,6 +35,7 @@
           <th scope="col">Telefon</th>
           <th scope="col">Locație</th>
           <th scope="col">Nivel</th>
+          <th scope="col">Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -48,7 +49,25 @@
           <td *ngIf="elev.locatieId == '3'" >Bazinul Carol</td>
           <td *ngIf="elev.nivelId == 1" >Începător</td>
           <td *ngIf="elev.nivelId == 2" >Intermediar</td>
-          <td *ngIf="elev.nivelId == 3" >Avansat</td>                    
+          <td *ngIf="elev.nivelId == 3" >Avansat</td>
+          <td> <button mat-raised-button (click)="openModalEditElev(i,elevModal)" >Edit elev</button></td>                    
       </tbody>
     </table>  
 </div>
+
+
+<ng-template #elevModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Detalii elev</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="font-PE" >Editează elevul <strong>{{elevToBeEdited.displayName}}</strong></p>
+
+
+    <button mat-button (click)="modalRef?.hide()">Închide</button>
+    <button mat-button cdkFocusInitial (click)="editElev(elevToBeEdited)">Edit</button>
+  </div>
+</ng-template>

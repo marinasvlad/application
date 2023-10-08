@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Prezenta } from '../models/prezenta';
 import { IUser } from '../models/user';
 import { AnuntService } from '../services/anunt.service';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Elev } from '../models/elev';
 import { map, startWith, take } from 'rxjs/operators';
 import { AccountService } from '../services/account.service';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-elevi',
@@ -21,8 +22,11 @@ export class EleviComponent implements OnInit {
   filteredOptions: Observable<Elev[]>;
   elevi: Elev[] = [];
   eleviInDrop: Elev[] =  [];
+  modalRef?: BsModalRef;
+  indexElevToEdit: number;
+  elevToBeEdited: Elev;
 
-  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private accountService: AccountService) { }
+  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private accountService: AccountService,private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -48,6 +52,7 @@ export class EleviComponent implements OnInit {
     this.elevi = [];
     this.accountService.getAllElevi(this.user.token).subscribe(res => {
       this.elevi = res;
+      console.log(this.elevi);
     })
   }
 
@@ -68,4 +73,14 @@ export class EleviComponent implements OnInit {
       this.elevi.push(res);
     });
   }
+
+  editElev(elevToBeEdited: Elev)
+  {
+
+  }
+
+  openModalEditElev(indexElevToEdit: number, template: TemplateRef<any>) {
+    this.elevToBeEdited = this.elevi[indexElevToEdit];
+    this.modalRef = this.modalService.show(template);
+  }  
 }
