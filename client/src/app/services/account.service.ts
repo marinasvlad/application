@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { AuthUrlDTO } from '../dtos/AuthUrlDTO';
 import { RegisterDTO } from '../models/registerDTO';
 import { RegisterOauthDTO } from '../models/registerOauthDTO';
+import { Elev } from '../models/elev';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,24 @@ export class AccountService {
     );
   } 
 
+  getElevById(elevId: number, bearer: string)
+  {
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + bearer);    
+    return this.http.get(this.baseUrl + 'elevi/getelevbyid/' + elevId, {headers}).pipe(
+      map((response: Elev) => {
+        let elev: Elev = new Elev();
+        elev.id = response.id;
+        elev.displayName = response.displayName;
+        elev.email = response.email;
+        elev.numarDeTelefon = response.numarDeTelefon,
+        elev.locatieId = response.locatieId,
+        elev.nivelId = response.nivelId;
+        return elev;
+      })
+    );
+  }
+
   createOauthFacebookAccount(registerDto: RegisterOauthDTO){
     return this.http.post<any>(this.baseUrl + 'account/oauthregister',
     {DisplayName: registerDto.displayName,
@@ -84,7 +103,35 @@ export class AccountService {
         }
       })
     );
-  }   
+  }
+
+  getAllElevi(bearer: string){
+    let userR: IUser;
+    this.currentUser$.pipe(take(1)).subscribe(user => {
+      userR = user;
+    });
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + bearer);
+    return this.http.get<Elev[]>(this.baseUrl + 'account/getallelevi', {headers}).pipe(
+      map(response => {
+        let elevi: Elev[] = [];
+
+        response.forEach(elv => {
+          let e: Elev = new Elev;
+          e.id = elv.id;
+          e.displayName = elv.displayName;
+          e.email = elv.email;
+          e.numarDeTelefon = elv.numarDeTelefon,
+          e.locatieId = elv.locatieId,
+          e.nivelId = elv.nivelId;
+          elevi.push(e);
+        });
+
+        return elevi;
+      })
+    );
+
+  }
 
   getGoogleLoginUrl()
   {

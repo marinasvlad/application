@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Dtos;
 using API.Errors;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -17,8 +19,10 @@ namespace API.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILocatiiRepository _locatiiRepo;
-        public InscrieriController(IInscrieriRepository inscrieriRepo, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILocatiiRepository locatiiRepo)
+        private readonly IMapper _mapper;
+        public InscrieriController(IInscrieriRepository inscrieriRepo, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILocatiiRepository locatiiRepo, IMapper mapper)
         {
+            _mapper = mapper;
             _locatiiRepo = locatiiRepo;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -29,9 +33,9 @@ namespace API.Controllers
         [Authorize(Policy = "RequireModeratorRole")]
         public async Task<ActionResult<IReadOnlyList<Inscriere>>> GetInscrieri()
         {
-            var invoiri = await _inscrieriRepo.GetInscrieriAsync();
+            var inscrieri = await _inscrieriRepo.GetInscrieriAsync();
 
-            return Ok(invoiri);
+            return Ok(_mapper.Map<IReadOnlyList<InscriereDto>>(inscrieri));
         }
 
         [HttpGet("acceptainscriere/{inscriereId}/{locatieId}")]
@@ -42,8 +46,17 @@ namespace API.Controllers
 
             var inscriere = await _inscrieriRepo.GetInscriereByIdAsync(inscriereId);
 
+            if(inscriere == null)
+            {
+                return BadRequest(new ApiResponse(400, "Înscrierea nu a reușit."));
+            }
 
             var locatie = await _locatiiRepo.GetLocatieByIdAsync(locatieId);
+
+            if(locatie == null)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat locația!"));
+            }
 
             int nivelId = 0;
 
@@ -51,13 +64,18 @@ namespace API.Controllers
             {
                 nivelId = 1;
             }
-            else if (inscriere.Nivel == "mediu")
+            else if (inscriere.Nivel == "intermediar")
             {
                 nivelId = 2;
             }
             else if (inscriere.Nivel == "avansat")
             {
                 nivelId = 3;
+            }
+
+            if(nivelId == 0)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul!"));
             }
 
             var user = new AppUser
@@ -98,7 +116,9 @@ namespace API.Controllers
 
             await _locatiiRepo.AddNewUserToLocatieAsync(user);
 
-            return Ok();      
+            await _inscrieriRepo.StergeInscriereById(inscriereId);
+
+            return Ok();
         }
 
 
@@ -109,6 +129,5 @@ namespace API.Controllers
             await _inscrieriRepo.StergeInscriereById(inscriereId);
             return Ok();
         }
-
     }
 }

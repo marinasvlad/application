@@ -7,11 +7,16 @@ import { IUser } from '../models/user';
 import { AnuntService } from '../services/anunt.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale, roLocale } from 'ngx-bootstrap/chronos';
-
-
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Elev } from '../models/elev';
 
 interface Locatie {
   value: number;
+  viewValue: string;
+}
+
+interface Nivel {
+  value: string;
   viewValue: string;
 }
 
@@ -22,13 +27,20 @@ interface Locatie {
 })
 export class GrupeComponent implements OnInit {
   user: IUser;
-  locatieIdInDrop: number = 0; 
+  locatieIdInDrop: number = 0;
   modalRef?: BsModalRef;
   dataSelectata: Date;
   bsInlineValue: Date;
+  bsInlineValueSplit: Date;
+
   oraGrupa: Date;
 
   grupaEfectuare: Grupa;
+  grupaInitiala: Grupa;
+  grupaToSplit: Grupa;
+
+  dataGrupaSplit: Date;
+  oraGrupaSplit: Date;
 
   imgWidthVariable: string;
 
@@ -37,140 +49,185 @@ export class GrupeComponent implements OnInit {
   urmatoareaGrupaActiva: Grupa = undefined;
 
   locatiiDropInModal: Locatie[] = [
-    {value: 1, viewValue: 'Waterpark'},
-    {value: 2, viewValue: 'Imperial Garden'},
-    {value: 3, viewValue: 'Bazinul Carol'}
-    ];
+    { value: 1, viewValue: 'Water Park' },
+    { value: 2, viewValue: 'Imperial Garden' },
+    { value: 3, viewValue: 'Bazinul Carol' }
+  ];
 
-  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService, localeService: BsLocaleService) { 
+  nivel: string = '';
+  nivele: Nivel[] = [
+    { value: 'incepator', viewValue: 'Începător' },
+    { value: 'intermediar', viewValue: 'Intermediar' },
+    { value: 'avansat', viewValue: 'Avavnsat' },
+  ];
+
+  constructor(private modalService: BsModalService, private datePipe: DatePipe, private grupeService: GrupeService, private anuntService: AnuntService, localeService: BsLocaleService) {
     defineLocale('ro', roLocale);
     localeService.use('ro');
     this.calculateImageClass();
-    window.addEventListener('resize', () => this.calculateImageClass());    
+    window.addEventListener('resize', () => this.calculateImageClass());
   }
 
   calculateImageClass() {
-    if(window.innerWidth <= 420){
+    if (window.innerWidth <= 420) {
       this.imgWidthVariable = 'mat-card-sm-image';
     }
-    else if(window.innerWidth >= 520 && window.innerWidth <= 600)
-    {
+    else if (window.innerWidth >= 520 && window.innerWidth <= 600) {
       this.imgWidthVariable = 'mat-card-lg-image';
     }
-    else if(window.innerWidth >= 600)
-    {
+    else if (window.innerWidth >= 600) {
       this.imgWidthVariable = 'mat-card-xl-image';
     }
   }
 
-  
+
 
   ngOnInit(): void {
-   this.getUser();
-   
-   if(this.user.roles.includes("Moderator") || this.user.roles.includes("Admin"))
-   {
-    this.getToateGrupeleActive();
-   }
-   else if(this.user.roles.includes("Member"))
-   {
-    this.getUrmatoareaGrupaActiva();
-   }
+    this.getUser();
+
+    if (this.user.roles.includes("Moderator") || this.user.roles.includes("Admin")) {
+      this.getToateGrupeleActive();
+    }
+    else if (this.user.roles.includes("Member")) {
+      this.getUrmatoareaGrupaActiva();
+    }
   }
 
-  getUrmatoareaGrupaActiva(){
+  drop(event: CdkDragDrop<Elev[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }  
+
+  getUrmatoareaGrupaActiva() {
     this.grupeService.getUrmatoareaGrupaActiva().subscribe(res => {
       this.urmatoareaGrupaActiva = res;
     });
   }
 
-  efectueazaGrupa(grupaActiva: Grupa, template: TemplateRef<any>)
-  {
+  efectueazaGrupa(grupaActiva: Grupa, template: TemplateRef<any>) {
     this.grupaEfectuare = grupaActiva;
     this.modalRef = this.modalService.show(template);
   }
 
-  particip(grupaId: number){
+
+  splitGrupaModal(grupaActiva: Grupa, template: TemplateRef<any>, indexGrupaInitiala: number) {
+    //this.grupaEfectuare = grupaActiva;
+    this.dataGrupaSplit = this.grupeActive[indexGrupaInitiala].dataGrupa;
+    this.oraGrupaSplit = this.grupeActive[indexGrupaInitiala].oraGrupa;
+    this.bsInlineValueSplit = this.grupeActive[indexGrupaInitiala].dataGrupa;
+    this.grupaToSplit = new Grupa();
+    this.grupaInitiala = this.grupeActive[indexGrupaInitiala];
+    this.modalRef = this.modalService.show(template);
+  }  
+
+  particip(grupaId: number) {
     this.grupeService.particip(grupaId).subscribe(() => {
       this.getUrmatoareaGrupaActiva();
     });
   }
 
-  renunt(grupaId: number)
-  {
+  renunt(grupaId: number) {
     this.grupeService.renunt(grupaId).subscribe(() => {
       this.getUrmatoareaGrupaActiva();
     });
   }
 
-  getToateGrupeleActive(){
+  getToateGrupeleActive() {
     this.grupeService.getToateGrupeleActive().subscribe(res => {
       this.grupeActive = res;
     });
   }
 
-  getUser(){
+  getUser() {
     this.user = this.anuntService.getCurrentUser();
   }
-  
-  confirmaGrupa(grupaId: number)
-  {
+
+  confirmaGrupa(grupaId: number) {
     this.grupeService.confirmaGrupa(grupaId).subscribe(() => {
       this.getToateGrupeleActive();
     });
   }
 
-  elevPrezent(indexElevPrezent: number)
-  {
+  elevPrezent(indexElevPrezent: number) {
     this.grupaEfectuare.elevi[indexElevPrezent].prezent = !this.grupaEfectuare.elevi[indexElevPrezent].prezent;
-  }  
+  }
 
-  
-  renuntaLaConfirmare(grupaId: number)
-  {
+  closeModalSplitGrupa(){
+    this.grupeService.getToateGrupeleActive().subscribe(res => {
+      this.grupeActive = res;
+      this.modalRef?.hide();
+    });
+  }
+
+
+  split(){
+    this.grupaToSplit.dataGrupa = this.dataGrupaSplit;
+    this.grupaToSplit.oraGrupa = this.oraGrupaSplit;
+    this.grupeService.splitGrupa(this.grupaInitiala, this.grupaToSplit).subscribe(() => {
+      this.modalRef?.hide();
+      this.getToateGrupeleActive();
+    });
+  }
+
+  renuntaLaConfirmare(grupaId: number) {
     this.grupeService.renuntaLaConfirmare(grupaId).subscribe(() => {
       this.getToateGrupeleActive();
     });
-  }  
+  }
 
-  openModal(template: TemplateRef<any>){
+  openModal(template: TemplateRef<any>) {
     this.locatieIdInDrop = 0;
     this.dataSelectata = undefined;
     this.oraGrupa = undefined;
     this.modalRef = this.modalService.show(template);
   }
 
-  changeLocatieDrop(locatie: Locatie){
+  changeLocatieDrop(locatie: Locatie) {
     this.locatieIdInDrop = locatie.value;
   }
 
-  changedate(event: any)
-  {
+  changedate(event: any) {
     this.dataSelectata = event;
     this.oraGrupa = event;
     this.oraGrupa.setMinutes(0);
     this.oraGrupa.setHours(0);
+  }
+
+  changedateSplit(event: any) {
+    this.dataGrupaSplit = event;
+    this.oraGrupaSplit = event;
+    this.oraGrupaSplit.setMinutes(0);
+    this.oraGrupaSplit.setHours(0);
   }  
 
-  postGrupa(){
+  postGrupa() {
     let grupa = new Grupa();
     grupa.dataGrupa = this.dataSelectata;
     grupa.oraGrupa = this.oraGrupa;
     grupa.locatieId = this.locatieIdInDrop;
-    this.grupeService.postGrupa(grupa).subscribe(() =>{
+    grupa.nivel = this.nivel;
+    this.grupeService.postGrupa(grupa).subscribe(() => {
       this.modalRef?.hide();
       this.getToateGrupeleActive();
     });
   }
 
-  efectueazaGrupaCuPrezente(){
+  efectueazaGrupaCuPrezente() {
     this.grupeService.efectueazaGrupa(this.grupaEfectuare).subscribe(() => {
       this.modalRef?.hide();
       this.getToateGrupeleActive();
     });
-  }  
+  }
 
-  deleteGrupa(grupaId: number){
+  deleteGrupa(grupaId: number) {
     this.grupeService.deleteGrupa(grupaId).subscribe(() => {
       this.getToateGrupeleActive();
     });

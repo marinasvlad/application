@@ -4,9 +4,11 @@
   <p *appHasRole='["Moderator"]' class="font-PE">Aici se organizează grupele. Mai jos o sa fie afișate grupele
     disponibile, data și ora când se țin
     și posibilitatea de a participa la ele.</p>
-  <p *appHasRole='["Member"]' class="font-PE">Ca să participi la o grupă trebuie să dai click pe butonul <strong style="color: #3F51B5" >ALBASTRU</strong> <mat-icon>person_add</mat-icon> la
+  <p *appHasRole='["Member"]' class="font-PE">Ca să participi la o grupă trebuie să dai click pe butonul <strong
+      style="color: #3F51B5">ALBASTRU</strong> <mat-icon>person_add</mat-icon> la
     grupa respectivă. Dacă dorești să nu
-    mai participi, trebuie să apeși pe butonul <strong style="color: #F44336" >ROȘU</strong> <mat-icon>cancel</mat-icon>.</p>
+    mai participi, trebuie să apeși pe butonul <strong style="color: #F44336">ROȘU</strong> <mat-icon>cancel</mat-icon>.
+  </p>
 
   <div *appHasRole='["Moderator"]' class="row">
     <div class="col sm-6">
@@ -26,7 +28,7 @@
   <br>
 
   <div *appHasRole='["Moderator"]'>
-    <div *ngFor="let grupaActiva of grupeActive">
+    <div *ngFor="let grupaActiva of grupeActive; let i = index;">
       <mat-card class="card-class">
         <mat-card-title-group>
           <mat-card-title *ngIf="grupaActiva.locatieId == 1" class="font-PE"><strong>Water Park</strong>
@@ -42,7 +44,7 @@
           <img class="img-class" *ngIf="grupaActiva.locatieId == 3" [ngClass]="imgWidthVariable"
             src="../../assets/bazin-carol.jpg">
         </mat-card-title-group>
-        
+
         <mat-card-content>
 
           <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
@@ -54,14 +56,14 @@
           <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
             <mat-icon> location_on</mat-icon> Strada Bibescu 30, Craiova
           </p>
-          <p class="font-PE" *ngIf="grupaActiva.locatieId == 1">
-            <mat-icon>stars</mat-icon> începători/ intermediari/ avansați
-          </p>
-          <p class="font-PE" *ngIf="grupaActiva.locatieId == 2">
+          <p class="font-PE" *ngIf="grupaActiva.nivelId == 1">
             <mat-icon>stars</mat-icon> începători
           </p>
-          <p class="font-PE" *ngIf="grupaActiva.locatieId == 3">
-            <mat-icon>stars</mat-icon> intermediari/avansați
+          <p class="font-PE" *ngIf="grupaActiva.nivelId == 2">
+            <mat-icon>stars</mat-icon> intermediari
+          </p>
+          <p class="font-PE" *ngIf="grupaActiva.nivelId == 3">
+            <mat-icon>stars</mat-icon>avansați
           </p>
           <p class="font-PE">
             <mat-icon>calendar_today</mat-icon> {{grupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}
@@ -72,17 +74,23 @@
           <p class="font-PE">
             <mat-icon matBadge="{{grupaActiva.elevi.length}}" matBadgeColor="primary">person</mat-icon>
           </p>
-
+          <button *ngIf="grupaActiva.elevi.length > 0" mat-raised-button  (click)="splitGrupaModal(grupaActiva, splitGrupa, i)" >
+            <mat-icon>call_split</mat-icon>
+            Split grupă
+          </button>
+          <br>
+          <br>
           <button *ngIf="grupaActiva.confirmata == false" mat-raised-button (click)="confirmaGrupa(grupaActiva.id)">
             <mat-icon>done</mat-icon>
             Confirmă grupa
-          </button>          
-          <button *ngIf="grupaActiva.confirmata == true" mat-raised-button (click)="renuntaLaConfirmare(grupaActiva.id)">
+          </button>
+          <button *ngIf="grupaActiva.confirmata == true" mat-raised-button
+            (click)="renuntaLaConfirmare(grupaActiva.id)">
             <mat-icon>cancel_presentation</mat-icon>
             Renunță la confirmare
-          </button>          
+          </button>
           <br>
-          <br>      
+          <br>
           <button mat-raised-button (click)="deleteGrupa(grupaActiva.id)">
             <mat-icon>delete</mat-icon>
             Șterge grupă
@@ -123,7 +131,7 @@
           <mat-card-title *ngIf="urmatoareaGrupaActiva.locatieId == 3" class="font-PE"><strong>Bazinul Carol</strong>
           </mat-card-title>
           <img *ngIf="urmatoareaGrupaActiva.locatieId == 3" [ngClass]="imgWidthVariable" class="img-class"
-            mat-card-sm-image src="../../assets/bazin-carol.jpg">                     
+            mat-card-sm-image src="../../assets/bazin-carol.jpg">
         </mat-card-title-group>
         <mat-card-content>
           <br>
@@ -132,7 +140,7 @@
           </alert>
           <alert *ngIf="urmatoareaGrupaActiva.confirmata == true" type="success">
             Această grupă a fost confirmată și va avea loc!
-          </alert>            
+          </alert>
           <p class="font-PE" *ngIf="urmatoareaGrupaActiva.locatieId == 1">
             <mat-icon> location_on</mat-icon> Strada Banul Stepan 2A, Craiova
           </p>
@@ -142,14 +150,14 @@
           <p class="font-PE" *ngIf="urmatoareaGrupaActiva.locatieId == 3">
             <mat-icon> location_on</mat-icon> Strada Bibescu 30, Craiova
           </p>
-          <p class="font-PE" *ngIf="urmatoareaGrupaActiva.locatieId == 1">
-            <mat-icon>stars</mat-icon> începători/intermediari/avansați
+          <p class="font-PE" *ngIf="urmatoareaGrupaActiva.nivelId == 1">
+            <mat-icon>stars</mat-icon>începători
           </p>
           <p class="font-PE" *ngIf="urmatoareaGrupaActiva.locatieId == 2">
-            <mat-icon>stars</mat-icon> începători
+            <mat-icon>stars</mat-icon>intermediari
           </p>
           <p class="font-PE" *ngIf="urmatoareaGrupaActiva.locatieId == 3">
-            <mat-icon>stars</mat-icon> intermediari/avansați
+            <mat-icon>stars</mat-icon>avansați
           </p>
           <p class="font-PE">
             <mat-icon>calendar_today</mat-icon> {{urmatoareaGrupaActiva.dataGrupa | date: 'dd.MM.yyyy'}}
@@ -191,10 +199,21 @@
         </mat-select>
       </mat-form-field>
       <br>
-      <label *ngIf="locatieIdInDrop != 0">Selectează <strong>data</strong> grupei</label>
+      <br>
+      <mat-form-field *ngIf="locatieIdInDrop != 0">
+        <mat-label>Alege nivelul</mat-label>
+        <mat-select [(ngModel)]="nivel" name="nivel">
+          <mat-option *ngFor="let niv of nivele" [value]="niv.value">
+            {{niv.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
       <br>
       <br>
-      <div *ngIf="locatieIdInDrop != 0" class="pr-3 pb-3 pe-3 w-auto">
+      <label *ngIf="nivel != ''">Selectează <strong>data</strong> grupei</label>
+      <br>
+      <br>
+      <div *ngIf="nivel != ''" class="pr-3 pb-3 pe-3 w-auto">
         <bs-datepicker-inline (bsValueChange)="changedate($event)" [bsValue]="bsInlineValue"></bs-datepicker-inline>
       </div>
       <p *ngIf="dataSelectata != undefined">Data selectată este <strong>{{dataSelectata | date: 'dd.MM.yyyy'}}</strong>
@@ -226,25 +245,78 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let elev of grupaEfectuare.elevi; let i = index" >
+          <tr *ngFor="let elev of grupaEfectuare.elevi; let i = index">
             <td scope="row">{{i + 1}}</td>
             <td>{{elev.displayName}}</td>
             <td>
               <button *ngIf="grupaEfectuare.elevi[i].prezent == true" mat-raised-button (click)="elevPrezent(i)">
-                <mat-icon >check_box</mat-icon>
+                <mat-icon>check_box</mat-icon>
                 Prezent
               </button>
               <button *ngIf="grupaEfectuare.elevi[i].prezent == false" mat-raised-button (click)="elevPrezent(i)">
                 <mat-icon>check_box_outline_blank</mat-icon>
-                Absent
-              </button>              
+                Prezent
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-      
+
       <button mat-button (click)="modalRef?.hide()">Închide</button>
       <button mat-button cdkFocusInitial (click)="efectueazaGrupaCuPrezente()">Efectuează</button>
     </div>
 
+  </ng-template>
+
+
+  <ng-template #splitGrupa>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Split grupă</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModalSplitGrupa()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div cdkDropListGroup>
+        <div class="example-container">
+          <h2>Grupa inițială</h2>
+      
+          <div
+            cdkDropList
+            [cdkDropListData]="grupaInitiala.elevi"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let elev1 of grupaInitiala.elevi" cdkDrag>{{elev1.displayName}}</div>
+          </div>
+        </div>
+      
+        <div class="example-container">
+          <h2>Grupa split</h2>
+      
+          <div
+            cdkDropList
+            [cdkDropListData]="grupaToSplit.elevi"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let elev2 of grupaToSplit.elevi" cdkDrag>{{elev2.displayName}}</div>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <div class="pr-3 pb-3 pe-3 w-auto">
+        <bs-datepicker-inline (bsValueChange)="changedateSplit($event)" [bsValue]="bsInlineValueSplit"></bs-datepicker-inline>
+      </div>
+      <p>Data selectată este <strong>{{dataGrupaSplit | date: 'dd.MM.yyyy'}}</strong>
+      </p>
+      <label>Selectează <strong>ora</strong> grupei split</label>
+      <timepicker [(ngModel)]="oraGrupaSplit" [showMeridian]="false"></timepicker>
+      <br>
+      
+      <button mat-button (click)="closeModalSplitGrupa()">Închide</button>
+      <button mat-button cdkFocusInitial (click)="split()">Split</button>
+    </div>
   </ng-template>

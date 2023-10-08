@@ -38,6 +38,7 @@ export class GrupeService {
           grupa.dataGrupa = new Date(this.datePipe.transform(element["dataGrupa"], "YYYY-MM-dd HH:mm"));
           grupa.oraGrupa = new Date(this.datePipe.transform(element["oraGrupa"], "YYYY-MM-dd HH:mm"));
           grupa.confirmata = element["confirmata"];
+          grupa.nivelId = element["nivelId"];
           element["elevi"].forEach(elv => {
             let elev = new Elev();
             elev.displayName = elv["displayName"];
@@ -95,6 +96,7 @@ export class GrupeService {
         grupa.oraGrupa = new Date(this.datePipe.transform(response["oraGrupa"], "YYYY-MM-dd HH:mm"));
         grupa.particip = response["particip"];
         grupa.confirmata = response["confirmata"];
+        grupa.nivelId = parseInt(response["nivelId"].toString());
         return grupa;
       })
     );
@@ -110,7 +112,8 @@ export class GrupeService {
       {
         DataGrupa: this.datePipe.transform(grupa.dataGrupa, 'YYYY-MM-dd HH:mm'),
         OraGrupa: this.datePipe.transform(grupa.oraGrupa, 'YYYY-MM-dd HH:mm'),
-        LocatieId: grupa.locatieId
+        LocatieId: grupa.locatieId,
+        Nivel: grupa.nivel
       }, { headers });
   }
 
@@ -125,6 +128,24 @@ export class GrupeService {
         Id: grupa.id,
         LocatieId: grupa.locatieId,
         Elevi: grupa.elevi
+      }, { headers });
+  }
+
+  splitGrupa(grupaInitiala: Grupa, grupaSplit: Grupa) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + this.user.token);
+    return this.http.post(this.baseUrl + 'grupe/splitgrupa',
+      {
+        IdGrupaInitiala: grupaInitiala.id,
+        LocatieIdGrupaInitiala: grupaInitiala.locatieId,
+        EleviGrupaInitiala: grupaInitiala.elevi,
+        LocatieIdGrupaSplit: grupaInitiala.locatieId,
+        EleviGrupaSplit: grupaSplit.elevi,
+        DataGrupaSplit: this.datePipe.transform(grupaSplit.dataGrupa, 'YYYY-MM-dd HH:mm'),
+        OraGrupaSplit: this.datePipe.transform(grupaSplit.oraGrupa, 'YYYY-MM-dd HH:mm')
       }, { headers });
   }  
 

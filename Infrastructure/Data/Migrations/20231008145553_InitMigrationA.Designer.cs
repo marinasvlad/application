@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppIdentityContext))]
-    [Migration("20231001143207_INITMigration")]
-    partial class INITMigration
+    [Migration("20231008145553_InitMigrationA")]
+    partial class InitMigrationA
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -210,6 +210,9 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<int>("LocatieId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NivelId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("OraGrupa")

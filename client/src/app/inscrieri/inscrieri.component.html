@@ -1,0 +1,110 @@
+<div class="container">
+  <br>
+  <h1 class="font-PE">Înscrieri</h1>
+
+  <br>
+  <p class="font-PE">Mai jos se află cererile de înscriere în aplicație.</p>
+  <br>
+
+  <mat-accordion>
+    <mat-expansion-panel (afterCollapse)="turnSelectedCardNull()" hideToggle *ngFor="let inscriere of inscrieri; let i = index;">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="font-PE">          
+          <strong>{{inscriere.displayName}}</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p class="font-PE"><mat-icon>perm_identity</mat-icon><strong>{{inscriere.displayName}}</strong></p>
+      <p class="font-PE"><mat-icon>alternate_email</mat-icon><strong>{{inscriere.email}}</strong></p>
+      <p class="font-PE"><mat-icon>phone</mat-icon><strong>{{inscriere.numarDeTelefon}}</strong></p>
+      <p class="font-PE" *ngIf="inscriere.nivel == 'incepator'"><mat-icon>stars</mat-icon><strong>Începător</strong></p>
+      <p class="font-PE" *ngIf="inscriere.nivel == 'intermediar'"><mat-icon>stars</mat-icon><strong>Intermediar</strong></p>
+      <p class="font-PE" *ngIf="inscriere.nivel == 'avansat'"><mat-icon>stars</mat-icon><strong>Avansat</strong></p>
+      <p class="font-PE" *ngIf="inscriere.varsta >= 7 && inscriere.varsta <= 18">
+        <mat-icon>perm_contact_calendar</mat-icon><strong>{{inscriere.varsta}} ani</strong></p>
+      <p class="font-PE" *ngIf="inscriere.varsta == 19"><mat-icon>perm_contact_calendar</mat-icon><strong>Mai mult de
+          {{inscriere.varsta}} ani</strong></p>
+      <p class="font-PE"><mat-icon>calendar_today</mat-icon><strong>{{inscriere.dataCerere | date:
+          'dd.MM.yyyy'}}</strong></p>
+      <br>
+      <p class="font-PE"><strong>Selectează locația:</strong></p>
+      <mat-card class="locatie-card" (click)="selectCard(1, i)" [ngClass]="{ 'selected': selectedCard === 1 }">
+        <mat-card-title-group>
+          <mat-card-title class="font-PE"><strong>Water Park</strong></mat-card-title>
+          <img [ngClass]="imgWidthVariable" mat-card-sm-image src="../../assets/water-park.jpg" class="img-class" >
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Banul Stepan 2A, Craiova <mat-icon>location_on</mat-icon></p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <mat-card class="locatie-card" (click)="selectCard(2, i)" [ngClass]="{ 'selected': selectedCard === 2 }">
+        <mat-card-title-group>
+          <mat-card-title class="font-PE"><strong>Imperial Garden</strong></mat-card-title>
+          <img [ngClass]="imgWidthVariable" src="../../assets/imperial-garden.jpg" class="img-class" >
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Drumul Industriilor 17, Craiova <mat-icon> location_on</mat-icon></p>
+        </mat-card-content>        
+      </mat-card>
+      <br>
+      <mat-card class="locatie-card" (click)="selectCard(3, i)" [ngClass]="{ 'selected': selectedCard === 3 }">
+        <mat-card-title-group>
+          <mat-card-title class="font-PE"><strong>Bazinul Carol</strong></mat-card-title>
+          <img [ngClass]="imgWidthVariable" src="../../assets/bazin-carol.jpg" class="img-class">
+        </mat-card-title-group>
+        <mat-card-content>
+          <p class="font-PE"><strong>Adresă</strong>: Strada Bibescu 30, Craiova <mat-icon> location_on</mat-icon></p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <button mat-raised-button color="primary" (click)="openModalAccept(acceptaModal,i)">Acceptă</button>
+          </div>
+
+          <div class="col-sm-6">
+            <button mat-raised-button color="warn" (click)="openModalRefuza(refuzaModal,i)">Refuză</button>
+          </div>
+        </div>
+
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br>
+</div>
+
+
+<ng-template #acceptaModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Acceptă înscrierea</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Ești sigur că vrei să accepți înscrierea elevului <strong>{{inscriereToAccept.displayName}}</strong> ?</p>
+    <button mat-button (click)="modalRef?.hide()">Închide</button>
+    <button mat-button cdkFocusInitial (click)="acceptaInscriere(inscriereToAccept)">Adaugă</button>
+  </div>
+
+</ng-template>
+
+
+
+<ng-template #refuzaModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Refuză înscrierea</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Ești sigur că vrei să refuzi înscrierea elevului <strong>{{inscriereToDelete.displayName}}</strong> ?</p>
+    <button mat-button (click)="modalRef?.hide()">Închide</button>
+    <button mat-button cdkFocusInitial (click)="refuzaInscrierea(inscriereToDelete.id)">Refuză</button>
+  </div>
+
+</ng-template>

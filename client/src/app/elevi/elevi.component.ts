@@ -4,6 +4,11 @@ import { Prezenta } from '../models/prezenta';
 import { IUser } from '../models/user';
 import { AnuntService } from '../services/anunt.service';
 import { PrezenteService } from '../services/prezente.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Elev } from '../models/elev';
+import { map, startWith, take } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-elevi',
@@ -12,38 +17,55 @@ import { PrezenteService } from '../services/prezente.service';
 })
 export class EleviComponent implements OnInit {
   user: IUser;
-  prezente: Prezenta[];
-  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private prezenteService: PrezenteService) { }
+  myControl = new FormControl('');
+  filteredOptions: Observable<Elev[]>;
+  elevi: Elev[] = [];
+  eleviInDrop: Elev[] =  [];
+
+  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getUser();
-   
-    if(this.user.roles.includes("Moderator") || this.user.roles.includes("Admin"))
-    {
-      this.getToatePrezentele();
-    }
-    else if(this.user.roles.includes("Member"))
-    {
-     this.getPrezenteMember();
-    }    
+    this.getAllElevi();
+    this.getAllEleviInDrop();
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
   }
 
   getUser(){
     this.user = this.anuntService.getCurrentUser();
   }
 
-  getToatePrezentele(){
-    this.prezente = [];
-    this.prezenteService.getPrezenteTotiElevii().subscribe(res => {
-      this.prezente = res;
-    });
+  private _filter(value: string): Elev[] {
+    const filterValue = value.toLowerCase();
+
+    return this.eleviInDrop.filter(elev => elev.displayName.toLowerCase().includes(filterValue));
+  }  
+
+  getAllElevi(){
+    this.elevi = [];
+    this.accountService.getAllElevi(this.user.token).subscribe(res => {
+      this.elevi = res;
+    })
   }
 
-  getPrezenteMember(){
-    this.prezente = [];
-    this.prezenteService.getPrezentaForMember().subscribe(res => {
-      this.prezente = res;
+  getAllEleviInDrop(){
+    this.eleviInDrop = [];
+    this.accountService.getAllElevi(this.user.token).subscribe(res => {
+      this.eleviInDrop = res;
+    })
+  }  
+
+  getElevById(elevId: number)
+  {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });
+    this.accountService.getElevById(elevId, this.user.token).subscribe(res => {
+      this.elevi = [];
+      this.elevi.push(res);
     });
   }
-
 }

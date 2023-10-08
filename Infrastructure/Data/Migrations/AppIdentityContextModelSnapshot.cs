@@ -210,6 +210,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("LocatieId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("NivelId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("OraGrupa")
                         .HasColumnType("timestamp without time zone");
 

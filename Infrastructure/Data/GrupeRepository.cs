@@ -30,6 +30,14 @@ namespace Infrastructure.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<int> AddNewGrupaAndReturnId(Grupa grupa)
+        {
+
+            await _context.Grupe.AddAsync(grupa);
+            await _context.SaveChangesAsync();
+            return grupa.Id;
+        }
+
         public async Task<bool> ConfirmaGrupa(int grupaId)
         {
             var grupa = await _context.Grupe.FirstOrDefaultAsync(g => g.Id == grupaId);
@@ -67,9 +75,9 @@ namespace Infrastructure.Data
             return await _context.Grupe.Where(g => g.DataGrupa.Date >= DateTime.Now.Date && g.Efectuata == false).Include(g => g.Elevi).Include(g => g.Locatie).ToListAsync();
         }
 
-        public async Task<Grupa> GetUrmatoareaGrupaActivaByLocatieId(int locatieId)
+        public async Task<Grupa> GetUrmatoareaGrupaActivaByLocatieIdAndNivelId(int locatieId, int nivelId)
         {
-            return await _context.Grupe.Include(g => g.Elevi).FirstOrDefaultAsync(g => g.LocatieId == locatieId && g.Efectuata == false && g.DataGrupa.Date >= DateTime.Now.Date);
+            return await _context.Grupe.Include(g => g.Elevi).FirstOrDefaultAsync(g => g.LocatieId == locatieId && g.Efectuata == false && g.DataGrupa.Date >= DateTime.Now.Date && g.NivelId == nivelId);
         }
 
         public async Task<bool> RenuntaLaConfirmare(int grupaId)

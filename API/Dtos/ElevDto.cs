@@ -10,6 +10,10 @@ namespace API.Dtos
         public int Id {get; set;}
         public string DisplayName { get; set; }
 
+        public string Email { get; set; }
+
+        public string NumarDeTelefon { get; set; }
+
         public int? GrupaId { get; set; }
 
         public int? LocatieId { get; set; }
@@ -19,5 +23,7 @@ namespace API.Dtos
         public int NumarSedinte { get; set; }
 
         public bool Prezent {get; set;}
+
+        public int NivelId { get; set; }
     }
 }

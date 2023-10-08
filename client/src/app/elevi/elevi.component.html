@@ -4,6 +4,27 @@
   <br>
   <p class="font-PE">Mai jos se află prezențele elevilor.</p>
 
+  <br>
+  <br>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Elev</mat-label>
+    <input type="text"
+           placeholder="Alege elev"
+           aria-label="Elev"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let elev of filteredOptions | async" [value]="elev.displayName" (click)="getElevById(elev.id)">
+        {{elev.displayName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <br>
+  <br>
+
   <div class="div table-responsive table-responsive-sm">
     <table class="table table-hover">
       <thead>
@@ -11,22 +32,23 @@
           <th scope="col">#</th>
           <th scope="col">Nume</th>
           <th scope="col">Email</th>
+          <th scope="col">Telefon</th>
           <th scope="col">Locație</th>
-          <th scope="col">Dată</th>
-          <th scope="col">Start</th>
-          <th scope="col">Stop</th>
+          <th scope="col">Nivel</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="cursor: pointer;" *ngFor="let prezenta of prezente; let i = index">
+        <tr style="cursor: pointer;" *ngFor="let elev of elevi; let i = index">
           <td>{{i + 1}}</td>
-          <td>{{prezenta.displayName}}</td>
-          <td>{{prezenta.email}}</td>
-          <td>{{prezenta.locatie}}</td>
-          <td>{{prezenta.data | date: 'dd.MM.yyyy'}}</td>
-          <td>{{prezenta.start | date: 'HH:mm'}}</td>
-          <td>{{prezenta.stop | date: 'HH:mm'}}</td>
+          <td>{{elev.displayName}}</td>
+          <td>{{elev.email}}</td>
+          <td>{{elev.numarDeTelefon}}</td>
+          <td *ngIf="elev.locatieId == '1'" >Water Park</td>
+          <td *ngIf="elev.locatieId == '2'" >Imperial Garden</td>
+          <td *ngIf="elev.locatieId == '3'" >Bazinul Carol</td>
+          <td *ngIf="elev.nivelId == 1" >Începător</td>
+          <td *ngIf="elev.nivelId == 2" >Intermediar</td>
+          <td *ngIf="elev.nivelId == 3" >Avansat</td>                    
       </tbody>
-    </table>
-  </div>
+    </table>  
 </div>

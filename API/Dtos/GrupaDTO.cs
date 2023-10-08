@@ -25,5 +25,9 @@ namespace API.Dtos
         public bool Confirmata { get; set; }
 
         public bool Efectuata { get; set; }
+
+        public string Nivel { get; set; }
+
+        public int NivelId { get; set; }
     }
 }

@@ -22,5 +22,7 @@ namespace Core.Entities
         public bool Confirmata { get; set; }
 
         public bool Efectuata { get; set; }
+
+        public int NivelId { get; set; }
     }
 }

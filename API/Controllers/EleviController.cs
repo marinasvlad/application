@@ -32,6 +32,15 @@ namespace API.Controllers
             return Ok(await _userManager.Users.ToListAsync());
         }
 
+        [HttpGet("getelevbyid/{elevId}")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult<ElevDto>> GetElevById(int elevId){
+
+            var user = await _userManager.FindByIdAsync(elevId.ToString());
+
+            return Ok(_mapper.Map<ElevDto>(user));
+        }
+        
         [HttpGet("getprezenteformember")]
         [Authorize(Policy = "RequireMemberRole")]
         public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteForMember(){

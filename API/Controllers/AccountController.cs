@@ -159,6 +159,19 @@ namespace API.Controllers
             });
         }
 
+        [HttpGet("getallelevi")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult<IReadOnlyList<ElevDto>>> GetAllElevi(){
+
+
+
+            var useriMember = await _userManager.GetUsersInRoleAsync("Member");
+
+            IReadOnlyList<AppUser> useri = useriMember.ToList();
+
+            return Ok(_mapper.Map<IReadOnlyList<ElevDto>>(useri));
+        }
+
         [HttpPost("facebooklogin")]
         public async Task<ActionResult<UserDto>> FacebookLogin(AuthCodeDTO facebookCodeDTO)
         {
@@ -304,7 +317,7 @@ namespace API.Controllers
                 }
             }
 
-            if (registerDto.Nivel != "incepator" && registerDto.Nivel != "mediu" && registerDto.Nivel != "avansat")
+            if (registerDto.Nivel != "incepator" && registerDto.Nivel != "intermediar" && registerDto.Nivel != "avansat")
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
             }
@@ -363,7 +376,7 @@ namespace API.Controllers
                 }
             }
 
-            if (registerDto.Nivel != "incepator" || registerDto.Nivel != "mediu" || registerDto.Nivel != "avansat")
+            if (registerDto.Nivel != "incepator" || registerDto.Nivel != "intermediar" || registerDto.Nivel != "avansat")
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
             }

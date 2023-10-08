@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos;
+using API.Errors;
 using API.Extensions;
 using AutoMapper;
 using Core.Entities;
@@ -48,7 +50,7 @@ namespace API.Controllers
 
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
-            var grupa = await _grupeRepo.GetUrmatoareaGrupaActivaByLocatieId((int)user.LocatieId);
+            var grupa = await _grupeRepo.GetUrmatoareaGrupaActivaByLocatieIdAndNivelId((int)user.LocatieId, (int)user.NivelId);
             var grupaDto = _mapper.Map<GrupaDTO>(grupa);
 
             if (grupa != null)
@@ -102,12 +104,40 @@ namespace API.Controllers
             DateTime dataGrupa = DateTime.ParseExact(grupaDto.DataGrupa, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             DateTime oraGrupa = DateTime.ParseExact(grupaDto.OraGrupa, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
             var locatie = await _locaiiRepo.GetLocatieByIdAsync(grupaDto.LocatieId);
+
+
+            int nivelId = 0;
+
+            if (grupaDto.Nivel == string.Empty || grupaDto.Nivel == null)
+            {
+                return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
+            }
+            else if (grupaDto.Nivel == "incepator")
+            {
+                nivelId = 1;
+            }
+            else if (grupaDto.Nivel == "intermediar")
+            {
+                nivelId = 2;
+
+            }
+            else if (grupaDto.Nivel == "avansat")
+            {
+                nivelId = 3;
+            }
+
+            if(nivelId == 0)
+            {
+                return BadRequest(new ApiResponse(400, "Grupa nu a fost creată."));
+            }
+
             Grupa grupa = new Grupa
             {
                 DataGrupa = dataGrupa,
                 OraGrupa = oraGrupa,
                 LocatieId = locatie.Id,
-                Locatie = locatie
+                Locatie = locatie,
+                NivelId = nivelId
             };
 
             return Ok(await _grupeRepo.AddNewGrupa(grupa));
@@ -154,5 +184,44 @@ namespace API.Controllers
             return Ok(efectuat);
         }
 
+        [HttpPost("splitgrupa")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult<bool>> SplitGrupa(SplitGrupaDto splitGrupaDto)
+        {
+
+            DateTime dataGrupaSplit = DateTime.ParseExact(splitGrupaDto.DataGrupaSplit, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            DateTime oraGrupaSplit = DateTime.ParseExact(splitGrupaDto.OraGrupaSplit, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture);
+            var locatie = await _locaiiRepo.GetLocatieByIdAsync(splitGrupaDto.LocatieIdGrupaInitiala);
+
+            var grupaInitiala = await _grupeRepo.GetGrupaByIdAsync(splitGrupaDto.IdGrupaInitiala);
+
+            grupaInitiala.Elevi = new Collection<AppUser>();
+
+            foreach(var elev in splitGrupaDto.EleviGrupaInitiala)
+            {
+                var userInitial = await _userManager.FindByIdAsync(elev.Id.ToString());
+                await _grupeRepo.AddElevToGrupa(userInitial, grupaInitiala);               
+            }
+
+            Grupa grupaSplit = new Grupa
+            {
+                DataGrupa = dataGrupaSplit,
+                OraGrupa = oraGrupaSplit,
+                LocatieId = locatie.Id,
+                Locatie = locatie,
+                NivelId = grupaInitiala.NivelId
+            };
+
+            int grupaSplitId = await _grupeRepo.AddNewGrupaAndReturnId(grupaSplit);       
+
+            var grupaSplitAdded = await _grupeRepo.GetGrupaByIdAsync(grupaSplitId);
+            foreach(var elevSplit in splitGrupaDto.EleviGrupaSplit)
+            {
+                var userSplit = await _userManager.FindByIdAsync(elevSplit.Id.ToString());
+                await _grupeRepo.AddElevToGrupa(userSplit, grupaSplitAdded);        
+            }
+
+            return Ok(true);
+        }        
     }
 }

@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class INITMigration : Migration
+    public partial class InitMigrationA : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,7 +108,8 @@ namespace Infrastructure.Data.Migrations
                     OraGrupa = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     LocatieId = table.Column<int>(type: "integer", nullable: false),
                     Confirmata = table.Column<bool>(type: "boolean", nullable: false),
-                    Efectuata = table.Column<bool>(type: "boolean", nullable: false)
+                    Efectuata = table.Column<bool>(type: "boolean", nullable: false),
+                    NivelId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

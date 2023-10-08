@@ -4,6 +4,11 @@ import { Prezenta } from '../models/prezenta';
 import { IUser } from '../models/user';
 import { AnuntService } from '../services/anunt.service';
 import { PrezenteService } from '../services/prezente.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { AccountService } from '../services/account.service';
+import { Elev } from '../models/elev';
 
 @Component({
   selector: 'app-prezente',
@@ -15,23 +20,41 @@ export class PrezenteComponent implements OnInit {
   prezente: Prezenta[];
   locatieId:number = 4;
 
-  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private prezenteService: PrezenteService) { }
+  myControl = new FormControl('');
+  elevi: Elev[] = [];
+  filteredOptions: Observable<Elev[]>;
+
+  constructor(private anuntService: AnuntService, private datePipe: DatePipe, private prezenteService: PrezenteService, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getUser();
-   
+    this.getAllElevi();
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+
     if(this.user.roles.includes("Moderator") || this.user.roles.includes("Admin"))
     {
       this.getToatePrezentele();
-    }
-    else if(this.user.roles.includes("Member"))
-    {
-     this.getPrezenteMember();
-    }    
+    }  
+  }
+
+  private _filter(value: string): Elev[] {
+    const filterValue = value.toLowerCase();
+
+    return this.elevi.filter(elev => elev.displayName.toLowerCase().includes(filterValue));
   }
 
   getUser(){
     this.user = this.anuntService.getCurrentUser();
+  }
+
+  getAllElevi(){
+    this.elevi = [];
+    this.accountService.getAllElevi(this.user.token).subscribe(res => {
+      this.elevi = res;
+    })
   }
 
   getToatePrezentele(){
@@ -41,10 +64,11 @@ export class PrezenteComponent implements OnInit {
     });
   }
 
-  getPrezenteMember(){
+  getPrezenteForElevById(userId: number)
+  {
     this.prezente = [];
-    this.prezenteService.getPrezentaForMember().subscribe(res => {
+    this.prezenteService.getPrezenteByUserId(userId).subscribe(res => {
       this.prezente = res;
-    });
+    })
   }
 }

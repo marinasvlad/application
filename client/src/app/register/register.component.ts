@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
 
   nivele: Nivel[] = [
     {value: 'incepator', viewValue: 'Începător'},
-    {value: 'mediu', viewValue: 'Mediu'},
+    {value: 'intermediar', viewValue: 'Intermediar'},
     {value: 'avansat', viewValue: 'Avavnsat'},
   ];
 
@@ -89,18 +89,18 @@ export class RegisterComponent implements OnInit {
   }
 
   calculateImageClass() {
-    if(window.innerWidth <= 422){
+    if(window.innerWidth <= 420){
       this.imgWidthVariable = 'mat-card-sm-image';
     }
     else if(window.innerWidth >= 520 && window.innerWidth <= 600)
     {
       this.imgWidthVariable = 'mat-card-md-image';
     }
-    else if(window.innerWidth >= 1000)
+    else if(window.innerWidth >= 600)
     {
-      this.imgWidthVariable = 'mat-card-xl-image';
+      this.imgWidthVariable = 'mat-card-lg-image';
     }
-  }  
+  }
 
   ngOnInit(): void {
     if(this.oauthAccount != '')

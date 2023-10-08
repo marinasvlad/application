@@ -47,6 +47,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ManagementComponent } from './management/management.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PrezenteComponent } from './prezente/prezente.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { InscrieriComponent } from './inscrieri/inscrieri.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,8 @@ import { PrezenteComponent } from './prezente/prezente.component';
     RegisterComponent,
     InitialScreenComponent,
     ManagementComponent,
-    PrezenteComponent
+    PrezenteComponent,
+    InscrieriComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +74,7 @@ import { PrezenteComponent } from './prezente/prezente.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    DragDropModule,    
     MatIconModule,
     MatDialogModule,
     FormsModule,
@@ -80,6 +86,8 @@ import { PrezenteComponent } from './prezente/prezente.component';
     MatTabsModule,
     MatSnackBarModule,
     MatStepperModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
     MatDatepickerModule,
     AlertModule.forRoot(),
     ModalModule.forRoot(),

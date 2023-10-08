@@ -9,4 +9,6 @@ export class Grupa {
     particip: boolean;
     confirmata: boolean;
     efectuata: boolean;
+    nivel: string;
+    nivelId: number;
 }

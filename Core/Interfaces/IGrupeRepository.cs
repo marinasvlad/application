@@ -11,6 +11,8 @@ namespace Core.Interfaces
         Task<Grupa> GetGrupaByIdAsync(int grupaId);
         Task<bool> AddNewGrupa(Grupa grupa);
 
+        Task<int> AddNewGrupaAndReturnId(Grupa grupa);
+
         Task<bool> DeleteGrupaById(int grupaId);
 
         Task<IReadOnlyList<Grupa>> GetToateGrupeleActive();
@@ -23,7 +25,7 @@ namespace Core.Interfaces
 
         Task<bool> RenuntElevToGrupa(AppUser elev, Grupa grupa);
 
-        Task<Grupa> GetUrmatoareaGrupaActivaByLocatieId(int locatieId);
+        Task<Grupa> GetUrmatoareaGrupaActivaByLocatieIdAndNivelId(int locatieId, int nivelId);
 
         Task<bool> EfectueazaGrupaAsync(Grupa grupa);
     }

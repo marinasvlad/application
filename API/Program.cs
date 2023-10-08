@@ -67,6 +67,7 @@ try
             await Seed.SeedLocatii(context);
             await Seed.SeedUsers(roleManager, userManager, context);
             await Seed.SeedAnunturi(context);
+            await Seed.SeedInscrieri(context);
     }
 }
 catch (Exception ex)
