@@ -124,6 +124,7 @@ export class AccountService {
           e.numarDeTelefon = elv.numarDeTelefon,
           e.locatieId = elv.locatieId,
           e.nivelId = elv.nivelId;
+          e.numarSedinte = elv.numarSedinte;
           elevi.push(e);
         });
 

@@ -66,7 +66,32 @@
   <div class="modal-body">
     <p class="font-PE" >Editează elevul <strong>{{elevToBeEdited.displayName}}</strong></p>
 
+    <br>
 
+    <mat-form-field class="example-form-field">
+      <mat-label>Ședințe</mat-label>
+      <input disabled="true" matInput type="text" [(ngModel)]="elevToBeEdited.numarSedinte">
+      <button  matSuffix mat-icon-button aria-label="adaugaSedinta" (click)="adaugaSedinta(elevToBeEdited)">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button  matSuffix mat-icon-button aria-label="scadeSedinta" (click)="scadeSedinta(elevToBeEdited)" >
+        <mat-icon>remove</mat-icon>
+      </button>      
+    </mat-form-field>
+    
+    <br>
+
+    <mat-form-field>
+      <mat-label>Selectează locația:</mat-label>
+      <mat-select [(ngModel)]="elevToBeEdited.locatieId">
+        <mat-option value='1'>Water Park</mat-option>
+        <mat-option value='2'>Imperial Garden</mat-option>
+        <mat-option value='3'>Bazinul Carol</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <br>
+    
     <button mat-button (click)="modalRef?.hide()">Închide</button>
     <button mat-button cdkFocusInitial (click)="editElev(elevToBeEdited)">Edit</button>
   </div>

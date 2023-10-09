@@ -21,7 +21,8 @@ namespace API.Helpers
 
             CreateMap<AppUser, ElevDto>().ForMember(elevDto => elevDto.Email, user => user.MapFrom(u => u.Email))
                                          .ForMember(elevDto => elevDto.LocatieId, user => user.MapFrom(u => u.LocatieId))
-                                         .ForMember(elevDto => elevDto.NivelId, user => user.MapFrom(u => u.NivelId));
+                                         .ForMember(elevDto => elevDto.NivelId, user => user.MapFrom(u => u.NivelId))
+                                         .ForMember(elevDto => elevDto.NumarSedinte, user => user.MapFrom(u => u.NumarSedinte));
 
             CreateMap<Grupa, GrupaDTO>().ForMember(grupaDto => grupaDto.DataGrupa, grupa => grupa.MapFrom(g => g.DataGrupa.ToString("yyyy-MM-dd HH:mm")))
             .ForMember(grupaDto => grupaDto.OraGrupa, grupa => grupa.MapFrom(g => g.OraGrupa.ToString("yyyy-MM-dd HH:mm")))
