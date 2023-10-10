@@ -3,9 +3,10 @@ export class Elev{
     displayName: string;
     email: string;
     numarDeTelefon: string;
-    locatieId: string;
+    locatieId: number;
     locatie: string;
     numarSedinte: number;
     prezent: boolean;
     nivelId: number;
+    nivel: string;
 }

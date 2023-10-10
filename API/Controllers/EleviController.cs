@@ -28,22 +28,53 @@ namespace API.Controllers
 
         [HttpGet]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<IReadOnlyList<AppUser>>> GetElevi(){
+        public async Task<ActionResult<IReadOnlyList<AppUser>>> GetElevi()
+        {
             return Ok(await _userManager.Users.ToListAsync());
         }
 
         [HttpGet("getelevbyid/{elevId}")]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<ElevDto>> GetElevById(int elevId){
+        public async Task<ActionResult<ElevDto>> GetElevById(int elevId)
+        {
 
             var user = await _userManager.FindByIdAsync(elevId.ToString());
 
-            return Ok(_mapper.Map<ElevDto>(user));
+            var elevDto = _mapper.Map<ElevDto>(user);
+            if (user.LocatieId == 1)
+            {
+                elevDto.Locatie = "Water Park";
+            }
+            else if (user.LocatieId == 2)
+            {
+                elevDto.Locatie = "Imperial Garden";
+            }
+            else if (user.LocatieId == 3)
+            {
+                elevDto.Locatie = "Bazinul Carol";
+            }
+
+            if (user.NivelId == 1)
+            {
+                elevDto.Nivel = "Începător";
+
+            }
+            else if (user.NivelId == 2)
+            {
+                elevDto.Nivel = "Intermediar";
+            }
+            else if (user.NivelId == 3)
+            {
+                elevDto.Nivel = "Avansat";
+            }
+
+            return Ok(elevDto);
         }
-        
+
         [HttpGet("getprezenteformember")]
         [Authorize(Policy = "RequireMemberRole")]
-        public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteForMember(){
+        public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteForMember()
+        {
 
             int userId = User.GetUserId();
             var prezente = await _prezenteRepo.GetPrezenteByUserId(userId);
@@ -52,9 +83,25 @@ namespace API.Controllers
 
         [HttpGet("getprezentetotielevii")]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteTotiElevii(){
+        public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteTotiElevii()
+        {
             var prezente = await _prezenteRepo.GetPrezenteTotiElevii();
             return Ok(_mapper.Map<IReadOnlyList<PrezentaDTO>>(prezente));
-        }              
+        }
+
+        [HttpPost("edituser")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult> EditUser(ElevDto elevDto)
+        {
+            var user = await _userManager.FindByIdAsync(elevDto.Id.ToString());
+
+            user.NumarSedinte = Convert.ToInt32(elevDto.NumarSedinte);
+            user.LocatieId = elevDto.LocatieId;
+            user.NivelId = elevDto.NivelId;
+
+            await _userManager.UpdateAsync(user);
+
+            return Ok();
+        }
     }
 }

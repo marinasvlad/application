@@ -25,5 +25,7 @@ namespace API.Dtos
         public bool Prezent {get; set;}
 
         public int NivelId { get; set; }
+
+        public string Nivel { get; set; }
     }
 }

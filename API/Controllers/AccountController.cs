@@ -163,13 +163,38 @@ namespace API.Controllers
         [Authorize(Policy = "RequireModeratorRole")]
         public async Task<ActionResult<IReadOnlyList<ElevDto>>> GetAllElevi(){
 
-
-
             var useriMember = await _userManager.GetUsersInRoleAsync("Member");
 
-            IReadOnlyList<AppUser> useri = useriMember.ToList();
+            List<ElevDto> listEleviDto = new List<ElevDto>();
+            foreach(var user in useriMember)
+            {
+                var elevDto = _mapper.Map<ElevDto>(user);
+                if(user.LocatieId == 1)
+                {
+                    elevDto.Locatie = "Water Park";
+                } else if (user.LocatieId == 2)
+                {
+                    elevDto.Locatie = "Imperial Garden";
+                } else if (user.LocatieId == 3)
+                {
+                    elevDto.Locatie = "Bazinul Carol";
+                }
 
-            return Ok(_mapper.Map<IReadOnlyList<ElevDto>>(useri));
+                if(user.NivelId == 1)
+                {
+                    elevDto.Nivel = "Începător";
+
+                } else if (user.NivelId == 2)
+                {
+                    elevDto.Nivel = "Intermediar";
+                } else if(user.NivelId == 3)
+                {
+                    elevDto.Nivel = "Avansat";
+                }
+
+                listEleviDto.Add(elevDto);
+            }
+            return Ok(listEleviDto.AsReadOnly());
         }
 
         [HttpPost("facebooklogin")]

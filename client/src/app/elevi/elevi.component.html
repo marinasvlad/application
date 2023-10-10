@@ -44,9 +44,9 @@
           <td>{{elev.displayName}}</td>
           <td>{{elev.email}}</td>
           <td>{{elev.numarDeTelefon}}</td>
-          <td *ngIf="elev.locatieId == '1'" >Water Park</td>
-          <td *ngIf="elev.locatieId == '2'" >Imperial Garden</td>
-          <td *ngIf="elev.locatieId == '3'" >Bazinul Carol</td>
+          <td *ngIf="elev.locatieId == 1" >Water Park</td>
+          <td *ngIf="elev.locatieId == 2" >Imperial Garden</td>
+          <td *ngIf="elev.locatieId == 3" >Bazinul Carol</td>
           <td *ngIf="elev.nivelId == 1" >Începător</td>
           <td *ngIf="elev.nivelId == 2" >Intermediar</td>
           <td *ngIf="elev.nivelId == 3" >Avansat</td>
@@ -59,7 +59,7 @@
 <ng-template #elevModal>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Detalii elev</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="inchideModalEditElevi()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
@@ -83,16 +83,28 @@
 
     <mat-form-field>
       <mat-label>Selectează locația:</mat-label>
-      <mat-select [(ngModel)]="elevToBeEdited.locatieId">
-        <mat-option value='1'>Water Park</mat-option>
-        <mat-option value='2'>Imperial Garden</mat-option>
-        <mat-option value='3'>Bazinul Carol</mat-option>
+      <mat-select [(ngModel)]="elevToBeEdited.locatie">
+        <mat-option (click)="setLocatie(1)" value="Water Park">Water Park</mat-option>
+        <mat-option (click)="setLocatie(2)" value="Imperial Garden">Imperial Garden</mat-option>
+        <mat-option (click)="setLocatie(3)" value="Bazinul Carol">Bazinul Carol</mat-option>
       </mat-select>
     </mat-form-field>
-    
+
     <br>
+
+
+    <mat-form-field>
+      <mat-label>Selectează nivelul:</mat-label>
+      <mat-select [(ngModel)]="elevToBeEdited.nivel">
+        <mat-option (click)="setNivel(1)" value="Începător">Începător</mat-option>
+        <mat-option (click)="setNivel(2)" value="Intermediar">Intermediar</mat-option>
+        <mat-option (click)="setNivel(3)" value="Avansat">Avansat</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <br>    
     
-    <button mat-button (click)="modalRef?.hide()">Închide</button>
+    <button mat-button (click)="inchideModalEditElevi()">Închide</button>
     <button mat-button cdkFocusInitial (click)="editElev(elevToBeEdited)">Edit</button>
   </div>
 </ng-template>

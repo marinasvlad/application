@@ -80,11 +80,21 @@ export class AccountService {
         elev.email = response.email;
         elev.numarDeTelefon = response.numarDeTelefon,
         elev.locatieId = response.locatieId,
+        elev.locatie = response.locatie;
         elev.nivelId = response.nivelId;
+        elev.nivel = response.nivel;
+        elev.numarSedinte = response.numarSedinte;
         return elev;
       })
     );
   }
+
+  editElev(elev: Elev, token: string) {
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + token);
+    return this.http.post(this.baseUrl + 'elevi/edituser', elev, { headers });
+  }  
 
   createOauthFacebookAccount(registerDto: RegisterOauthDTO){
     return this.http.post<any>(this.baseUrl + 'account/oauthregister',
@@ -125,6 +135,8 @@ export class AccountService {
           e.locatieId = elv.locatieId,
           e.nivelId = elv.nivelId;
           e.numarSedinte = elv.numarSedinte;
+          e.locatie = elv.locatie;
+          e.nivel = elv.nivel;
           elevi.push(e);
         });
 

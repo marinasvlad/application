@@ -73,6 +73,17 @@ export class EleviComponent implements OnInit {
     });
   }
 
+  inchideModalEditElevi(){
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });    
+    this.accountService.getAllElevi(this.user.token).subscribe(res => {
+      this.elevi = res;
+      this.modalRef?.hide();
+    });
+  }
+
+
   scadeSedinta(elev: Elev)
   {
     elev.numarSedinte = elev.numarSedinte - 1;
@@ -85,7 +96,13 @@ export class EleviComponent implements OnInit {
 
   editElev(elevToBeEdited: Elev)
   {
-
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });    
+    this.accountService.editElev(elevToBeEdited,this.user.token).subscribe(() => {
+      this.getAllElevi();
+      this.modalRef?.hide();
+    });
   }
 
   openModalEditElev(indexElevToEdit: number, template: TemplateRef<any>) {
@@ -94,7 +111,11 @@ export class EleviComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  setLocatieEditElev(locatieId: number, elev: Elev){
-
+  setLocatie(locatieId: number){
+    this.elevToBeEdited.locatieId = locatieId;
   }
+
+  setNivel(nivelId: number){
+    this.elevToBeEdited.nivelId = nivelId;
+  }  
 }
