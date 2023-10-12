@@ -81,6 +81,15 @@ namespace API.Controllers
             return Ok(_mapper.Map<IReadOnlyList<PrezentaDTO>>(prezente));
         }
 
+        [HttpGet("getnrsedinteramase")]
+        [Authorize(Policy = "RequireMemberRole")]
+        public async Task<ActionResult<int>> GetNumarSedinteRamase(){
+            int userId = User.GetUserId();
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            return Ok(user.NumarSedinte);
+        }
+
         [HttpGet("getprezentetotielevii")]
         [Authorize(Policy = "RequireModeratorRole")]
         public async Task<ActionResult<IReadOnlyList<PrezentaDTO>>> GetPrezenteTotiElevii()

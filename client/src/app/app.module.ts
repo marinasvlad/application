@@ -51,6 +51,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { InscrieriComponent } from './inscrieri/inscrieri.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { PrezenteElevComponent } from './prezente-elev/prezente-elev.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     InitialScreenComponent,
     ManagementComponent,
     PrezenteComponent,
-    InscrieriComponent
+    InscrieriComponent,
+    PrezenteElevComponent
   ],
   imports: [
     BrowserModule,

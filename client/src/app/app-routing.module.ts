@@ -5,6 +5,7 @@ import { EleviComponent } from './elevi/elevi.component';
 import { GrupeComponent } from './grupe/grupe.component';
 import { HomeComponent } from './home/home.component';
 import { ManagementComponent } from './management/management.component';
+import { PrezenteElevComponent } from './prezente-elev/prezente-elev.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
     children:[
       {path: 'grupe', component: GrupeComponent},
       {path: 'management', component: ManagementComponent},
-      {path: 'contact', component: ContactComponent}
+      {path: 'contact', component: ContactComponent},
+      {path: 'prezenteelev', component: PrezenteElevComponent}
     ]
   },
   {path: "**",component: HomeComponent, pathMatch: 'full'}

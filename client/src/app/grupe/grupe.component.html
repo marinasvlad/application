@@ -183,7 +183,7 @@
   <ng-template #adaugaGrupaModal>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Adaugă o grupă</h4>
-      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="closeModalAdaugaGrupa()">
         <span aria-hidden="true" class="visually-hidden">&times;</span>
       </button>
     </div>
@@ -221,7 +221,7 @@
       <label *ngIf="dataSelectata != undefined">Selectează <strong>ora</strong> grupei</label>
       <timepicker *ngIf="dataSelectata != undefined" [(ngModel)]="oraGrupa" [showMeridian]="false"></timepicker>
       <br>
-      <button mat-button (click)="modalRef?.hide()">Închide</button>
+      <button mat-button (click)="closeModalAdaugaGrupa()">Închide</button>
       <button [disabled]="oraGrupa == undefined" mat-button cdkFocusInitial (click)="postGrupa()">Adaugă</button>
     </div>
 

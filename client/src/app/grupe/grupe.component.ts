@@ -167,6 +167,13 @@ export class GrupeComponent implements OnInit {
     });
   }
 
+  closeModalAdaugaGrupa(){
+    this.modalRef?.hide();
+    this.locatieIdInDrop = 0;
+    this.nivel = '';
+    this.dataSelectata = undefined;    
+  }
+
 
   split(){
     this.grupaToSplit.dataGrupa = this.dataGrupaSplit;
