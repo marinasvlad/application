@@ -1,0 +1,18 @@
+<br>
+<div class="container" style="width: 30vh;">
+    <div class="row">
+        <p class="font-PE">Adresa de email pentru care vrei să schimbi parola: <strong>{{email}}</strong></p>
+        <br>        
+        <p class="font-PE" >Introdu noua parolă:</p>
+        <br>
+        <input [(ngModel)]="parolaNoua" autocomplete="off" type="password" class="form-control" placeholder="Noua parolă" aria-label="parola"
+            aria-describedby="Noua parola">
+    </div>
+    <br>
+    
+    <div class="row">
+        <button mat-raised-button (click)="schimbaParola()"><mat-icon>done</mat-icon>
+            Schimbă parola</button>
+    </div>
+    <br>
+</div>

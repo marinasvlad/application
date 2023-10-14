@@ -33,10 +33,12 @@ namespace API.Controllers
         private readonly IExternalAuthService _externalAuthService;
         private readonly ILocatiiRepository _locatiiRepo;
         private readonly IInscrieriRepository _inscrieriRepo;
+        private readonly IMailService _mailService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService,
-         IMapper mapper, IExternalAuthService externalAuthService, ILocatiiRepository locatiiRepo, IInscrieriRepository inscrieriRepo)
+         IMapper mapper, IExternalAuthService externalAuthService, ILocatiiRepository locatiiRepo, IInscrieriRepository inscrieriRepo, IMailService mailService)
         {
+            _mailService = mailService;
             _inscrieriRepo = inscrieriRepo;
             _locatiiRepo = locatiiRepo;
             _externalAuthService = externalAuthService;
@@ -215,6 +217,7 @@ namespace API.Controllers
                 DisplayName = user.DisplayName
             });
         }
+
         [HttpPost("getgooglepayload")]
         public async Task<ActionResult<string>> GetGooglePayload(AuthCodeDTO googleAuthCodeDTO)
         {
@@ -244,6 +247,50 @@ namespace API.Controllers
             facebookRegisterDTO.Provider = "Facebook";
             string facebookRegisterJsonString = JsonConvert.SerializeObject(facebookRegisterDTO);
             return facebookRegisterJsonString;
+        }
+
+        [HttpGet("resetpassword/{email}")]
+        public async Task<ActionResult<object>> ResetPassword(string email){
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if(user == null)
+            {
+                return BadRequest(new ApiResponse(400, "Adresa de email introdusă nu a fost găsită"));
+            }
+
+            string passwordResteToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            _mailService.SendLinkCuToken(email,passwordResteToken);
+
+            var response = new {
+                mesaj = "success"
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPost("schimbaparola")]
+        public async Task<ActionResult<object>> SchimbaParola(SchimbaParolaDTO schimbaParola)
+        {
+            var user = await _userManager.FindByEmailAsync(schimbaParola.Email);
+
+            if(user == null)
+            {
+                return BadRequest(new ApiResponse(400, "Ceva nu a funcționat. Emailul nu a fost găsit"));
+            }
+
+            var resetResult = await _userManager.ResetPasswordAsync(user, schimbaParola.Token, schimbaParola.ParolaNoua);
+
+            if(resetResult.Succeeded == false)
+            {
+                return BadRequest(new ApiResponse(400, "Operația nu a reușit"));
+            }
+
+            var obj = new {
+                mesaj = "success"
+            };
+
+            return Ok(obj);
         }
 
         // [HttpPost("register")]
@@ -315,7 +362,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
 
             }
-
+        
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
             if (contNume != null)
             {

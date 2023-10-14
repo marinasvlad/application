@@ -20,7 +20,8 @@ namespace API.Extensions
             .AddRoleManager<RoleManager<AppRole>>()
             .AddSignInManager<SignInManager<AppUser>>()
             .AddRoleValidator<RoleValidator<AppRole>>()
-            .AddEntityFrameworkStores<AppIdentityContext>();
+            .AddEntityFrameworkStores<AppIdentityContext>()
+            .AddDefaultTokenProviders();
 
             builder  = new IdentityBuilder(builder.UserType, builder.Services);
 

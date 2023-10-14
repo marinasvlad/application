@@ -52,6 +52,8 @@ import { InscrieriComponent } from './inscrieri/inscrieri.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { PrezenteElevComponent } from './prezente-elev/prezente-elev.component';
+import { ParolaUitataComponent } from './parola-uitata/parola-uitata.component';
+import { SchimbaParolaComponent } from './schimba-parola/schimba-parola.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { PrezenteElevComponent } from './prezente-elev/prezente-elev.component';
     ManagementComponent,
     PrezenteComponent,
     InscrieriComponent,
-    PrezenteElevComponent
+    PrezenteElevComponent,
+    ParolaUitataComponent,
+    SchimbaParolaComponent
   ],
   imports: [
     BrowserModule,

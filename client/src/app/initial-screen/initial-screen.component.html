@@ -17,12 +17,14 @@
                     Înregistrează-te</button>
             </div>
             <br> 
-            <div *ngIf="signInVisible == true || registerVisible == true" class="row">
+            <div *ngIf="signInVisible == true || registerVisible == true || amUitatParolaVisible == true || schimbaParolaVisible == true"  class="row">
                 <button mat-raised-button  (click)="inapoiClick()" ><mat-icon>keyboard_backspace</mat-icon>
                     Înapoi</button>
             </div>                                 
         </div>  
     </div>
-    <app-sign-in *ngIf="signInVisible == true"></app-sign-in>
-    <app-register [oauthAccount]="oauthAccount" *ngIf="registerVisible == true" (confirmation)="handleValueFromChild($event)" ></app-register>      
+    <app-sign-in *ngIf="signInVisible == true" (parolaUitata)="handleAmUitatParola($event)"></app-sign-in>
+    <app-register [oauthAccount]="oauthAccount" *ngIf="registerVisible == true" (confirmation)="handleConfirmation($event)" ></app-register>
+    <app-parola-uitata *ngIf="amUitatParolaVisible == true" (parolaSchimbataSuccess)="handleParolaSchimbata($event)" ></app-parola-uitata>
+    <app-schimba-parola [token]="tokenResetParola" [email]="emailSchimbParola" *ngIf="schimbaParolaVisible == true" (parolaSchimbataSuccess)="handleParolaSchimbataSuccess($event)" ></app-schimba-parola>
 </div>

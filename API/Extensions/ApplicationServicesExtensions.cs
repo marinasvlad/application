@@ -23,6 +23,7 @@ namespace API.Extensions
             services.AddScoped<IGrupeRepository, GrupeRepository>();
             services.AddScoped<IPrezenteRepository, PrezenteRepository>();
             services.AddScoped<IInscrieriRepository, InscrieriRepository>();
+            services.AddScoped<IMailService, MailService>();
             services.AddDbContext<AppIdentityContext>(opt => {
                 opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
                 //opt.UseSqlite(config.GetConnectionString("SqliteConnection"));

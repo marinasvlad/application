@@ -1,0 +1,16 @@
+<br>
+<div class="container" style="width: 30vh;">
+    <div class="row">
+        <p class="font-PE" >Introdu adresa de email a countului tau:</p>
+        <br>
+        <input [(ngModel)]="email" autocomplete="off" type="text" class="form-control" placeholder="Email" aria-label="Email"
+            aria-describedby="user">
+    </div>
+    <br>
+    
+    <div class="row">
+        <button mat-raised-button (click)="recupereazaParola()"><mat-icon>lock_open</mat-icon>
+            Recuperează parola</button>
+    </div>
+    <br>
+</div>

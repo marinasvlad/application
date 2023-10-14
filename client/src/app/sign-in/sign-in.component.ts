@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../models/user';
 import { map } from 'rxjs/operators';
@@ -25,6 +25,9 @@ export class SignInComponent implements OnInit {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<IUser>(1);
   currentUser$ = this.currentUserSource.asObservable();
+
+  @Output() parolaUitata = new EventEmitter<string>();
+
 
   constructor(private router: Router, private http: HttpClient, private accountService: AccountService, 
     private route: ActivatedRoute,
@@ -60,5 +63,9 @@ export class SignInComponent implements OnInit {
     this.accountService.login(this.user).subscribe(res =>{
       window.location.reload();
     });
+  }
+
+  amUitatParola(){
+    this.parolaUitata.emit('amUitatParola');
   }
 }

@@ -102,6 +102,24 @@ export class AccountService {
     return this.http.get<number>(this.baseUrl + 'elevi/getnrsedinteramase', { headers });
   }
 
+
+  recupereazaParola(email: string){
+    return this.http.get<any>(this.baseUrl + 'account/resetpassword/' + email);
+  }  
+
+  schimbaParola(email: string, token: string, parolanoua: string){
+    console.log({
+      Email: email,
+      Token: token,
+      ParolaNoua: parolanoua
+    });
+    return this.http.post<any>(this.baseUrl + 'account/schimbaparola', {
+      Email: email,
+      Token: token,
+      ParolaNoua: parolanoua
+    });
+  }    
+
   createOauthFacebookAccount(registerDto: RegisterOauthDTO){
     return this.http.post<any>(this.baseUrl + 'account/oauthregister',
     {DisplayName: registerDto.displayName,
