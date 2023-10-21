@@ -51,9 +51,10 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { InscrieriComponent } from './inscrieri/inscrieri.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { PrezenteElevComponent } from './prezente-elev/prezente-elev.component';
 import { ParolaUitataComponent } from './parola-uitata/parola-uitata.component';
 import { SchimbaParolaComponent } from './schimba-parola/schimba-parola.component';
+import { DateElevComponent } from './date-elev/date-elev.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -70,9 +71,10 @@ import { SchimbaParolaComponent } from './schimba-parola/schimba-parola.componen
     ManagementComponent,
     PrezenteComponent,
     InscrieriComponent,
-    PrezenteElevComponent,
     ParolaUitataComponent,
-    SchimbaParolaComponent
+    SchimbaParolaComponent,
+    DateElevComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

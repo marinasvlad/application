@@ -29,6 +29,8 @@ export class ErrorInterceptor implements HttpInterceptor{
                     }
                     if(error.status == 401)
                     {
+                        console.log('Here!');
+                        console.log(error.headers.get('Token-Expired'));
                         this.toastr.error(error.error.message, error.error.statusCode)
                     }
                 }

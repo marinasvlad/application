@@ -73,10 +73,10 @@ export class GrupeComponent implements OnInit {
       this.imgWidthVariable = 'mat-card-sm-image';
     }
     else if (window.innerWidth >= 520 && window.innerWidth <= 600) {
-      this.imgWidthVariable = 'mat-card-lg-image';
+      this.imgWidthVariable = 'mat-card-md-image';
     }
     else if (window.innerWidth >= 600) {
-      this.imgWidthVariable = 'mat-card-xl-image';
+      this.imgWidthVariable = 'mat-card-lg-image';
     }
   }
 

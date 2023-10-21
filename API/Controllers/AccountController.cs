@@ -269,6 +269,32 @@ namespace API.Controllers
             return Ok(response);
         }
 
+        [HttpPost("changeparola")]
+        [Authorize(Policy = "RequireMemberRole")]
+        public async Task<ActionResult<object>> ChangeParola(ChangeParolaDTO changeParola){
+
+            if(changeParola.ParolaNoua != changeParola.ParolaNouaRe)
+            {
+                return BadRequest(new ApiResponse(400, "Parola nouă și parola nouă rescrisă nu se potrivesc!"));
+            }
+
+            var user = await _userManager.FindByIdAsync(User.GetUserId().ToString());
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, changeParola.ParolaCurenta, false);
+
+            if (!result.Succeeded) return BadRequest(new ApiResponse(400, "Nu ai introdus parola curentă corectă"));
+
+            var resultChangeParola = await _userManager.ChangePasswordAsync(user, changeParola.ParolaCurenta, changeParola.ParolaNoua);
+
+            if(!result.Succeeded)  return BadRequest(new ApiResponse(400, "Ceva nu a mers bine. Încearcă din nou."));
+
+            var obj = new {
+                mesaj = "success"
+            };
+
+            return Ok(obj);
+        }
+
         [HttpPost("schimbaparola")]
         public async Task<ActionResult<object>> SchimbaParola(SchimbaParolaDTO schimbaParola)
         {

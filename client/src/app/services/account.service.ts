@@ -102,17 +102,22 @@ export class AccountService {
     return this.http.get<number>(this.baseUrl + 'elevi/getnrsedinteramase', { headers });
   }
 
+  changeParola(parolaCurenta: string, parolaNoua: string, parolaNouaRe: string, token: string){
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + token);
+    return this.http.post<any>(this.baseUrl + 'account/changeparola', 
+    {
+      ParolaCurenta: parolaCurenta,
+      ParolaNoua: parolaNoua,
+      ParolaNouaRe: parolaNouaRe
+    }, { headers });
+  }
 
   recupereazaParola(email: string){
     return this.http.get<any>(this.baseUrl + 'account/resetpassword/' + email);
   }  
 
   schimbaParola(email: string, token: string, parolanoua: string){
-    console.log({
-      Email: email,
-      Token: token,
-      ParolaNoua: parolanoua
-    });
     return this.http.post<any>(this.baseUrl + 'account/schimbaparola', {
       Email: email,
       Token: token,

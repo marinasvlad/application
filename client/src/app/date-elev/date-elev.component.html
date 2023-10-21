@@ -1,0 +1,61 @@
+<div class="container">
+  <h1 class="font-PE">Date elev</h1>
+  <br>
+
+  <button mat-raised-button (click)="schimbaParolaModal(template)" >Schimbă parola</button>
+  <br>
+  <br>
+  <p class="font-PE">Numărul de ședințe la care poți să participi rămase este <strong>{{numarSedinteRamase}}</strong>
+  </p>
+
+  <p class="font-PE">Mai jos este un tabel cu prezențele tale:</p>
+
+  <div class="div table-responsive table-responsive-sm">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nume</th>
+          <th scope="col">Email</th>
+          <th scope="col">Locatie</th>
+          <th scope="col">Data</th>
+          <th scope="col">Start</th>
+          <th scope="col">Stop</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prezenta of prezenteUser; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{prezenta.displayName}}</td>
+          <td>{{prezenta.email}}</td>
+          <td>{{prezenta.locatie}}</td>
+          <td>{{prezenta.data | date: 'dd.MM.yyyy'}}</td>
+          <td>{{prezenta.start | date: 'HH:mm'}}</td>
+          <td>{{prezenta.stop | date: 'HH:mm'}}</td>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Schimbă parola</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="inchideModal(template)">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <br>
+    <label for="Parola curentă">Parola curentă</label>
+    <input type="password" [(ngModel)]="parolaCurenta" class="form-control" placeholder="Parola curentă" aria-label="Parola curentă" aria-describedby="pass">
+    <br>
+    <label for="Parola nouă">Parola nouă</label>
+    <input type="password" [(ngModel)]="parolaNoua" class="form-control" placeholder="Parola nouă" aria-label="Parola nouă" aria-describedby="pass-n">
+    <br>
+    <label for="Rescrie parola nouă">Rescrie parola nouă</label>
+    <input type="password" [(ngModel)]="parolaNouaRe" class="form-control" placeholder="Rescrie parola nouă" aria-label="Rescrie parola nouă" aria-describedby="pass-n-re">
+    <br> 
+    <button mat-button (click)="inchideModal(template)">Închide</button>
+    <button [disabled]="parolaCurenta.length == 0 || parolaNoua.length == 0 || parolaNouaRe.length == 0" mat-button cdkFocusInitial (click)="schimbaParola()">Adaugă</button>
+  </div>
+</ng-template>
