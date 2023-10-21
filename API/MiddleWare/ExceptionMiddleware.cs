@@ -25,11 +25,12 @@ namespace API.MiddleWare
         {
             try
             {
+               
+                await _next(context);
                 if(context.Response.Headers.ContainsKey("Token-Expired"))
                 {
-                    System.Console.WriteLine("HEREEEEEEE");
-                }                
-                await _next(context);
+                    context.Response.StatusCode = 417;
+                }                 
             }
             catch (Exception ex)
             {

@@ -197,7 +197,6 @@ export class AccountService {
   }  
 
   logOut(){
-    //stergem useru din localstorage
     localStorage.removeItem('userApplication');
     this.currentUserSource.next(null as any);
     this.router.navigateByUrl('/');

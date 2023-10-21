@@ -4,7 +4,6 @@ import { ContactComponent } from './contact/contact.component';
 import { DateElevComponent } from './date-elev/date-elev.component';
 import { GrupeComponent } from './grupe/grupe.component';
 import { HomeComponent } from './home/home.component';
-import { LogoutComponent } from './logout/logout.component';
 import { ManagementComponent } from './management/management.component';
 
 const routes: Routes = [
@@ -16,8 +15,7 @@ const routes: Routes = [
       {path: 'grupe', component: GrupeComponent},
       {path: 'management', component: ManagementComponent},
       {path: 'contact', component: ContactComponent},
-      {path: 'dateelev', component: DateElevComponent},
-      {path: 'logout', component: LogoutComponent}
+      {path: 'dateelev', component: DateElevComponent}
     ]
   },
   {path: "**",component: HomeComponent, pathMatch: 'full'}

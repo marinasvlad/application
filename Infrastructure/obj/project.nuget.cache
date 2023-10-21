@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7RvA9Vzu0hyDl4QySUm+mODUgJBqZC7b9mgPm9qeswq9N3jlons2z5DVBKPeqYxsKACG7/ZtDDk/I+nWhI2pqQ==",
+  "dgSpecHash": "4G6f160pje882hR8ozKlw8nkbhVmdUegOrOhMsuGD6jx1yP0Mv/Fo3cXrWiJWAcOePNuYoGGKDrnzp8GTdTB/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vlad\\.nuget\\packages\\google.apis\\1.60.0\\google.apis.1.60.0.nupkg.sha512",
     "C:\\Users\\Vlad\\.nuget\\packages\\google.apis.auth\\1.60.0\\google.apis.auth.1.60.0.nupkg.sha512",

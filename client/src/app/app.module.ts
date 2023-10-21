@@ -54,7 +54,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ParolaUitataComponent } from './parola-uitata/parola-uitata.component';
 import { SchimbaParolaComponent } from './schimba-parola/schimba-parola.component';
 import { DateElevComponent } from './date-elev/date-elev.component';
-import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +72,7 @@ import { LogoutComponent } from './logout/logout.component';
     InscrieriComponent,
     ParolaUitataComponent,
     SchimbaParolaComponent,
-    DateElevComponent,
-    LogoutComponent
+    DateElevComponent
   ],
   imports: [
     BrowserModule,

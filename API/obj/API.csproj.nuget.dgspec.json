@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vlad\\application\\application\\API\\API.csproj": {}
+    "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vlad\\application\\application\\API\\API.csproj": {
+    "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vlad\\application\\application\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Vlad\\application\\application\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vlad\\application\\application\\API\\obj\\",
+        "outputPath": "C:\\Users\\Vlad\\Projects\\Application\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -25,14 +22,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -101,22 +99,19 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Vlad\\application\\application\\Core\\Core.csproj": {
+    "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vlad\\application\\application\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Vlad\\application\\application\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vlad\\application\\application\\Core\\obj\\",
+        "outputPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -173,22 +168,19 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Vlad\\application\\application\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Vlad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vlad\\application\\application\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Vlad\\Projects\\Application\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\Vlad\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -204,8 +196,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Vlad\\application\\application\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Vlad\\application\\application\\Core\\Core.csproj"
+              "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Vlad\\Projects\\Application\\Core\\Core.csproj"
               }
             }
           }
@@ -261,7 +253,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
