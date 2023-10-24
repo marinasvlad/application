@@ -159,8 +159,6 @@ export class HomeComponent implements OnInit {
   getPageSizeCustom(locationId: number)
   {
     this.anuntService.getPageSizeCustom(locationId).subscribe(res => {
-      console.log('aici!');
-      console.log(res);
       let pageSizeResponse: number = parseInt(res.toString());
 
       if(pageSizeResponse >= 10)

@@ -5,4 +5,5 @@ export class RegisterDTO {
     numarDeTelefon: string;
     nivel: string;
     varsta: number;
+    termeniSiConditii: boolean;
 }

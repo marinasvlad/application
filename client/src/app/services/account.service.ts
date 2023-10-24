@@ -46,7 +46,8 @@ export class AccountService {
       Password: registerDto.parola,
       NumarDeTelefon: registerDto.numarDeTelefon,
       Nivel: registerDto.nivel,
-      Varsta: registerDto.varsta});
+      Varsta: registerDto.varsta,
+      TermeniSiConditii: registerDto.termeniSiConditii});
     }
 
   createOauthGoogleAccount(registerDto: RegisterOauthDTO){

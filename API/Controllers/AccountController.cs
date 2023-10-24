@@ -383,6 +383,12 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
+
+            if(string.IsNullOrEmpty(registerDto.Email) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi adresa de email"));
+            }
+
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
                 return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
@@ -401,6 +407,10 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
+            if(registerDto.TermenSiConditii == false)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să dai click pe Sunt de acord cu Termeni si conditii."));
+            }
 
             if (registerDto.NumarDeTelefon.Count() != 10)
             {

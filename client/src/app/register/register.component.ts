@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
     thirdCtrl: ['', Validators.required],
   });
 
+  termeniSiConditii: boolean = false;
+
   imgWidthVariable: string;
 
   googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
@@ -137,6 +139,7 @@ export class RegisterComponent implements OnInit {
     registerDTO.nivel = this.nivel;
     registerDTO.numarDeTelefon = this.numarDeTelefon;
     registerDTO.varsta = this.varsta;
+    registerDTO.termeniSiConditii = this.termeniSiConditii;
     this.accountService.registerCont(registerDTO).subscribe(res => {
       if(res["raspuns"] == "success")
       {

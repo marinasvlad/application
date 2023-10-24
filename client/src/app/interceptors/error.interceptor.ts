@@ -30,7 +30,6 @@ export class ErrorInterceptor implements HttpInterceptor{
                     }
                     if(error.status == 401)
                     {
-                        console.log('in 401');
                         this.toastr.error(error.error.message, error.error.statusCode)
                     }
                     if(error.status == 417)
@@ -39,7 +38,7 @@ export class ErrorInterceptor implements HttpInterceptor{
                         this.accountService.logOut();
                         setTimeout(() => {
                             window.location.reload();
-                          }, 1050);                     
+                          }, 2000);                     
                     }             
                 }
                 return throwError(error);

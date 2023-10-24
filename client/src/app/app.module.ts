@@ -54,7 +54,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { ParolaUitataComponent } from './parola-uitata/parola-uitata.component';
 import { SchimbaParolaComponent } from './schimba-parola/schimba-parola.component';
 import { DateElevComponent } from './date-elev/date-elev.component';
-
+import { TermeniConditiiComponent } from './termeni-conditii/termeni-conditii.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,8 @@ import { DateElevComponent } from './date-elev/date-elev.component';
     InscrieriComponent,
     ParolaUitataComponent,
     SchimbaParolaComponent,
-    DateElevComponent
+    DateElevComponent,
+    TermeniConditiiComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +93,7 @@ import { DateElevComponent } from './date-elev/date-elev.component';
     MatInputModule,
     MatTabsModule,
     MatSnackBarModule,
+    MatCheckboxModule,
     MatStepperModule,
     MatExpansionModule,
     MatAutocompleteModule,

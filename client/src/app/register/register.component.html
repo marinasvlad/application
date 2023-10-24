@@ -296,7 +296,14 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Crează cont!</ng-template>
+        <br>
+        <app-termeni-conditii></app-termeni-conditii>
+        <br>
+        <mat-checkbox [(ngModel)]="termeniSiConditii" >Sunt de acord cu Termeni si conditii</mat-checkbox>
+        <br>
+        <br>
         <p>Contul tau este gata de a fi creat!</p>
+        <br>
         <button mat-button (click)="creazaCont()" >Crează cont</button>
         <button mat-button matStepperPrevious>Înapoi</button>
     </mat-step>
