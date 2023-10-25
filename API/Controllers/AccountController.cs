@@ -421,6 +421,26 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
+            if(registerDto.Password.Length < 8)
+            {
+                return BadRequest(new ApiResponse(400, "Parola trebuie să conțină minim 8 caractere."));
+            }
+
+            if(registerDto.Password.Any(char.IsUpper) == false)
+            {
+                return BadRequest(new ApiResponse(400, "Parola trebuie să conțină minim o literă mare."));
+            }
+
+            if(registerDto.Password.Any(char.IsLower) == false)
+            {
+                return BadRequest(new ApiResponse(400, "Parola trebuie să conțină minim o literă mică."));
+            }    
+
+            if(registerDto.Password.Any(char.IsNumber) == false)
+            {
+                return BadRequest(new ApiResponse(400, "Parola trebuie să conțină minim o cifră."));
+            }                                   
+
             if (registerDto.TermeniSiConditii == false)
             {
                 return BadRequest(new ApiResponse(400, "Trebuie să dai click pe Sunt de acord cu Termeni si conditii."));

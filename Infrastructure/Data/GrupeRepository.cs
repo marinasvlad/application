@@ -72,7 +72,7 @@ namespace Infrastructure.Data
 
         public async Task<IReadOnlyList<Grupa>> GetToateGrupeleActive()
         {
-            return await _context.Grupe.Where(g => g.DataGrupa.Date >= DateTime.Now.Date && g.Efectuata == false).Include(g => g.Elevi).Include(g => g.Locatie).ToListAsync();
+            return await _context.Grupe.Where(g => g.Efectuata == false).Include(g => g.Elevi).Include(g => g.Locatie).ToListAsync();
         }
 
         public async Task<Grupa> GetUrmatoareaGrupaActivaByLocatieIdAndNivelId(int locatieId, int nivelId)

@@ -25,12 +25,12 @@ namespace API.Extensions
             services.AddScoped<IInscrieriRepository, InscrieriRepository>();
             services.AddScoped<IMailService, MailService>();
             services.AddDbContext<AppIdentityContext>(opt => {
-                opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
+                //opt.UseNpgsql(config.GetConnectionString("ElephantsqlConnection"));
                 //opt.UseSqlServer(config.GetConnectionString("PleskSql"));
                 //opt.UseSqlServer(config.GetConnectionString("PleskSql"));
                 //opt.UseSqlite(config.GetConnectionString("SqliteConnection"));
                 //opt.UseMySql(config.GetConnectionString("MariaDb"), ServerVersion.AutoDetect(config.GetConnectionString("MariaDb")));
-                //opt.UseMySql(config.GetConnectionString("MariaDbRemote"), ServerVersion.AutoDetect(config.GetConnectionString("MariaDbRemote")));
+                opt.UseMySql(config.GetConnectionString("MariaDbRemote"), ServerVersion.AutoDetect(config.GetConnectionString("MariaDbRemote")));
                 
             });
             

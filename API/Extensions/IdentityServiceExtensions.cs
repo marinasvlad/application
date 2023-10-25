@@ -16,7 +16,9 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            var builder = services.AddIdentityCore<AppUser>()
+            var builder = services.AddIdentityCore<AppUser>(opt =>{
+                    opt.Password.RequireNonAlphanumeric = false;
+            })
             .AddRoles<AppRole>()
             .AddRoleManager<RoleManager<AppRole>>()
             .AddSignInManager<SignInManager<AppUser>>()
