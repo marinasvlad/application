@@ -18,6 +18,8 @@ namespace API.Dtos
 
         public string Nivel { get; set; }
         
-        public int Varsta { get; set; }        
+        public int Varsta { get; set; }      
+
+        public bool TermeniSiConditii {get; set;}  
     }
 }

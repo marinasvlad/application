@@ -3,4 +3,8 @@ export class RegisterOauthDTO {
     displayName: string;
     locatieNumar: number;
     provider: string;
+    numarDeTelefon: string;
+    nivel: string;
+    varsta: number;
+    termeniSiConditii: boolean;    
 }

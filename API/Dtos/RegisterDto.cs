@@ -15,6 +15,6 @@ namespace API.Dtos
         public string NumarDeTelefon { get; set; }
         public string Nivel { get; set; }
         public int Varsta { get; set; }
-        public bool TermenSiConditii { get; set;}
+        public bool TermeniSiConditii { get; set;}
     }
 }

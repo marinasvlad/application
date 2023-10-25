@@ -63,7 +63,7 @@ namespace API.Controllers
                     DisplayName = user.DisplayName
                 };
             }
-            
+
             return Ok();
         }
 
@@ -163,33 +163,38 @@ namespace API.Controllers
 
         [HttpGet("getallelevi")]
         [Authorize(Policy = "RequireModeratorRole")]
-        public async Task<ActionResult<IReadOnlyList<ElevDto>>> GetAllElevi(){
+        public async Task<ActionResult<IReadOnlyList<ElevDto>>> GetAllElevi()
+        {
 
             var useriMember = await _userManager.GetUsersInRoleAsync("Member");
 
             List<ElevDto> listEleviDto = new List<ElevDto>();
-            foreach(var user in useriMember)
+            foreach (var user in useriMember)
             {
                 var elevDto = _mapper.Map<ElevDto>(user);
-                if(user.LocatieId == 1)
+                if (user.LocatieId == 1)
                 {
                     elevDto.Locatie = "Water Park";
-                } else if (user.LocatieId == 2)
+                }
+                else if (user.LocatieId == 2)
                 {
                     elevDto.Locatie = "Imperial Garden";
-                } else if (user.LocatieId == 3)
+                }
+                else if (user.LocatieId == 3)
                 {
                     elevDto.Locatie = "Bazinul Carol";
                 }
 
-                if(user.NivelId == 1)
+                if (user.NivelId == 1)
                 {
                     elevDto.Nivel = "Începător";
 
-                } else if (user.NivelId == 2)
+                }
+                else if (user.NivelId == 2)
                 {
                     elevDto.Nivel = "Intermediar";
-                } else if(user.NivelId == 3)
+                }
+                else if (user.NivelId == 3)
                 {
                     elevDto.Nivel = "Avansat";
                 }
@@ -250,19 +255,21 @@ namespace API.Controllers
         }
 
         [HttpGet("resetpassword/{email}")]
-        public async Task<ActionResult<object>> ResetPassword(string email){
+        public async Task<ActionResult<object>> ResetPassword(string email)
+        {
             var user = await _userManager.FindByEmailAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new ApiResponse(400, "Adresa de email introdusă nu a fost găsită"));
             }
 
             string passwordResteToken = await _userManager.GeneratePasswordResetTokenAsync(user);
 
-            _mailService.SendLinkCuToken(email,passwordResteToken);
+            _mailService.SendLinkCuToken(email, passwordResteToken);
 
-            var response = new {
+            var response = new
+            {
                 mesaj = "success"
             };
 
@@ -271,9 +278,10 @@ namespace API.Controllers
 
         [HttpPost("changeparola")]
         [Authorize(Policy = "RequireMemberRole")]
-        public async Task<ActionResult<object>> ChangeParola(ChangeParolaDTO changeParola){
+        public async Task<ActionResult<object>> ChangeParola(ChangeParolaDTO changeParola)
+        {
 
-            if(changeParola.ParolaNoua != changeParola.ParolaNouaRe)
+            if (changeParola.ParolaNoua != changeParola.ParolaNouaRe)
             {
                 return BadRequest(new ApiResponse(400, "Parola nouă și parola nouă rescrisă nu se potrivesc!"));
             }
@@ -286,9 +294,10 @@ namespace API.Controllers
 
             var resultChangeParola = await _userManager.ChangePasswordAsync(user, changeParola.ParolaCurenta, changeParola.ParolaNoua);
 
-            if(!result.Succeeded)  return BadRequest(new ApiResponse(400, "Ceva nu a mers bine. Încearcă din nou."));
+            if (!result.Succeeded) return BadRequest(new ApiResponse(400, "Ceva nu a mers bine. Încearcă din nou."));
 
-            var obj = new {
+            var obj = new
+            {
                 mesaj = "success"
             };
 
@@ -300,19 +309,20 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(schimbaParola.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest(new ApiResponse(400, "Ceva nu a funcționat. Emailul nu a fost găsit"));
             }
 
             var resetResult = await _userManager.ResetPasswordAsync(user, schimbaParola.Token, schimbaParola.ParolaNoua);
 
-            if(resetResult.Succeeded == false)
+            if (resetResult.Succeeded == false)
             {
                 return BadRequest(new ApiResponse(400, "Operația nu a reușit"));
             }
 
-            var obj = new {
+            var obj = new
+            {
                 mesaj = "success"
             };
 
@@ -384,7 +394,7 @@ namespace API.Controllers
         public async Task<ActionResult<string>> Register(RegisterDto registerDto)
         {
 
-            if(string.IsNullOrEmpty(registerDto.Email) == true)
+            if (string.IsNullOrEmpty(registerDto.Email) == true)
             {
                 return BadRequest(new ApiResponse(400, "Trebuie să completezi adresa de email"));
             }
@@ -394,7 +404,11 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
 
             }
-        
+
+            if (string.IsNullOrEmpty(registerDto.DisplayName) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi numele și prenumele."));
+            }
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
             if (contNume != null)
             {
@@ -407,9 +421,14 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, "Nu ai completat parola."));
             }
 
-            if(registerDto.TermenSiConditii == false)
+            if (registerDto.TermeniSiConditii == false)
             {
                 return BadRequest(new ApiResponse(400, "Trebuie să dai click pe Sunt de acord cu Termeni si conditii."));
+            }
+
+            if (string.IsNullOrEmpty(registerDto.NumarDeTelefon) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi numărul de telefon!"));
             }
 
             if (registerDto.NumarDeTelefon.Count() != 10)
@@ -423,6 +442,11 @@ namespace API.Controllers
                 {
                     return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
                 }
+            }
+
+            if (string.IsNullOrEmpty(registerDto.Nivel) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să selectezi nivelul!"));
             }
 
             if (registerDto.Nivel != "incepator" && registerDto.Nivel != "intermediar" && registerDto.Nivel != "avansat")
@@ -459,17 +483,33 @@ namespace API.Controllers
         [HttpPost("oauthregister")]
         public async Task<ActionResult<string>> GoogleRegister(OauthRegisterDTO registerDto)
         {
+
+            if (string.IsNullOrEmpty(registerDto.Email) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi adresa de email"));
+            }
+
             if (CheckEmailExistsAsync(registerDto.Email).Result.Value)
             {
                 return BadRequest(new ApiResponse(400, "Adresa de email este deja folosită de alt cont."));
             }
-
+            if (string.IsNullOrEmpty(registerDto.DisplayName) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi numele și prenumele."));
+            }
             var contNume = await _userManager.Users.FirstOrDefaultAsync(cont => cont.DisplayName == registerDto.DisplayName);
             if (contNume != null)
             {
                 return BadRequest(new ApiResponse(400, "Numele și prenumele mai sunt folosite deja de un alt cont. Poți adăuga un număr la final pentru a evita coincidența."));
             }
-
+            if (registerDto.TermeniSiConditii == false)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să dai click pe Sunt de acord cu Termeni si conditii."));
+            }
+            if (string.IsNullOrEmpty(registerDto.NumarDeTelefon) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să completezi numărul de telefon!"));
+            }            
 
             if (registerDto.NumarDeTelefon.Count() != 10)
             {
@@ -483,12 +523,15 @@ namespace API.Controllers
                     return BadRequest(new ApiResponse(400, "Numărul de telefon introdus trebuie să conțină doar cifre. Exemplu de număr de telefon: 0723121311."));
                 }
             }
+            if (string.IsNullOrEmpty(registerDto.Nivel) == true)
+            {
+                return BadRequest(new ApiResponse(400, "Trebuie să selectezi nivelul!"));
+            }            
 
-            if (registerDto.Nivel != "incepator" || registerDto.Nivel != "intermediar" || registerDto.Nivel != "avansat")
+            if (registerDto.Nivel != "incepator" && registerDto.Nivel != "intermediar" && registerDto.Nivel != "avansat")
             {
                 return BadRequest(new ApiResponse(400, "Nu ai selectat nivelul."));
             }
-
 
             if (registerDto.Varsta < 7 || registerDto.Varsta > 19)
             {
@@ -507,7 +550,9 @@ namespace API.Controllers
 
             await _inscrieriRepo.AdaugaInscriereAsync(inscriere);
 
-            return Ok("succes");
+            var raspuns = new { raspuns = "success" };
+
+            return Ok(raspuns);
         }
 
         [HttpGet("emailexists")]

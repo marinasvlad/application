@@ -24,8 +24,9 @@ export class EleviComponent implements OnInit {
   eleviInDrop: Elev[] =  [];
   modalRef?: BsModalRef;
   indexElevToEdit: number;
+  indexElevToBeDeleted: number;
   elevToBeEdited: Elev;
-
+  elevToBeDeleted: Elev;
   constructor(private anuntService: AnuntService, private datePipe: DatePipe, private accountService: AccountService,private modalService: BsModalService) { }
 
   ngOnInit(): void {
@@ -79,9 +80,21 @@ export class EleviComponent implements OnInit {
     });    
     this.accountService.getAllElevi(this.user.token).subscribe(res => {
       this.elevi = res;
+      this.elevToBeEdited = new Elev();
       this.modalRef?.hide();
     });
   }
+
+  inchideModalDeleteElevi(){
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });    
+    this.accountService.getAllElevi(this.user.token).subscribe(res => {
+      this.elevi = res;
+      this.elevToBeDeleted = new Elev();
+      this.modalRef?.hide();
+    });
+  }  
 
 
   scadeSedinta(elev: Elev)
@@ -100,10 +113,21 @@ export class EleviComponent implements OnInit {
       this.user = user;
     });    
     this.accountService.editElev(elevToBeEdited,this.user.token).subscribe(() => {
-      this.getAllElevi();
       this.modalRef?.hide();
+      window.location.reload();      
     });
   }
+
+  deleteElev(elevToBeDeleted: Elev)
+  {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
+      this.user = user;
+    });    
+    this.accountService.deleteElev(elevToBeDeleted.id,this.user.token).subscribe(() => {
+      this.modalRef?.hide();
+      window.location.reload();
+    });
+  }  
 
   openModalEditElev(indexElevToEdit: number, template: TemplateRef<any>) {
     this.indexElevToEdit = indexElevToEdit;
@@ -111,6 +135,11 @@ export class EleviComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  openModalDeleteElev(indexElevToDelete: number, template: TemplateRef<any>) {
+    this.indexElevToBeDeleted = indexElevToDelete;
+    this.elevToBeDeleted = this.elevi[this.indexElevToBeDeleted];
+    this.modalRef = this.modalService.show(template);
+  }
   setLocatie(locatieId: number){
     this.elevToBeEdited.locatieId = locatieId;
   }

@@ -54,12 +54,12 @@ export class InscrieriComponent implements OnInit {
   acceptaInscriere(inscriereAceptata: Inscriere)
   {
     this.inscrieriService.acceptaInscriere(inscriereAceptata).subscribe(() =>{
-      this.inscriereToAccept = null;
-      this.inscriereToDelete = null;
-      this.inscrieri = [];
       this.inscrieriService.getInscrieri().subscribe(res => {
-        this.inscrieri = res;
         this.modalRef?.hide();
+        this.inscrieri = [];
+        this.inscrieri = res;
+        this.inscriereToAccept = new Inscriere();
+        this.inscriereToDelete = new Inscriere();      
       });
     });
   }
@@ -67,12 +67,12 @@ export class InscrieriComponent implements OnInit {
   refuzaInscrierea(inscriereRefuzataId: number)
   {
     this.inscrieriService.refuzaInscriere(inscriereRefuzataId).subscribe(() =>{
-      this.inscriereToAccept = null;
-      this.inscriereToDelete = null;
-      this.inscrieri = [];
       this.inscrieriService.getInscrieri().subscribe(res => {
-        this.inscrieri = res;
         this.modalRef?.hide();
+        this.inscrieri = [];
+        this.inscrieri = res;
+        this.inscriereToAccept = new Inscriere();
+        this.inscriereToDelete = new Inscriere();        
       });
     });
   }  

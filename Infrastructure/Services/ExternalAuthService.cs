@@ -25,8 +25,8 @@ namespace Infrastructure.Services
         {
             GoogleClientId = configuration["GoogleAuth:ClientId"];
             GoogleClientSecret = configuration["GoogleAuth:ClientSecret"];
-            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
-            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
+            GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUriLocal"];
+            //GoogleRedirectionUri = configuration["GoogleAuth:RedirectionUri"];            
             FacebookClientId = configuration["FacebookAuth:ClientId"];
             FacebookClientSecret = configuration["FacebookAuth:ClientSecret"];
             //FacebookRedirectionUri = configuration["FacebookAuth:RedirectionUriLocal"];

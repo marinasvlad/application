@@ -112,5 +112,16 @@ namespace API.Controllers
 
             return Ok();
         }
+
+        [HttpDelete("deleteuser/{userId}")]
+        [Authorize(Policy = "RequireModeratorRole")]
+        public async Task<ActionResult> DeleteUser(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            await _userManager.DeleteAsync(user);
+
+            return Ok();
+        }        
     }
 }

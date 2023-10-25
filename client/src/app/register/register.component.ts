@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, Self } from '@angular/core';
-import {  FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AccountService } from '../services/account.service';
 import { RegisterDTO } from '../models/registerDTO';
 import { RegisterOauthDTO } from '../models/registerOauthDTO';
@@ -33,13 +33,16 @@ export class RegisterComponent implements OnInit {
   thirdFormGroup = this._formBuilder.group({
     thirdCtrl: ['', Validators.required],
   });
+  forthFormGroup = this._formBuilder.group({
+    forthCtrl: ['', Validators.required],
+  });
 
   termeniSiConditii: boolean = false;
 
   imgWidthVariable: string;
 
   googleLogoUrl: string = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
-  facebookLogoUrl: string = "https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg";  
+  facebookLogoUrl: string = "https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg";
 
   locatieSelectata: number = 0;
 
@@ -50,25 +53,25 @@ export class RegisterComponent implements OnInit {
   numarDeTelefon: string;
 
   nivele: Nivel[] = [
-    {value: 'incepator', viewValue: 'Începător'},
-    {value: 'intermediar', viewValue: 'Intermediar'},
-    {value: 'avansat', viewValue: 'Avavnsat'},
+    { value: 'incepator', viewValue: 'Începător' },
+    { value: 'intermediar', viewValue: 'Intermediar' },
+    { value: 'avansat', viewValue: 'Avavnsat' },
   ];
 
   varste: Varsta[] = [
-    {value: 7, viewValue: '7 ani'},
-    {value: 8, viewValue: '8 ani'},
-    {value: 9, viewValue: '9 ani'},
-    {value: 10, viewValue: '10 ani'},
-    {value: 11, viewValue: '11 ani'},
-    {value: 12, viewValue: '12 ani'},
-    {value: 13, viewValue: '13 ani'},
-    {value: 14, viewValue: '14 ani'},
-    {value: 15, viewValue: '15 ani'},
-    {value: 16, viewValue: '16 ani'},
-    {value: 17, viewValue: '17 ani'},
-    {value: 18, viewValue: '18 ani'},
-    {value: 19, viewValue: 'Mai mult de 18 ani'}
+    { value: 7, viewValue: '7 ani' },
+    { value: 8, viewValue: '8 ani' },
+    { value: 9, viewValue: '9 ani' },
+    { value: 10, viewValue: '10 ani' },
+    { value: 11, viewValue: '11 ani' },
+    { value: 12, viewValue: '12 ani' },
+    { value: 13, viewValue: '13 ani' },
+    { value: 14, viewValue: '14 ani' },
+    { value: 15, viewValue: '15 ani' },
+    { value: 16, viewValue: '16 ani' },
+    { value: 17, viewValue: '17 ani' },
+    { value: 18, viewValue: '18 ani' },
+    { value: 19, viewValue: 'Mai mult de 18 ani' }
   ];
 
   contNouStepperVisible: boolean = false;
@@ -84,38 +87,35 @@ export class RegisterComponent implements OnInit {
     this.locatieSelectata = cardNumber;
     this.registerOauthDTO.locatieNumar = cardNumber;
   }
-  
-  constructor(private _formBuilder: FormBuilder, private accountService: AccountService) { 
+
+  constructor(private _formBuilder: FormBuilder, private accountService: AccountService) {
     this.calculateImageClass();
-    window.addEventListener('resize', () => this.calculateImageClass()); 
+    window.addEventListener('resize', () => this.calculateImageClass());
   }
 
   calculateImageClass() {
-    if(window.innerWidth <= 420){
+    if (window.innerWidth <= 420) {
       this.imgWidthVariable = 'mat-card-sm-image';
     }
-    else if(window.innerWidth >= 520 && window.innerWidth <= 600)
-    {
+    else if (window.innerWidth >= 520 && window.innerWidth <= 600) {
       this.imgWidthVariable = 'mat-card-md-image';
     }
-    else if(window.innerWidth >= 600)
-    {
+    else if (window.innerWidth >= 600) {
       this.imgWidthVariable = 'mat-card-lg-image';
     }
   }
 
   ngOnInit(): void {
-    if(this.oauthAccount != '')
-    {
+    if (this.oauthAccount != '') {
       this.processOauthRegisterAccount(this.oauthAccount);
     }
   }
 
-  contNou(){
-  this.contNouStepperVisible = true;
+  contNou() {
+    this.contNouStepperVisible = true;
   }
 
-  renunta(){
+  renunta() {
     this.contNouStepperVisible = false;
     this.contNouStepperOauthVisible = false;
   }
@@ -126,12 +126,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  registerFacebook(){
-    this.accountService.getFacebookRegisterUrl().subscribe(res =>{
+  registerFacebook() {
+    this.accountService.getFacebookRegisterUrl().subscribe(res => {
       window.location.href = res.url;
     });
   }
-  creazaCont(){
+  creazaCont() {
     let registerDTO = new RegisterDTO();
     registerDTO.displayName = this.numeSiPrenume;
     registerDTO.email = this.email;
@@ -141,28 +141,30 @@ export class RegisterComponent implements OnInit {
     registerDTO.varsta = this.varsta;
     registerDTO.termeniSiConditii = this.termeniSiConditii;
     this.accountService.registerCont(registerDTO).subscribe(res => {
-      if(res["raspuns"] == "success")
-      {
+      if (res["raspuns"] == "success") {
         this.confirmation.emit("success");
       }
     });
   }
 
-  createGoogleOauthAccount(){
-    this.accountService.createOauthGoogleAccount(this.registerOauthDTO).subscribe(() => {
-      window.location.reload();
+  createGoogleOauthAccount() {
+    this.accountService.createOauthGoogleAccount(this.registerOauthDTO).subscribe(res => {
+      if (res["raspuns"] == "success") {
+        this.confirmation.emit("success");
+      }
     });
   }
 
-  createFacebookOauthAccount(){
-    this.accountService.createOauthFacebookAccount(this.registerOauthDTO).subscribe(() => {
-      window.location.reload();
+  createFacebookOauthAccount() {
+    this.accountService.createOauthFacebookAccount(this.registerOauthDTO).subscribe(res => {
+      if (res["raspuns"] == "success") {
+        this.confirmation.emit("success");
+      }
     });
-  }  
+  }
 
-  processOauthRegisterAccount(oauthJsonString: string)
-  {
-    let oauthJSON = JSON.parse(oauthJsonString);    
+  processOauthRegisterAccount(oauthJsonString: string) {
+    let oauthJSON = JSON.parse(oauthJsonString);
     this.registerOauthDTO.displayName = oauthJSON["DisplayName"];
     this.registerOauthDTO.email = oauthJSON["Email"];
     this.registerOauthDTO.provider = oauthJSON["Provider"];

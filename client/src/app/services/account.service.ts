@@ -39,7 +39,6 @@ export class AccountService {
   }
 
   registerCont(registerDto: RegisterDTO){
-
       return this.http.post<any>(this.baseUrl + 'account/register',
       {DisplayName: registerDto.displayName,
       Email: registerDto.email,
@@ -53,20 +52,11 @@ export class AccountService {
   createOauthGoogleAccount(registerDto: RegisterOauthDTO){
     return this.http.post<any>(this.baseUrl + 'account/oauthregister',
     {DisplayName: registerDto.displayName,
-    Email: registerDto.email,
-    LocatieNumar: registerDto.locatieNumar}).pipe(
-      map((response: IUser) => {
-        const user = response;
-        if(user)
-        {
-          const roles = this.getDecodedToken(user.token).role;
-          user.roles = [];
-          Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-          localStorage.setItem('userApplication', JSON.stringify(user));
-          this.currentUserSource.next(user);
-        }
-      })
-    );
+      Email: registerDto.email,
+      NumarDeTelefon: registerDto.numarDeTelefon,
+      Nivel: registerDto.nivel,
+      Varsta: registerDto.varsta,
+      TermeniSiConditii: registerDto.termeniSiConditii});
   } 
 
   getElevById(elevId: number, bearer: string)
@@ -96,6 +86,13 @@ export class AccountService {
     headers = headers.set('Authorization', 'Bearer ' + token);
     return this.http.post(this.baseUrl + 'elevi/edituser', elev, { headers });
   }
+
+  deleteElev(elevId: number, token: string) {
+
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + token);
+    return this.http.delete(this.baseUrl + 'elevi/deleteuser/' + elevId, { headers });
+  }  
 
   getNrSedinteRamase(token: string){
     let headers = new HttpHeaders();
@@ -129,20 +126,11 @@ export class AccountService {
   createOauthFacebookAccount(registerDto: RegisterOauthDTO){
     return this.http.post<any>(this.baseUrl + 'account/oauthregister',
     {DisplayName: registerDto.displayName,
-    Email: registerDto.email,
-    LocatieNumar: registerDto.locatieNumar}).pipe(
-      map((response: IUser) => {
-        const user = response;
-        if(user)
-        {
-          const roles = this.getDecodedToken(user.token).role;
-          user.roles = [];
-          Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-          localStorage.setItem('userApplication', JSON.stringify(user));
-          this.currentUserSource.next(user);
-        }
-      })
-    );
+      Email: registerDto.email,
+      NumarDeTelefon: registerDto.numarDeTelefon,
+      Nivel: registerDto.nivel,
+      Varsta: registerDto.varsta,
+      TermeniSiConditii: registerDto.termeniSiConditii});
   }
 
   getAllElevi(bearer: string){

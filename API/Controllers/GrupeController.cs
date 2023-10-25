@@ -77,6 +77,11 @@ namespace API.Controllers
 
             var user = await _userManager.FindByIdAsync(userId.ToString());
 
+            if(user.NumarSedinte <= 0)
+            {
+                return BadRequest(new ApiResponse(400, "Nu poți participa deoarece nu mai ai ședințe."));
+            }
+
             var grupa = await _grupeRepo.GetGrupaByIdAsync(grupaId);
 
             return Ok(await _grupeRepo.AddElevToGrupa(user, grupa));

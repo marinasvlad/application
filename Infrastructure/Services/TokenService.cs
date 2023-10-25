@@ -44,7 +44,7 @@ namespace Infrastructure.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = DateTime.Now.AddDays(25),
                 SigningCredentials = creds,
                 Issuer = _config["Token:Issuer"]
             };

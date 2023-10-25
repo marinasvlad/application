@@ -36,6 +36,7 @@
           <th scope="col">Locație</th>
           <th scope="col">Nivel</th>
           <th scope="col">Edit</th>
+          <th scope="col">Șterge</th>
         </tr>
       </thead>
       <tbody>
@@ -50,10 +51,28 @@
           <td *ngIf="elev.nivelId == 1" >Începător</td>
           <td *ngIf="elev.nivelId == 2" >Intermediar</td>
           <td *ngIf="elev.nivelId == 3" >Avansat</td>
-          <td> <button mat-raised-button (click)="openModalEditElev(i,elevModal)" >Edit elev</button></td>                    
+          <td> <button mat-raised-button (click)="openModalEditElev(i,elevModal)" >Edit elev</button></td>
+          <td> <button mat-raised-button (click)="openModalDeleteElev(i,deleteElevModal)" >Șterge elev</button></td>                    
       </tbody>
     </table>  
 </div>
+
+<ng-template #deleteElevModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Șterge elev</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="inchideModalDeleteElevi()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p class="font-PE" >Șterge elevul <strong>{{elevToBeDeleted.displayName}}</strong></p>
+
+    <br>    
+    
+    <button mat-button (click)="inchideModalDeleteElevi()">Închide</button>
+    <button mat-button cdkFocusInitial (click)="deleteElev(elevToBeDeleted)">Șterge</button>
+  </div>
+</ng-template>
 
 
 <ng-template #elevModal>
